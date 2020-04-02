@@ -1,0 +1,19 @@
+{
+  "name": "final-project",
+  "version": "1.0.0",
+  "description": "App that connects people who need medication and who can donate",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Suele/final-project.git"
+  },
+  "author": "Suele Guimarães",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Suele/final-project/issues"
+  },
+  "homepage": "https://github.com/Suele/final-project#readme"
+}
