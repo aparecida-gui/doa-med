@@ -2,9 +2,10 @@
   "name": "final-project",
   "version": "1.0.0",
   "description": "App that connects people who need medication and who can donate",
-  "main": "index.js",
+  "main": "configServer.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "dev": "nodemon --exec babel-node configServer.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,19 @@
   "bugs": {
     "url": "https://github.com/Suele/final-project/issues"
   },
-  "homepage": "https://github.com/Suele/final-project#readme"
+  "homepage": "https://github.com/Suele/final-project#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.9.0",
+    "eslint": "^6.8.0",
+    "jest": "^25.2.7",
+    "nodemon": "^2.0.2"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  }
 }
