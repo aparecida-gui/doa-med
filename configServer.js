@@ -1,5 +1,8 @@
-import Server from './src/back-end/Server';
+import http from 'http';
 
-let server1 = new Server();
+const port = process.env.PORT || 8080;
+const server = http.createServer();
 
-console.log(server1.teste());
+server.listen(port, () => {
+  console.log(`Server running ${port}`);
+});
