@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "dev": "nodemon --exec babel-node configServer.js",
-    "start": "node configServer.js"
+    "start": "babel-node configServer.js"
   },
   "repository": {
     "type": "git",
@@ -19,11 +19,6 @@
   },
   "homepage": "https://github.com/Suele/final-project#readme",
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/node": "^7.8.7",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "@babel/preset-env": "^7.9.0",
-    "babel-core": "^6.26.3",
     "babel-jest": "^25.2.6",
     "eslint": "^6.8.0",
     "jest": "^25.2.7",
@@ -32,6 +27,11 @@
     "sequelize-cli": "^5.5.1"
   },
   "dependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/node": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.9.0",
+    "babel-core": "^6.26.3",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "pg": "^8.0.2",
