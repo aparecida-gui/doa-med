@@ -5,7 +5,8 @@
   "main": "configServer.js",
   "scripts": {
     "test": "jest",
-    "dev": "nodemon --exec babel-node configServer.js"
+    "dev": "nodemon --exec babel-node configServer.js",
+    "start": "babel-node configServer.js"
   },
   "repository": {
     "type": "git",
