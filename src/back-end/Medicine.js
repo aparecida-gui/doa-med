@@ -7,6 +7,7 @@ class Medicine {
     const medicine = { name: 'Paracetamol', laboratorio: 'Baer' };
 
     if (this.name === medicine.name) {
+      console.log('Medicine');
       return medicine;
     }
   }
