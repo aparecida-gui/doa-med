@@ -2,7 +2,6 @@ import Sequelize from 'sequelize';
 import databaseConfig from '../config/databaseConfig';
 
 const connection = new Sequelize(databaseConfig);
-console.log('file index.js');
 
 connection
   .authenticate()
