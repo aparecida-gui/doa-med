@@ -1,8 +1,8 @@
-databaseConfig = {
-  dialect: 'postgres',
-  host: 'localhost',
-  username: 'postgres',
-  password: 'postgres',
+const configDatabase = {
+  dialect: 'mysql',
+  host: '127.0.0.1',
+  username: 'root',
+  password: '12345',
   database: 'doaMed',
   define: {
     timestamps: true,
@@ -10,4 +10,4 @@ databaseConfig = {
   },
 };
 
-export default databaseConfig;
+module.exports = configDatabase;
