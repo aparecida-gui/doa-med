@@ -13,6 +13,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      quantity: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       laboratory: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -20,7 +24,7 @@ module.exports = {
       photo: {
         type: Sequelize.BLOB('long'),
       },
-      create_at: {
+      created_at: {
         type: Sequelize.DATE,
         allowNull: false,
       },
