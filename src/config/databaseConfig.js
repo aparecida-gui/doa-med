@@ -1,4 +1,4 @@
-module.exports = {
+const configDatabase = {
   dialect: 'mysql',
   host: '127.0.0.1',
   username: 'root',
@@ -9,3 +9,5 @@ module.exports = {
     underscored: true,
   },
 };
+
+module.exports = configDatabase;
