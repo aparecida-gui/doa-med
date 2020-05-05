@@ -6,6 +6,7 @@ class Medicine extends Model {
       {
         id: { type: DataTypes.INTEGER, primaryKey: true },
         name: { type: DataTypes.STRING },
+        quantity: { type: DataTypes.INTEGER },
         laboratory: { type: DataTypes.STRING },
         photo: {
           type: DataTypes.BLOB('long'),
