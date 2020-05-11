@@ -13,6 +13,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      expirationDate: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+      },
       quantity: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -24,13 +28,10 @@ module.exports = {
       photo: {
         type: Sequelize.BLOB('long'),
       },
-      created_at: {
+      createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
-      },
-      updated_at: {
-        type: Sequelize.DATE,
-        allowNull: false,
+        defaultValue: new Date(),
       },
     });
   },

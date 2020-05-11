@@ -21,5 +21,4 @@ describe('Medicine', () => {
       expect(resMedicine.status).toBe(200);
       done();
     });
-  jest.useFakeTimers();
 });

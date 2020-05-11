@@ -1,5 +1,7 @@
+'use strict';
+
 import MedicineModel from '../model/MedicineModel';
-import MedicineValidade from '../MedicineValidade';
+import moment from 'moment';
 
 class Medicine {
   async medicineSearch(req, res) {
@@ -11,31 +13,45 @@ class Medicine {
         });
         if (medicine.length > 0) {
           return res.status(200).json({ medicine });
+        } else {
+          return res.status(200).json({
+            message: `${name} não tem cadastro para doação.`,
+          });
         }
-        return res.status(200).json({
-          message: `${name} não tem cadastro para doação.`,
-        });
       }
+      res.end();
     } catch (error) {
-      return res.status(400).json({ message: error });
+      res.status(400).json({ message: error });
+      res.end();
     }
   }
 
   async registerMedicine(req, res) {
-    const { name, quantity, laboratory, photo } = req.body;
+    let { name, laboratory, quantity, expirationDate, photo } = req.body;
 
-    if (name && quantity && laboratory) {
-      const medicine = await MedicineModel.create({
-        name,
-        quantity,
-        laboratory,
-        photo,
-      });
-      return res.status(200).json({ medicine });
+    expirationDate = moment(expirationDate, 'DD-MM-YYYY', true).format();
+
+    try {
+      if (expirationDate === 'Invalid date') {
+        res.status(400).json({
+          message: 'O campo data está com o valor inválido.',
+        });
+      } else {
+        const medicine = await MedicineModel.create({
+          name,
+          laboratory,
+          quantity,
+          expirationDate,
+          photo,
+        });
+
+        res.status(200).json({ medicine });
+      }
+    } catch (error) {
+      res, status(400).json({ message: error });
     }
-    return res.status(400).json({
-      message: 'verifique se todos os campos estão preenchidos corretamente.',
-    });
+
+    res.end();
   }
 }
 
