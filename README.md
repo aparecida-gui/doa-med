@@ -1,2 +1,6 @@
-### Documentação e Artefatos urilizados no Projeto Final do curso de Análise e Desenvolvimento de SIstemas.
+### doaMed
+Aplicativo para doação de medicamentos.
+
+## Tecnologias utilizadas
+Desenvolvido utilizando nodejs no backend e reactjs no frontend, banco de dados relacional mysql.
 
