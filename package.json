@@ -10,7 +10,7 @@
   "scripts": {
     "test": "jest --watch --detectOpenHandles",
     "dev": "nodemon --exec babel-node configServer.js",
-    "start": "babel-node configServer.js"
+    "start": "--exec babel-node configServer.js"
   },
   "repository": {
     "type": "git",
