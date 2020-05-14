@@ -23,9 +23,6 @@
   },
   "homepage": "https://github.com/Suele/final-project#readme",
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "@babel/plugin-transform-runtime": "^7.9.6",
-    "@babel/preset-env": "^7.9.6",
     "babel-jest": "^25.5.1",
     "eslint": "^6.8.0",
     "jest": "^25.2.7",
@@ -36,7 +33,10 @@
   },
   "dependencies": {
     "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
     "@babel/node": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.9.6",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "moment": "^2.25.3",
