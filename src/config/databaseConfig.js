@@ -1,8 +1,8 @@
 const configDatabase = {
-  dialect: 'mysql',
+  dialect: 'postgres',
   host: '127.0.0.1',
-  username: 'root',
-  password: '12345',
+  username: 'postgres',
+  password: 'postgres',
   database: 'doaMed',
   define: {
     timestamps: true,
