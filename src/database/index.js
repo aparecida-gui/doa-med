@@ -1,6 +1,8 @@
 import Sequelize from 'sequelize';
 import databaseConfig from '../config/databaseConfig';
 import Medicine from '../back-end/model/MedicineModel';
+import Donor from '../back-end/model/DonorModel';
+import DonorMedicine from '../back-end/model/DonorMedicineModel';
 
 const connection = new Sequelize(
   databaseConfig.database,
@@ -14,6 +16,7 @@ const connection = new Sequelize(
       min: 0,
       idle: 10000,
     },
+    timestamps: false,
   }
 );
 
@@ -27,5 +30,18 @@ connection
   });
 
 Medicine.init(connection);
+Donor.init(connection);
+DonorMedicine.init(connection);
+
+Medicine.belongsToMany(Donor, {
+  foreignKey: 'medicine_id',
+  through: 'Donor_medicine',
+  as: 'donors',
+});
+Donor.belongsToMany(Medicine, {
+  foreignKey: 'donor_id',
+  through: 'Donor_medicine',
+  as: 'medicines',
+});
 
 export default connection;

@@ -5,7 +5,7 @@ const configDatabase = {
   password: 'postgres',
   database: 'doaMed',
   define: {
-    timestamps: true,
+    timestamps: false,
     underscored: true,
   },
 };
