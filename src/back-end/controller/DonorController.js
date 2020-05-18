@@ -7,8 +7,6 @@ class Donor {
   async registerDonor(req, res) {
     const { name, email, phone, observations } = req.body;
 
-    console.log('>>>>>', name);
-
     if (name !== '' && email !== '' && phone !== '' && observations !== '') {
       const donor = await DonorModel.create({
         name,
