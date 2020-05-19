@@ -3,6 +3,7 @@ import databaseConfig from '../config/databaseConfig';
 import Medicine from '../back-end/model/MedicineModel';
 import Donor from '../back-end/model/DonorModel';
 import DonorMedicine from '../back-end/model/DonorMedicineModel';
+import BeneficiaryModel from '../back-end/model/BeneficiaryModel';
 
 const connection = new Sequelize(
   databaseConfig.database,
@@ -32,6 +33,7 @@ connection
 Medicine.init(connection);
 Donor.init(connection);
 DonorMedicine.init(connection);
+BeneficiaryModel.init(connection);
 
 Medicine.belongsToMany(Donor, {
   foreignKey: 'medicine_id',
