@@ -13,7 +13,7 @@ router.post(
   MedicineController.registerMedicine
 );
 
-router.post('/donor/ register_donor', DonorController.registerDonor);
+router.post('/donor/register_donor', DonorController.registerDonor);
 router.post(
   '/beneficiary/register_beneficiary',
   BeneficiaryController.registerBeneficiary

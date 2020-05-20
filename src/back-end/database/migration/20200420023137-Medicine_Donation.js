@@ -3,7 +3,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable(
-      'Donor_medicine',
+      'Medicine_Donation',
       {
         id: {
           type: Sequelize.INTEGER,
@@ -11,19 +11,21 @@ module.exports = {
           autoIncrement: true,
           allowNull: false,
         },
-        donor_id: {
-          type: Sequelize.INTEGER,
+        name: {
+          type: Sequelize.STRING,
           allowNull: false,
-          references: { model: 'Donor', key: 'id' },
-          onUpdate: 'CASCADE',
-          onDelete: 'CASCADE',
         },
-        medicine_id: {
+        expirationDate: {
+          type: Sequelize.DATEONLY,
+          allowNull: false,
+        },
+        quantity: {
           type: Sequelize.INTEGER,
           allowNull: false,
-          references: { model: 'Medicine', key: 'id' },
-          onUpdate: 'CASCADE',
-          onDelete: 'CASCADE',
+        },
+        laboratory: {
+          type: Sequelize.STRING,
+          allowNull: false,
         },
       },
       { freezeTableName: true, timestamps: false }
@@ -31,6 +33,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Donor_medicine');
+    return queryInterface.dropTable('Medicine_Donation');
   },
 };

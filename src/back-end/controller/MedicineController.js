@@ -1,6 +1,6 @@
 'use strict';
 
-import MedicineModel from '../model/MedicineModel';
+import MedicineDonationModel from '../model/MedicineDonationModel';
 import DonorModel from '../model/DonorModel';
 import moment from 'moment';
 import fs from 'fs';
@@ -11,7 +11,7 @@ class Medicine {
     try {
       const name = req.params.name;
       if (name) {
-        let medicine = await MedicineModel.findAll({
+        let medicine = await MedicineDonationModel.findAll({
           where: { name },
         });
         if (medicine.length > 0) {
@@ -63,7 +63,7 @@ class Medicine {
         expirationDate !== ''
       ) {
         expirationDate = moment(expirationDate, 'DD-MM-YYYY', true).format();
-        const medicine = await MedicineModel.create({
+        const medicine = await MedicineDonationModel.create({
           name,
           expirationDate,
           quantity,

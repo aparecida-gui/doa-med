@@ -1,9 +1,10 @@
 import Sequelize from 'sequelize';
 import databaseConfig from '../config/databaseConfig';
-import Medicine from '../back-end/model/MedicineModel';
+import MedicineDonationModel from '../back-end/model/MedicineDonationModel';
 import Donor from '../back-end/model/DonorModel';
-import DonorMedicine from '../back-end/model/DonorMedicineModel';
+import DonorMedicineModel from '../back-end/model/DonorMedicineModel';
 import BeneficiaryModel from '../back-end/model/BeneficiaryModel';
+import MedicineBeneficiaryModel from '../back-end/model/MedicineBeneficiaryModel';
 
 const connection = new Sequelize(
   databaseConfig.database,
@@ -18,6 +19,7 @@ const connection = new Sequelize(
       idle: 10000,
     },
     timestamps: false,
+    freezeTableName: true,
   }
 );
 
@@ -30,20 +32,32 @@ connection
     console.error('Unable to connect to the database:', err);
   });
 
-Medicine.init(connection);
+MedicineDonationModel.init(connection);
 Donor.init(connection);
-DonorMedicine.init(connection);
+DonorMedicineModel.init(connection);
 BeneficiaryModel.init(connection);
+MedicineBeneficiaryModel.init(connection);
 
-Medicine.belongsToMany(Donor, {
-  foreignKey: 'medicine_id',
-  through: 'Donor_medicine',
+MedicineDonationModel.belongsToMany(Donor, {
+  foreignKey: 'medicine_donation_id',
+  through: 'Donor_Medicine',
   as: 'donors',
 });
-Donor.belongsToMany(Medicine, {
+Donor.belongsToMany(MedicineDonationModel, {
   foreignKey: 'donor_id',
-  through: 'Donor_medicine',
+  through: 'Donor_Medicine',
   as: 'medicines',
+});
+
+BeneficiaryModel.belongsToMany(MedicineBeneficiaryModel, {
+  foreignKey: 'medicine_beneficiary_id',
+  through: 'Medicine_Beneficiary',
+  as: 'medicinesBeneficiary',
+});
+MedicineBeneficiaryModel.belongsToMany(BeneficiaryModel, {
+  foreignKey: 'beneficiary_id',
+  through: 'Medicine_Beneficiary',
+  as: 'beneficiaries',
 });
 
 export default connection;

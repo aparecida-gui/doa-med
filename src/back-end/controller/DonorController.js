@@ -1,7 +1,6 @@
 'use strict';
 
 import DonorModel from '../model/DonorModel';
-import MedicineModel from '../model/MedicineModel';
 
 class Donor {
   async registerDonor(req, res) {

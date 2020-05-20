@@ -2,18 +2,22 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Beneficiary', {
-      id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false,
+    return queryInterface.createTable(
+      'Beneficiary',
+      {
+        id: {
+          type: Sequelize.INTEGER,
+          primaryKey: true,
+          autoIncrement: true,
+          allowNull: false,
+        },
+        name: { type: Sequelize.STRING, allowNull: false },
+        phone: { type: Sequelize.STRING, allowNull: false },
+        email: { type: Sequelize.STRING, allowNull: false },
+        city: { type: Sequelize.STRING, allowNull: false },
       },
-      name: { type: Sequelize.STRING, allowNull: false },
-      phone: { type: Sequelize.STRING, allowNull: false },
-      email: { type: Sequelize.STRING, allowNull: false },
-      city: { type: Sequelize.STRING, allowNull: false },
-    });
+      { freezeTableName: true, timestamps: false }
+    );
   },
 
   down: (queryInterface, Sequelize) => {

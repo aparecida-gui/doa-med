@@ -1,13 +1,11 @@
 import { Model, DataTypes } from 'sequelize';
 
-class Medicine extends Model {
+class MedicineBeneficiary extends Model {
   static init(sequelize) {
     super.init(
       {
         name: { type: DataTypes.STRING },
-        expirationDate: { type: DataTypes.DATEONLY },
         quantity: { type: DataTypes.INTEGER },
-        laboratory: { type: DataTypes.STRING },
       },
       {
         freezeTableName: true,
@@ -18,4 +16,4 @@ class Medicine extends Model {
   }
 }
 
-export default Medicine;
+export default MedicineBeneficiary;
