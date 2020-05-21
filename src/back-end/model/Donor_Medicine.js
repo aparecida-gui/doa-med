@@ -1,11 +1,11 @@
 import { Model, DataTypes } from 'sequelize';
 
-class DonorMedicine extends Model {
+class Donor_Medicine extends Model {
   static init(sequelize) {
     super.init(
       {
         donor_id: { type: DataTypes.INTEGER },
-        medicine_id: { type: DataTypes.INTEGER },
+        medicine_donation_id: { type: DataTypes.INTEGER },
       },
       {
         freezeTableName: true,
@@ -16,4 +16,4 @@ class DonorMedicine extends Model {
   }
 }
 
-export default DonorMedicine;
+export default Donor_Medicine;

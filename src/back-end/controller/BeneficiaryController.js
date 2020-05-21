@@ -1,4 +1,4 @@
-import BeneficiaryModel from '../model/BeneficiaryModel';
+import BeneficiaryModel from '../model/Beneficiary';
 
 class Beneficiary {
   async registerBeneficiary(req, res) {

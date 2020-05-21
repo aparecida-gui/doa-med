@@ -1,10 +1,10 @@
 import Sequelize from 'sequelize';
 import databaseConfig from '../config/databaseConfig';
-import MedicineDonationModel from '../back-end/model/MedicineDonationModel';
-import Donor from '../back-end/model/DonorModel';
-import DonorMedicineModel from '../back-end/model/DonorMedicineModel';
-import BeneficiaryModel from '../back-end/model/BeneficiaryModel';
-import MedicineBeneficiaryModel from '../back-end/model/MedicineBeneficiaryModel';
+import Medicine_Donation from '../back-end/model/Medicine_Donation';
+import Donor from '../back-end/model/Donor';
+import Donor_Medicine from '../back-end/model/Donor_Medicine';
+import Beneficiary from '../back-end/model/Beneficiary';
+import Medicine_Beneficiary from '../back-end/model/Medicine_Beneficiary';
 
 const connection = new Sequelize(
   databaseConfig.database,
@@ -19,7 +19,6 @@ const connection = new Sequelize(
       idle: 10000,
     },
     timestamps: false,
-    freezeTableName: true,
   }
 );
 
@@ -32,32 +31,32 @@ connection
     console.error('Unable to connect to the database:', err);
   });
 
-MedicineDonationModel.init(connection);
+Medicine_Donation.init(connection);
 Donor.init(connection);
-DonorMedicineModel.init(connection);
-BeneficiaryModel.init(connection);
-MedicineBeneficiaryModel.init(connection);
+Donor_Medicine.init(connection);
+Medicine_Beneficiary.init(connection);
+Beneficiary.init(connection);
 
-MedicineDonationModel.belongsToMany(Donor, {
+Medicine_Donation.belongsToMany(Donor, {
   foreignKey: 'medicine_donation_id',
   through: 'Donor_Medicine',
   as: 'donors',
 });
-Donor.belongsToMany(MedicineDonationModel, {
+Donor.belongsToMany(Medicine_Donation, {
   foreignKey: 'donor_id',
   through: 'Donor_Medicine',
   as: 'medicines',
 });
 
-BeneficiaryModel.belongsToMany(MedicineBeneficiaryModel, {
-  foreignKey: 'medicine_beneficiary_id',
-  through: 'Medicine_Beneficiary',
-  as: 'medicinesBeneficiary',
-});
-MedicineBeneficiaryModel.belongsToMany(BeneficiaryModel, {
-  foreignKey: 'beneficiary_id',
-  through: 'Medicine_Beneficiary',
+Medicine_Beneficiary.belongsToMany(Beneficiary, {
+  foreignKey: 'medicine_id',
+  through: 'Beneficiary_Medicine',
   as: 'beneficiaries',
+});
+Beneficiary.belongsToMany(Medicine_Beneficiary, {
+  foreignKey: 'beneficiary_id',
+  through: 'Beneficiary_Medicine',
+  as: 'medicinesBeneficiary',
 });
 
 export default connection;

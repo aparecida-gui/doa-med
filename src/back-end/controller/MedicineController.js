@@ -1,7 +1,7 @@
 'use strict';
 
-import MedicineDonationModel from '../model/MedicineDonationModel';
-import DonorModel from '../model/DonorModel';
+import MedicineDonationModel from '../model/Medicine_Donation';
+import DonorModel from '../model/Donor';
 import moment from 'moment';
 import fs from 'fs';
 import { Buffer } from 'buffer';
@@ -46,8 +46,6 @@ class Medicine {
   async registerMedicine(req, res) {
     const { donor_id } = req.params;
     let { name, laboratory, quantity, expirationDate } = req.body;
-    // let photo = req.file;
-    // photo = photo.filename;
 
     let donor = await DonorModel.findByPk(donor_id);
 
@@ -69,8 +67,8 @@ class Medicine {
           quantity,
           laboratory,
         });
-        const associate = await donor.addMedicine(medicine);
-        res.status(200).json({ medicine, associate });
+        await donor.addMedicine(medicine);
+        res.status(200).json({ message: 'medicamento cadastrado com sucesso' });
       }
     }
 

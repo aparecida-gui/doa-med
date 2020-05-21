@@ -18,7 +18,7 @@ module.exports = {
           onUpdate: 'CASCADE',
           onDelete: 'CASCADE',
         },
-        medicine_beneficiary_id: {
+        medicine_id: {
           type: Sequelize.INTEGER,
           allowNull: false,
           references: { model: 'Medicine_Beneficiary', key: 'id' },

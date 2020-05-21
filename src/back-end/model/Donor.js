@@ -1,6 +1,6 @@
 import { Model, DataTypes } from 'sequelize';
 
-class Beneficiary extends Model {
+class Donor extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -8,6 +8,7 @@ class Beneficiary extends Model {
         phone: { type: DataTypes.STRING },
         email: { type: DataTypes.STRING },
         city: { type: DataTypes.STRING },
+        observations: { type: DataTypes.TEXT },
       },
       {
         freezeTableName: true,
@@ -18,4 +19,4 @@ class Beneficiary extends Model {
   }
 }
 
-export default Beneficiary;
+export default Donor;

@@ -1,13 +1,11 @@
 import { Model, DataTypes } from 'sequelize';
 
-class Donor extends Model {
+class Medicine_Beneficiary extends Model {
   static init(sequelize) {
     super.init(
       {
         name: { type: DataTypes.STRING },
-        email: { type: DataTypes.STRING },
-        phone: { type: DataTypes.STRING },
-        observations: { type: DataTypes.TEXT },
+        quantity: { type: DataTypes.INTEGER },
       },
       {
         freezeTableName: true,
@@ -18,4 +16,4 @@ class Donor extends Model {
   }
 }
 
-export default Donor;
+export default Medicine_Beneficiary;
