@@ -19,6 +19,10 @@ module.exports = {
           type: Sequelize.INTEGER,
           allowNull: false,
         },
+        photo: {
+          type: Sequelize.BLOB,
+          allowNull: false,
+        },
       },
       { freezeTableName: true, timestamps: false }
     );
