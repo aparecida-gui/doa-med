@@ -32,11 +32,10 @@ class Beneficiary {
 
     let newMedicineBeneficiary = Object.entries(medicineBeneficiary);
 
-    if (newMedicineBeneficiary.length > 0) {
+    if (newMedicineBeneficiary == 0) {
+      res.status(400).json({ message: 'Não têm registros no banco de dados' });
+    } else {
       res.status(200).json({ newMedicineBeneficiary });
-    }
-    if (newMedicineBeneficiary.length < 0) {
-      res.status(400).json({ message: 'Nenhum registro cadastrado.' });
     }
   }
 }
