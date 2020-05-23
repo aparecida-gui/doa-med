@@ -19,6 +19,10 @@ router.post(
   '/beneficiary/register_beneficiary',
   BeneficiaryController.registerBeneficiary
 );
+router.get(
+  '/beneficiary/show_beneficiary',
+  BeneficiaryController.showMedicineBeneficiary
+);
 router.post(
   '/medicine/:beneficiary_id/register_medicine_benef',
   multer(multerConfig).single('photo'),
