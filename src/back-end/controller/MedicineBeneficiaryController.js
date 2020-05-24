@@ -6,7 +6,6 @@ class MedicineBeneficiary {
     const { beneficiary_id } = req.params;
     const beneficiary = await Beneficiary.findByPk(beneficiary_id);
 
-    const photo = req.file.filename;
     const { name, quantity } = req.body;
 
     if (!beneficiary) {
@@ -18,7 +17,6 @@ class MedicineBeneficiary {
         const medicineBeneficiary = await MedicineBeneficiaryModel.create({
           name,
           quantity,
-          photo,
         });
         const associanteBeneficiary = await beneficiary.addMedicinesBeneficiary(
           medicineBeneficiary
