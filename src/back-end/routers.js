@@ -3,6 +3,7 @@ import MedicineController from './controller/MedicineController';
 import DonorController from './controller/DonorController';
 import BeneficiaryController from './controller/BeneficiaryController';
 import MedicineBeneficiaryController from './controller/MedicineBeneficiaryController';
+import PhotoController from './controller/PhotoController';
 import multer from 'multer';
 import multerConfig from '../config/multerConfig';
 
@@ -25,8 +26,13 @@ router.get(
 );
 router.post(
   '/medicine/:beneficiary_id/register_medicine_benef',
-  multer(multerConfig).single('photo'),
   MedicineBeneficiaryController.registerMedicineBeneficiary
+);
+
+router.post(
+  '/medicine/:medicine_beneficiary_id/photo',
+  multer(multerConfig).single('name'),
+  PhotoController.AddPhoto
 );
 
 export default router;

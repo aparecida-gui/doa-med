@@ -5,6 +5,7 @@ import Donor from '../back-end/model/Donor';
 import Donor_Medicine from '../back-end/model/Donor_Medicine';
 import Beneficiary from '../back-end/model/Beneficiary';
 import Medicine_Beneficiary from '../back-end/model/Medicine_Beneficiary';
+import Photo from '../back-end/model/Photo';
 
 const connection = new Sequelize(
   databaseConfig.database,
@@ -36,6 +37,7 @@ Donor.init(connection);
 Donor_Medicine.init(connection);
 Medicine_Beneficiary.init(connection);
 Beneficiary.init(connection);
+Photo.init(connection);
 
 Medicine_Donation.belongsToMany(Donor, {
   foreignKey: 'medicine_donation_id',
@@ -48,6 +50,10 @@ Donor.belongsToMany(Medicine_Donation, {
   as: 'medicines',
 });
 
+Photo.belongsTo(Medicine_Beneficiary, {
+  foreignKey: 'medicine_beneficiary_id',
+  as: 'medicine_beneficiary',
+});
 Medicine_Beneficiary.belongsToMany(Beneficiary, {
   foreignKey: 'medicine_id',
   through: 'Beneficiary_Medicine',
