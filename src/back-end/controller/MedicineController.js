@@ -3,8 +3,6 @@
 import MedicineDonationModel from '../model/Medicine_Donation';
 import DonorModel from '../model/Donor';
 import moment from 'moment';
-import fs from 'fs';
-import { Buffer } from 'buffer';
 
 class Medicine {
   async medicineSearch(req, res) {
@@ -15,21 +13,6 @@ class Medicine {
           where: { name },
         });
         if (medicine.length > 0) {
-          // let photoMedicine = medicine[0]['photo'];
-
-          // let photoFormatBuffer = Buffer.from(photoMedicine);
-          // const imageDB = photoFormatBuffer.toLocaleString();
-
-          // const newMedicine = [
-          //   {
-          //     name: medicine[0]['name'],
-          //     expirationDate: medicine[0]['expirationDate'],
-          //     quantity: medicine[0]['quantity'],
-          //     laboratory: medicine[0]['laboratory'],
-          //     iamge: imageDB,
-          //   },
-          // ];
-
           res.status(200).json({ medicine });
         } else {
           res.status(200).json({

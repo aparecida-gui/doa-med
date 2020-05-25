@@ -54,6 +54,7 @@ Photo.belongsTo(Medicine_Beneficiary, {
   foreignKey: 'medicine_beneficiary_id',
   as: 'medicine_beneficiary',
 });
+
 Medicine_Beneficiary.belongsToMany(Beneficiary, {
   foreignKey: 'medicine_id',
   through: 'Beneficiary_Medicine',

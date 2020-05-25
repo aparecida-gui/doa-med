@@ -26,6 +26,7 @@ router.get(
 );
 router.post(
   '/medicine/:beneficiary_id/register_medicine_benef',
+  multer(multerConfig).single('photo'),
   MedicineBeneficiaryController.registerMedicineBeneficiary
 );
 
@@ -34,5 +35,7 @@ router.post(
   multer(multerConfig).single('name'),
   PhotoController.AddPhoto
 );
+
+router.get('/photo', PhotoController.showPhoto);
 
 export default router;
