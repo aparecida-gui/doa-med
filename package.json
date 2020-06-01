@@ -1,9 +1,10 @@
 {
   "name": "final-project",
   "version": "1.0.0",
+  "private": true,
   "engines": {
-    "npm": "6.x",
-    "node": "12.16.x"
+    "npm": "6.14.4",
+    "node": "13.14.0"
   },
   "description": "App that connects people who need medication and who can donate",
   "main": "configServer.js",
