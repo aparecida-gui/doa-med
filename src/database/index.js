@@ -8,12 +8,16 @@ import Medicine_Beneficiary from '../back-end/model/Medicine_Beneficiary';
 import Photo from '../back-end/model/Photo';
 
 const connection = new Sequelize(
-  databaseConfig.database,
-  databaseConfig.username,
-  databaseConfig.password,
+  databaseConfig.url,
+  // databaseConfig.database,
+  // databaseConfig.username,
+  // databaseConfig.password,
   {
-    host: databaseConfig.host,
-    dialect: databaseConfig.dialect,
+    dialectOptions: {
+      ssl: true,
+    },
+    // host: databaseConfig.host,
+    // dialect: databaseConfig.dialect,
     pool: {
       max: 5,
       min: 0,
