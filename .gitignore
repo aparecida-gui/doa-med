@@ -105,6 +105,3 @@ dist
 
 # file security nodejs
 package-lock.jsonnode_modules
-
-# file uploads in the images
-/tmp/uploads
