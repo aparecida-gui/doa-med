@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express from 'express';
 import router from './src/back-end/routers';
 import bodyParser from 'body-parser';
@@ -5,6 +6,7 @@ import db from './src/database';
 import path from 'path';
 
 const app = express();
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
