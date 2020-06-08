@@ -3,6 +3,7 @@ import { BrowserRouter, NavLink, Switch, Route } from 'react-router-dom';
 import SearchMedicine from './components/SearchMedicine';
 import Error404 from './components/Error404';
 import RegisterBeneficiary from './components/RegisterBeneficiary';
+import RecordsOptions from './components/RecordsOptions';
 
 function App() {
   return (
@@ -31,7 +32,7 @@ function App() {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="register_beneficiary">
+              <NavLink className="nav-link" to="record_options">
                 Registro
               </NavLink>
             </li>
@@ -51,6 +52,7 @@ function App() {
       <div className="container">
         <Switch>
           <Route exact path="/search_medicine" component={SearchMedicine} />
+          <Route exact path="/record_options" component={RecordsOptions} />
           <Route
             exact
             path="/register_beneficiary"
