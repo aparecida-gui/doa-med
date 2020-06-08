@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import moment from 'moment';
 class SearchMedicine extends React.Component {
   state = { search_medicine: '', medicines: [], message: '' };
 
@@ -64,7 +65,9 @@ class SearchMedicine extends React.Component {
                   <tbody key={medicine.id}>
                     <tr>
                       <th>{medicine.name}</th>
-                      <th>{medicine.expirationDate}</th>
+                      <th>
+                        {moment(medicine.expirationDate).format('DD/MM/YYYY')}
+                      </th>
                       <th>{medicine.quantity}</th>
                       <th>{medicine.laboratory}</th>
                     </tr>
