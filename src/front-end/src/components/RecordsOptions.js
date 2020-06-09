@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const RecordsOptions = () => {
   return (
-    <div className="text-center">
+    <div style={{ paddingTop: ' 15rem' }} className="text-center">
       <h3>Escolha uma opção:</h3>
       <Link to="/register_beneficiary">
         <h4>Registrar Beneficiario</h4>

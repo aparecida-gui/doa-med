@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, NavLink, Switch, Route } from 'react-router-dom';
 import SearchMedicine from './components/SearchMedicine';
+import Home from './components/Home';
 import Error404 from './components/Error404';
 import RegisterBeneficiary from './components/RegisterBeneficiary';
 import RecordsOptions from './components/RecordsOptions';
@@ -9,7 +10,7 @@ function App() {
   return (
     <BrowserRouter>
       <nav className="navbar navbar-dark bg-dark">
-        <NavLink className="navbar-brand" to="#">
+        <NavLink className="navbar-brand" to="/">
           DoaMed
         </NavLink>
         <button
@@ -27,7 +28,7 @@ function App() {
         <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
             <li className="nav-item active">
-              <NavLink className="nav-link" to="#">
+              <NavLink className="nav-link" to="/">
                 Home <span className="sr-only">(current)</span>
               </NavLink>
             </li>
@@ -51,6 +52,7 @@ function App() {
       </nav>
       <div className="container">
         <Switch>
+          <Route exact path="/" component={Home} />
           <Route exact path="/search_medicine" component={SearchMedicine} />
           <Route exact path="/record_options" component={RecordsOptions} />
           <Route
