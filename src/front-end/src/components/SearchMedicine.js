@@ -21,7 +21,6 @@ class SearchMedicine extends React.Component {
   };
 
   render() {
-    console.log(this.state.search_medicine.length);
     return (
       <div className="center">
         <form onSubmit={(e) => e.preventDefault()}>
