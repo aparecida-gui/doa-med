@@ -3,14 +3,21 @@ import MedicineBeneficiaryModel from '../model/Medicine_Beneficiary';
 
 class Beneficiary {
   async registerBeneficiary(req, res) {
-    const { name, phone, city, email } = req.body;
+    const { name, phone, city, email, password } = req.body;
 
-    if (name !== '' && phone !== '' && city !== '' && email !== '') {
+    if (
+      name !== '' &&
+      phone !== '' &&
+      city !== '' &&
+      email !== '' &&
+      password !== ''
+    ) {
       const beneficiary = await BeneficiaryModel.create({
         name,
         phone,
         city,
         email,
+        password,
       });
 
       res
@@ -36,6 +43,19 @@ class Beneficiary {
       res.status(400).json({ message: 'Não têm registros no banco de dados' });
     } else {
       res.status(200).json({ newMedicineBeneficiary });
+    }
+  }
+
+  async login(req, res) {
+    const { email, password } = req.body;
+
+    const loginBeneficiary = await BeneficiaryModel.findOne({
+      where: { email, password },
+    });
+    if (loginBeneficiary) {
+      res.status(200).json(loginBeneficiary);
+    } else {
+      res.status(400).json({ messageError: 'Usuário não existe.' });
     }
   }
 }

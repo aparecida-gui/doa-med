@@ -8,6 +8,7 @@ class Beneficiary extends Model {
         phone: { type: DataTypes.STRING },
         email: { type: DataTypes.STRING },
         city: { type: DataTypes.STRING },
+        password: { type: DataTypes.STRING },
       },
       {
         freezeTableName: true,

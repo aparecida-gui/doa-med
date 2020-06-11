@@ -38,4 +38,6 @@ router.post(
 
 router.get('/photo', PhotoController.showPhoto);
 
+router.post('/login', BeneficiaryController.login);
+
 export default router;

@@ -15,6 +15,7 @@ module.exports = {
         phone: { type: Sequelize.STRING, allowNull: false },
         email: { type: Sequelize.STRING, allowNull: false },
         city: { type: Sequelize.STRING, allowNull: false },
+        password: { type: Sequelize.STRING, allowNull: false },
       },
       { freezeTableName: true, timestamps: false }
     );
