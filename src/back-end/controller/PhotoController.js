@@ -32,8 +32,6 @@ class Photo {
       ],
     });
 
-    console.log('>>>>> photo: ', photo);
-
     let imageMedicalPrescription = photo.map(function (photos) {
       return [
         {

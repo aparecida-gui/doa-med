@@ -48,14 +48,14 @@ class Beneficiary {
 
   async login(req, res) {
     const { email, password } = req.body;
-
-    const loginBeneficiary = await BeneficiaryModel.findOne({
+    let loginBeneficiary = await BeneficiaryModel.findOne({
       where: { email, password },
     });
-    if (loginBeneficiary) {
+
+    if (loginBeneficiary !== null) {
       res.status(200).json(loginBeneficiary);
     } else {
-      res.status(400).json({ messageError: 'Usuário não existe.' });
+      res.status(404).json({ message: 'Usuário não existe.' });
     }
   }
 }

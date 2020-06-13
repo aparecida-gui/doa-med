@@ -6,9 +6,10 @@ import { Link } from 'react-router-dom';
 class RegisterBeneficiary extends Component {
   state = {
     name: '',
-    phone: React.createRef(),
+    phone: '',
     city: '',
     email: '',
+    password: '',
     beneficiarioRegister: false,
   };
 
@@ -18,6 +19,7 @@ class RegisterBeneficiary extends Component {
       phone: this.state.phone,
       city: this.state.city,
       email: this.state.email,
+      password: this.state.password,
     };
 
     const registerBenef = await axios.post(
@@ -28,6 +30,7 @@ class RegisterBeneficiary extends Component {
     if (registerBenef.status === 200) {
       this.setState({ beneficiarioRegister: true });
     }
+    console.log(registerBenef);
   };
 
   render() {
@@ -89,6 +92,17 @@ class RegisterBeneficiary extends Component {
               className="form-control"
               id="email"
               aria-describedby="emailHelp"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Senha</label>
+            <input
+              value={this.state.password}
+              onChange={(e) => this.setState({ password: e.target.value })}
+              type="password"
+              className="form-control"
+              id="password"
+              aria-describedby="passwordHelp"
             />
           </div>
           <button
