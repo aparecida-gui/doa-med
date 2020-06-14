@@ -20,9 +20,7 @@ class Beneficiary {
         password,
       });
 
-      res
-        .status(200)
-        .json({ message: `Seja bem-vindo(a) ${beneficiary.name}` });
+      res.status(200).json(beneficiary);
     } else {
       res
         .status(400)

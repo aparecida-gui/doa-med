@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import InputMask from 'react-input-mask';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 class RegisterBeneficiary extends Component {
   state = {
@@ -10,7 +10,8 @@ class RegisterBeneficiary extends Component {
     city: '',
     email: '',
     password: '',
-    beneficiarioRegister: false,
+    isRegisterOk: false,
+    message: '',
   };
 
   handleSubmit = async () => {
@@ -22,25 +23,39 @@ class RegisterBeneficiary extends Component {
       password: this.state.password,
     };
 
-    const registerBenef = await axios.post(
-      'http://localhost:7009/beneficiary/register_beneficiary',
-      beneficiario
-    );
+    let registerBenef = null;
 
-    if (registerBenef.status === 200) {
-      this.setState({ beneficiarioRegister: true });
+    try {
+      registerBenef = await axios.post(
+        'http://localhost:7009/beneficiary/register_beneficiary',
+        beneficiario
+      );
+
+      if (registerBenef.status === 200) {
+        this.setState({ isRegisterOk: true });
+        localStorage.setItem('api-register', registerBenef.data.id);
+        console.log(registerBenef.id);
+      }
+    } catch (error) {
+      this.setState({ message: 'Não foi possível cadastrar o beneficiario.' });
+      console.log('>>>>>', this.state.message, error);
     }
-    console.log(registerBenef);
   };
 
   render() {
     return (
       <div>
         <div style={{ paddingTop: ' 4rem' }} className="row">
-          {this.state.beneficiarioRegister === true && (
+          {this.state.isRegisterOk === true && (
             <div className="alert alert-success" role="alert">
-              <h4>Beneficiario cadastrado com sucesso.</h4>
-              Acesse a página <Link to="/">Login</Link>
+              <h4 className="text-center">Seja bem-vindo(a) ao DoaMed</h4>
+              {<Redirect exact to="/register_medicine_benef" />}
+            </div>
+          )}
+
+          {this.state.message !== '' && (
+            <div className="alert alert-danger" role="alert">
+              <h4 className="text-center">{this.state.message}</h4>
             </div>
           )}
         </div>
@@ -49,6 +64,7 @@ class RegisterBeneficiary extends Component {
           <div className="form-group">
             <label htmlFor="name">Nome</label>
             <input
+              required
               value={this.state.name}
               onChange={(e) => this.setState({ name: e.target.value })}
               type="text"
@@ -61,6 +77,7 @@ class RegisterBeneficiary extends Component {
           <div className="form-group">
             <label htmlFor="phone">Telefone</label>
             <InputMask
+              required
               mask="(99) 99999-9999"
               onChange={(e) => this.setState({ phone: e.target.value })}
               value={this.state.phone}
@@ -75,6 +92,7 @@ class RegisterBeneficiary extends Component {
           <div className="form-group">
             <label htmlFor="city">Cidade</label>
             <input
+              required
               value={this.state.city}
               onChange={(e) => this.setState({ city: e.target.value })}
               type="text"
@@ -86,6 +104,7 @@ class RegisterBeneficiary extends Component {
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
+              required
               value={this.state.email}
               onChange={(e) => this.setState({ email: e.target.value })}
               type="email"
@@ -97,6 +116,7 @@ class RegisterBeneficiary extends Component {
           <div className="form-group">
             <label htmlFor="password">Senha</label>
             <input
+              required
               value={this.state.password}
               onChange={(e) => this.setState({ password: e.target.value })}
               type="password"
@@ -105,13 +125,15 @@ class RegisterBeneficiary extends Component {
               aria-describedby="passwordHelp"
             />
           </div>
-          <button
-            onClick={this.handleSubmit}
-            type="submit"
-            className="btn btn-outline-success"
-          >
-            Registrar
-          </button>
+          <div className="form-group">
+            <button
+              onClick={this.handleSubmit}
+              type="submit"
+              className="btn btn-primary"
+            >
+              Registrar
+            </button>
+          </div>
         </form>
       </div>
     );
