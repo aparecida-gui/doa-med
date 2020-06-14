@@ -15,8 +15,10 @@ class SearchMedicine extends React.Component {
 
     if (medicine.data.message) {
       this.setState({ message: medicine.data.message });
+      this.setState({ medicines: [] });
     } else {
       this.setState({ medicines: medicine.data.medicine });
+      this.setState({ message: '' });
     }
 
     this.getInitialState();
