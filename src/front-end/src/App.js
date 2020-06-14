@@ -6,6 +6,7 @@ import Login from './components/Login';
 import Error404 from './components/Error404';
 import RegisterBeneficiary from './components/RegisterBeneficiary';
 import RecordsOptions from './components/RecordsOptions';
+import RegisterMedicineBenef from './components/RegisterMedicineBenef';
 
 function App() {
   return (
@@ -20,6 +21,11 @@ function App() {
             exact
             path="/register_beneficiary"
             component={RegisterBeneficiary}
+          />
+          <Route
+            exact
+            path="/register_medicine_benef"
+            component={RegisterMedicineBenef}
           />
           <Route component={Error404} />
         </Switch>
