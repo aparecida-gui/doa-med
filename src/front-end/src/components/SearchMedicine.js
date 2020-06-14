@@ -18,12 +18,18 @@ class SearchMedicine extends React.Component {
     } else {
       this.setState({ medicines: medicine.data.medicine });
     }
+
+    this.getInitialState();
+  };
+
+  getInitialState = () => {
+    this.setState({ search_medicine: '' });
   };
 
   render() {
     return (
-      <div className="center">
-        <form onSubmit={(e) => e.preventDefault()}>
+      <div>
+        <form className="form" onSubmit={(e) => e.preventDefault()}>
           <div className="form-group">
             <label htmlFor="search-medicine">Nome do medicamento</label>
             <input
@@ -37,13 +43,15 @@ class SearchMedicine extends React.Component {
             />
           </div>
           {this.state.search_medicine.length > 0 && (
-            <button
-              onClick={this.handleSubmit}
-              type="submit"
-              className="btn btn-primary"
-            >
-              Pesquisar
-            </button>
+            <div className="form-group">
+              <button
+                onClick={this.handleSubmit}
+                type="submit"
+                className="btn btn-primary"
+              >
+                Pesquisar
+              </button>
+            </div>
           )}
         </form>
 

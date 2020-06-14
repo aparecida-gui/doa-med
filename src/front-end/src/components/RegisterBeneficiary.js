@@ -34,12 +34,18 @@ class RegisterBeneficiary extends Component {
       if (registerBenef.status === 200) {
         this.setState({ isRegisterOk: true });
         localStorage.setItem('api-register', registerBenef.data.id);
-        console.log(registerBenef.id);
+        this.getInitialState();
+        console.log(registerBenef.data);
       }
     } catch (error) {
       this.setState({ message: 'Não foi possível cadastrar o beneficiario.' });
+      this.getInitialState();
       console.log('>>>>>', this.state.message, error);
     }
+  };
+
+  getInitialState = () => {
+    this.setState({ name: '', phone: '', city: '', email: '', password: '' });
   };
 
   render() {

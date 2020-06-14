@@ -28,6 +28,7 @@ class Login extends Component {
       }
     } catch (error) {
       this.setState({ message: 'Usuário não existe' });
+      this.setState({ email: '', password: '' });
       console.log('>>>>', this.state.message, error);
     }
   };
