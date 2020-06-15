@@ -26,7 +26,6 @@ router.get(
 );
 router.post(
   '/medicine/:beneficiary_id/register_medicine_benef',
-  multer(multerConfig).single('photo'),
   MedicineBeneficiaryController.registerMedicineBeneficiary
 );
 
