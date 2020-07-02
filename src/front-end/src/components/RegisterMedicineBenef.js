@@ -53,6 +53,8 @@ class RegisterMedicineBenef extends Component {
     } else {
       this.setState({ message: 'Não foi possivel registrar a foto.' });
     }
+
+    this.setState({ name: '', quantity: '', photo: null });
   };
   render() {
     return (
@@ -122,7 +124,6 @@ class RegisterMedicineBenef extends Component {
               Registrar Medicamento
             </button>
           </div>
-          {console.log(this.state.photo)}
         </form>
       </div>
     );

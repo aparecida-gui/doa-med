@@ -35,12 +35,10 @@ class Beneficiary {
       ],
     });
 
-    let newMedicineBeneficiary = Object.entries(medicineBeneficiary);
-
-    if (newMedicineBeneficiary == 0) {
+    if (medicineBeneficiary == 0) {
       res.status(400).json({ message: 'Não têm registros no banco de dados' });
     } else {
-      res.status(200).json({ newMedicineBeneficiary });
+      res.status(200).json(medicineBeneficiary);
     }
   }
 

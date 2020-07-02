@@ -17,7 +17,6 @@ app.use(
   express.static(path.resolve(__dirname, '.', 'tmp', 'uploads'))
 );
 
-app.set(db);
 app.use('/', router);
 
 app.use((req, res) => {
@@ -27,8 +26,17 @@ app.use((req, res) => {
   res.end();
 });
 
-app.listen(`${port}`, () => {
+const server = () => {
+  app.listen(port);
   console.log(`>>>>> server run port: ${port}`);
-});
+};
+
+db.sync()
+  .then(() => {
+    server();
+  })
+  .catch((err) => {
+    console.log('>>>> Err database : ', err);
+  });
 
 export default app;
