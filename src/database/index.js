@@ -4,6 +4,7 @@ import Medicine_Donation from '../back-end/model/Medicine_Donation';
 import Donor from '../back-end/model/Donor';
 import Donor_Medicine from '../back-end/model/Donor_Medicine';
 import Beneficiary from '../back-end/model/Beneficiary';
+import RegisterUser from '../back-end/model/RegisterUser';
 import Medicine_Beneficiary from '../back-end/model/Medicine_Beneficiary';
 import Photo from '../back-end/model/Photo';
 
@@ -37,6 +38,7 @@ Donor.init(connection);
 Donor_Medicine.init(connection);
 Medicine_Beneficiary.init(connection);
 Beneficiary.init(connection);
+RegisterUser.init(connection);
 Photo.init(connection);
 
 Medicine_Donation.belongsToMany(Donor, {

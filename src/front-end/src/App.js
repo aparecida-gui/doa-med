@@ -18,11 +18,7 @@ function App() {
           <Route exact path="/" component={Login} />
           <Route exact path="/search_medicine" component={SearchMedicine} />
           <Route exact path="/record_options" component={RecordsOptions} />
-          <Route
-            exact
-            path="/register_beneficiary"
-            component={RegisterBeneficiary}
-          />
+          <Route exact path="/register_user" component={RegisterBeneficiary} />
           <Route
             exact
             path="/register_medicine_benef"

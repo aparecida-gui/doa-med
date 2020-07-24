@@ -2,8 +2,10 @@ import express from 'express';
 import MedicineController from './controller/MedicineController';
 import DonorController from './controller/DonorController';
 import BeneficiaryController from './controller/BeneficiaryController';
+import RegisterUserController from './controller/RegisterUserController';
 import MedicineBeneficiaryController from './controller/MedicineBeneficiaryController';
 import PhotoController from './controller/PhotoController';
+
 import multer from 'multer';
 import multerConfig from '../config/multerConfig';
 
@@ -16,10 +18,8 @@ router.post(
 );
 
 router.post('/donor/register_donor', DonorController.registerDonor);
-router.post(
-  '/beneficiary/register_beneficiary',
-  BeneficiaryController.registerBeneficiary
-);
+// register user
+router.post('/register_user', RegisterUserController.register);
 router.get(
   '/beneficiary/show_beneficiary',
   BeneficiaryController.showMedicineBeneficiary

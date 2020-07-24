@@ -1,33 +1,7 @@
-import BeneficiaryModel from '../model/Beneficiary';
+import BeneficiaryModel from '../model/RegisterUser';
 import MedicineBeneficiaryModel from '../model/Medicine_Beneficiary';
 
 class Beneficiary {
-  async registerBeneficiary(req, res) {
-    const { name, phone, city, email, password } = req.body;
-
-    if (
-      name !== '' &&
-      phone !== '' &&
-      city !== '' &&
-      email !== '' &&
-      password !== ''
-    ) {
-      const beneficiary = await BeneficiaryModel.create({
-        name,
-        phone,
-        city,
-        email,
-        password,
-      });
-
-      res.status(200).json(beneficiary);
-    } else {
-      res
-        .status(400)
-        .json({ message: 'Verifique se todos os campos foram preenchidos.' });
-    }
-  }
-
   async showMedicineBeneficiary(req, res) {
     let medicineBeneficiary = await BeneficiaryModel.findAll({
       include: [

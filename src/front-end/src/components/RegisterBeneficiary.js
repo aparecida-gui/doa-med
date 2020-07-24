@@ -15,7 +15,7 @@ class RegisterBeneficiary extends Component {
   };
 
   handleSubmit = async () => {
-    const beneficiario = {
+    const user = {
       name: this.state.name,
       phone: this.state.phone,
       city: this.state.city,
@@ -23,22 +23,24 @@ class RegisterBeneficiary extends Component {
       password: this.state.password,
     };
 
-    let registerBenef = null;
+    let registerUser = null;
 
     try {
-      registerBenef = await axios.post(
-        'http://localhost:7009/beneficiary/register_beneficiary',
-        beneficiario
+      registerUser = await axios.post(
+        'http://localhost:7009/register_user',
+        user
       );
 
-      if (registerBenef.status === 200) {
+      console.log('dados do user: ', registerUser);
+
+      if (registerUser.status === 200) {
         this.setState({ isRegisterOk: true });
-        localStorage.setItem('api-register', registerBenef.data.id);
+        localStorage.setItem('api-register', registerUser.data.id);
         this.getInitialState();
-        console.log(registerBenef.data);
+        console.log(registerUser.data);
       }
     } catch (error) {
-      this.setState({ message: 'Não foi possível cadastrar o beneficiario.' });
+      this.setState({ message: 'Não foi possível cadastrar o user.' });
       this.getInitialState();
       console.log('>>>>>', this.state.message, error);
     }
@@ -66,7 +68,7 @@ class RegisterBeneficiary extends Component {
           )}
         </div>
         <form onSubmit={(e) => e.preventDefault()}>
-          <h1 className="text-center">Beneficiario</h1>
+          <h1 className="text-center">Cadastro</h1>
           <div className="form-group">
             <label htmlFor="name">Nome</label>
             <input
@@ -137,7 +139,7 @@ class RegisterBeneficiary extends Component {
               type="submit"
               className="btn btn-primary"
             >
-              Registrar
+              Cadastrar
             </button>
           </div>
         </form>
