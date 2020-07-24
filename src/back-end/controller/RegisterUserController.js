@@ -1,7 +1,11 @@
 import RegisterUserModel from '../model/RegisterUser';
+import encrypData from '../help/encryptData';
 
 class RegisterUser {
   async register(req, res) {
+    const hashPassword = encrypData.hashPassword(req.body.password);
+    req.body.password = hashPassword;
+
     const { name, phone, city, email, password } = req.body;
 
     try {

@@ -12,7 +12,7 @@ class RegisterUser extends Model {
       },
       {
         freezeTableName: true,
-        constraints: false,
+
         timestamps: false,
         sequelize,
       }
