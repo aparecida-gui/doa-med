@@ -1,5 +1,6 @@
 import RegisterUserModel from '../model/RegisterUser';
 import encrypData from '../help/encryptData';
+import jwt from '../help/jwt';
 
 class RegisterUser {
   async register(req, res) {
@@ -10,13 +11,17 @@ class RegisterUser {
 
     try {
       if (name && phone && city && email && password) {
-        await RegisterUserModel.create({
+        const user = await RegisterUserModel.create({
           name,
           phone,
           city,
           email,
           password,
         });
+        if (user) {
+          const token = jwt.generationToken();
+          console.log('>>>>>>>>>>>', token);
+        }
         res.status(200).json({
           messageSuccess: `Seja bem-vindo(a) ao DoaMed ${name}`,
         });
