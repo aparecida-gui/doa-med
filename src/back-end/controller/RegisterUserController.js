@@ -28,23 +28,16 @@ class RegisterUser {
           const hashPassword = encrypData.hashPassword(req.body.password);
           req.body.password = hashPassword;
 
-          await RegisterUserModel.create({
-            name,
-            phone,
-            city,
-            email,
-            password,
-          });
+          await RegisterUserModel.create(req.body);
 
           res.status(201).json({
             messageSuccess: `Seja bem-vindo(a) ao DoaMed ${name}`,
-            token,
           });
         } else {
           return res.status(400).json({ token });
         }
       } else {
-        return res.status(400).json({ validData, isUserExit });
+        res.status(400).json({ validData, isUserExit });
       }
     } catch (error) {
       res.status(400).json({
