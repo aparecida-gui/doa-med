@@ -10,7 +10,7 @@ class RegisterBeneficiary extends Component {
     city: '',
     email: '',
     password: '',
-    isRegisterOk: false,
+    isRegisterOk: null,
     message: '',
   };
 
@@ -23,31 +23,50 @@ class RegisterBeneficiary extends Component {
       password: this.state.password,
     };
 
+    const { name, phone, city, email, password } = user;
+
     let registerUser = null;
 
     try {
-      registerUser = await axios.post(
-        'http://localhost:7009/register_user',
-        user
-      );
+      registerUser = await axios.post('http://localhost:7009/register_user', {
+        name,
+        phone,
+        city,
+        email,
+        password,
+      });
 
-      console.log('dados do user: ', registerUser);
-
-      if (registerUser.status === 200) {
-        this.setState({ isRegisterOk: true });
-        localStorage.setItem('api-register', registerUser.data.id);
-        this.getInitialState();
-        console.log(registerUser.data);
+      if (registerUser.status === 201) {
+        this.setState({
+          isRegisterOk: true,
+        });
       }
     } catch (error) {
-      this.setState({ message: 'Não foi possível cadastrar o user.' });
-      this.getInitialState();
-      console.log('>>>>>', this.state.message, error);
+      if (error.response.data.isUserExit.message) {
+        this.setState({
+          isRegisterOk: false,
+          message: error.response.data.isUserExit.message,
+        });
+        this.getInitialState();
+      }
+      if (error.response.data.validData.message) {
+        this.setState({
+          isRegisterOk: false,
+          message: error.response.data.validData.message,
+        });
+      }
+      console.log(this.state.message);
     }
   };
 
   getInitialState = () => {
-    this.setState({ name: '', phone: '', city: '', email: '', password: '' });
+    this.setState({
+      name: '',
+      phone: '',
+      city: '',
+      email: '',
+      password: '',
+    });
   };
 
   render() {
@@ -56,12 +75,10 @@ class RegisterBeneficiary extends Component {
         <div style={{ paddingTop: ' 4rem' }} className="row">
           {this.state.isRegisterOk === true && (
             <div className="alert alert-success" role="alert">
-              <h4 className="text-center">Seja bem-vindo(a) ao DoaMed</h4>
               {<Redirect exact to="/register_medicine_benef" />}
             </div>
           )}
-
-          {this.state.message !== '' && (
+          {this.state.isRegisterOk === false && (
             <div className="alert alert-danger" role="alert">
               <h4 className="text-center">{this.state.message}</h4>
             </div>
