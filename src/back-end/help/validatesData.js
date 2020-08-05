@@ -17,10 +17,6 @@ const userDatas = (dataRequest) => {
     return { message: 'O campo senha está Vaziu' };
   } else if (dataRequest.password.length < 6) {
     return { message: 'A sua senha deve conter no minimo 6 caracteres.' };
-  } else if (dataRequest.password.length > 12) {
-    return {
-      message: 'Senha muito grande tamanho máximo são 12 caracteres',
-    };
   } else {
     return true;
   }
