@@ -1,15 +1,25 @@
 import express from 'express';
+const router = express.Router();
+
+import RegisterUserController from './controller/RegisterUserController';
+import LoginController from './controller/LoginController';
+import BeneficiaryController from './controller/BeneficiaryController';
 import MedicineController from './controller/MedicineController';
 import DonorController from './controller/DonorController';
-import BeneficiaryController from './controller/BeneficiaryController';
-import RegisterUserController from './controller/RegisterUserController';
 import MedicineBeneficiaryController from './controller/MedicineBeneficiaryController';
 import PhotoController from './controller/PhotoController';
 
 import multer from 'multer';
 import multerConfig from '../config/multerConfig';
 
-const router = express.Router();
+// register user and login
+router.post('/register_user', RegisterUserController.register);
+router.post('/login', LoginController.login);
+
+router.get(
+  '/beneficiary/show_beneficiary',
+  BeneficiaryController.showMedicineBeneficiary
+);
 
 router.get('/medicine/:name', MedicineController.medicineSearch);
 router.post(
@@ -18,12 +28,6 @@ router.post(
 );
 
 router.post('/donor/register_donor', DonorController.registerDonor);
-// register user
-router.post('/register_user', RegisterUserController.register);
-router.get(
-  '/beneficiary/show_beneficiary',
-  BeneficiaryController.showMedicineBeneficiary
-);
 router.post(
   '/medicine/:beneficiary_id/register_medicine_benef',
   MedicineBeneficiaryController.registerMedicineBeneficiary
@@ -36,7 +40,5 @@ router.post(
 );
 
 router.get('/photo', PhotoController.showPhoto);
-
-router.post('/login', BeneficiaryController.login);
 
 export default router;
