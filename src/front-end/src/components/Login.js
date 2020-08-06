@@ -6,7 +6,7 @@ class Login extends Component {
   state = {
     email: '',
     password: '',
-    isLogin: false,
+    isLogin: null,
     message: '',
   };
 
@@ -16,20 +16,37 @@ class Login extends Component {
       password: this.state.password,
     };
 
+    const { email, password } = login;
     let acessoLogin = null;
 
     try {
-      acessoLogin = await axios.post('http://localhost:7009/login', login);
+      acessoLogin = await axios.post('http://localhost:7009/login', {
+        email,
+        password,
+      });
 
       if (acessoLogin.status === 200) {
         this.setState({ isLogin: true });
-        localStorage.setItem('api-login', acessoLogin.data.id);
-        console.log('>>>> acessoLogin:', acessoLogin.data);
       }
     } catch (error) {
-      this.setState({ message: 'Usuário não existe' });
-      this.setState({ email: '', password: '' });
-      console.log('>>>>', this.state.message, error);
+      this.setState({ isLogin: false });
+      if (error.response.data.validateDataLogin) {
+        this.setState({
+          message: error.response.data.validateDataLogin,
+        });
+      }
+      if (error.response.data.message) {
+        this.setState({
+          message: error.response.data.message,
+          email: '',
+          password: '',
+        });
+      }
+      if (error.response.data.messageError) {
+        this.setState({
+          message: error.response.data.messageError,
+        });
+      }
     }
   };
 
@@ -44,7 +61,7 @@ class Login extends Component {
             </div>
           )}
 
-          {this.state.message !== '' && (
+          {this.state.isLogin === false && (
             <div className="alert alert-danger" role="alert">
               <h4 className="text-center">{this.state.message}</h4>
             </div>
