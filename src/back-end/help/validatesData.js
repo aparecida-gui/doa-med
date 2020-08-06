@@ -22,4 +22,18 @@ const userDatas = (dataRequest) => {
   }
 };
 
-export default { userDatas };
+const loginData = (dataRequest) => {
+  if (!dataRequest.email) {
+    return { message: 'O campo email é obrigatório.' };
+  } else if (typeof dataRequest.email !== 'string') {
+    return { message: 'O campo email não aceita números.' };
+  } else if (!dataRequest.password) {
+    return { message: 'O campo senha é obrigatório.' };
+  } else if (dataRequest.password.length < 6) {
+    return { message: 'A sua senha deve conter no minimo 6 caracteres.' };
+  } else {
+    return true;
+  }
+};
+
+export default { userDatas, loginData };
