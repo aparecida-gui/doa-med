@@ -15,19 +15,6 @@ class Beneficiary {
       res.status(200).json(medicineBeneficiary);
     }
   }
-
-  async login(req, res) {
-    const { email, password } = req.body;
-    let loginBeneficiary = await BeneficiaryModel.findOne({
-      where: { email, password },
-    });
-
-    if (loginBeneficiary !== null) {
-      res.status(200).json(loginBeneficiary);
-    } else {
-      res.status(404).json({ message: 'Usuário não existe.' });
-    }
-  }
 }
 
 export default new Beneficiary();
