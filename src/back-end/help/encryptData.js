@@ -1,9 +1,15 @@
 import bcrypt from 'bcrypt';
 const saltRounds = 10;
 
-const hashPassword = (password) => bcrypt.hashSync(password, saltRounds);
+const hashPassword = (my_password) => bcrypt.hashSync(my_password, saltRounds);
 
-const checkPassword = async (password, passwordBD) =>
-  bcrypt.compareSync(password, passwordBD);
+const checkPassword = async (my_password, passwordBD) => {
+  const result = bcrypt.compareSync(my_password, passwordBD);
+  if (result) {
+    return { messageSucess: 'Senha está ok.' };
+  } else {
+    return { messageError: 'Senha Inválida.' };
+  }
+};
 
 export default { hashPassword, checkPassword };

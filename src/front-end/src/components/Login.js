@@ -47,6 +47,9 @@ class Login extends Component {
           message: error.response.data.messageError,
         });
       }
+      if (error.response.data.messagePassword) {
+        this.setState({ message: error.response.data.messagePassword });
+      }
     }
   };
 

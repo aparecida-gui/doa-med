@@ -1,5 +1,6 @@
-import BeneficiaryModel from '../model/RegisterUser';
+import RegisterModel from '../model/RegisterUser';
 import validatesData from '../help/validatesData';
+import encryptData from '../help/encryptData';
 
 class LoginController {
   async login(req, res) {
@@ -9,15 +10,28 @@ class LoginController {
 
     try {
       if (validateDataLogin === true) {
-        loginBeneficiary = await BeneficiaryModel.findOne({
-          where: { email, password },
+        loginBeneficiary = await RegisterModel.findOne({
+          where: { email },
         });
+
         if (loginBeneficiary) {
-          res.status(200).json({ messageSuccess: 'Olá seja bem-vindo(a)' });
+          const checkData = await encryptData.checkPassword(
+            password,
+            loginBeneficiary.password
+          );
+          if (checkData.messageSucess) {
+            res.status(200).json({ messageOk: 'Olá seja bem-vindo(a)' });
+          } else {
+            return res.status(404).json({
+              messagePassword: checkData.messageError,
+            });
+          }
+        } else {
+          res.status(404).json({ message: 'Usuário não cadastrado.' });
         }
-        return res.status(404).json({ message: 'Usuário não existe.' });
+      } else {
+        res.status(400).json(validateDataLogin);
       }
-      res.status(400).json(validateDataLogin);
     } catch (error) {
       res.status(400).json({ messageError: error });
     }
