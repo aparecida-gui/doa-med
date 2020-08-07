@@ -31,11 +31,14 @@ class RegisterUser {
 
           res.status(201).json({
             messageSuccess: `Seja bem-vindo(a) ao DoaMed`,
+            token: token,
           });
+        } else {
+          res.status(400).json({ token });
         }
-        return res.status(400).json({ token });
+      } else {
+        res.status(400).json({ validData, isUserExit });
       }
-      res.status(400).json({ validData, isUserExit });
     } catch (error) {
       res.status(400).json({
         messageError: error,
