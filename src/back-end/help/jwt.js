@@ -16,8 +16,14 @@ const generationToken = async () => {
   }
 };
 
-const tokenVerify = () => {
-  jsonwebtoken.verify();
+const checkTokenIsValid = (token) => {
+  let decoded = null;
+  try {
+    decoded = jsonwebtoken.verify(token, process.env.JWT_SECRET);
+    return { messageSuccess: 'Token Valido.' };
+  } catch (messageError) {
+    return { messageError: 'Token inválido.' };
+  }
 };
 
-export default { generationToken, tokenVerify };
+export default { generationToken, checkTokenIsValid };
