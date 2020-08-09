@@ -1,7 +1,7 @@
 'use strict';
 
 import MedicineDonationModel from '../model/Medicine_Donation';
-import DonorModel from '../model/Donor';
+import User from '../model/RegisterUser';
 import moment from 'moment';
 
 class Medicine {
@@ -27,17 +27,14 @@ class Medicine {
   }
 
   async registerMedicine(req, res) {
-    const { donor_id } = req.params;
+    const { user_id } = req.params;
     let { name, laboratory, quantity, expirationDate } = req.body;
 
-    let donor = await DonorModel.findByPk(donor_id);
+    try {
+      const donor = await User.findByPk(user_id);
 
-    if (!donor) {
-      res
-        .status(400)
-        .json({ message: 'Não foi encontrado o usuário indicado.' });
-    } else {
       if (
+        donor &&
         name !== '' &&
         laboratory !== '' &&
         quantity !== '' &&
@@ -52,10 +49,10 @@ class Medicine {
         });
         await donor.addMedicine(medicine);
         res.status(200).json({ message: 'medicamento cadastrado com sucesso' });
+      } else {
+        res.status(400).json({ messageError: 'Usuário não cadastrado.' });
       }
-    }
-
-    res.end();
+    } catch (error) {}
   }
 }
 
