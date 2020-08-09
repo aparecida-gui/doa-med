@@ -41,13 +41,13 @@ Beneficiary.init(connection);
 RegisterUser.init(connection);
 Photo.init(connection);
 
-Medicine_Donation.belongsToMany(Donor, {
+Medicine_Donation.belongsToMany(RegisterUser, {
   foreignKey: 'medicine_donation_id',
   through: 'Donor_Medicine',
   as: 'donors',
 });
-Donor.belongsToMany(Medicine_Donation, {
-  foreignKey: 'donor_id',
+RegisterUser.belongsToMany(Medicine_Donation, {
+  foreignKey: 'user_id',
   through: 'Donor_Medicine',
   as: 'medicines',
 });
