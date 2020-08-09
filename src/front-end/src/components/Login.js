@@ -27,6 +27,7 @@ class Login extends Component {
 
       if (acessoLogin.status === 200) {
         this.setState({ isLogin: true });
+        localStorage.setItem('tokenUser', acessoLogin.data.token);
       }
     } catch (error) {
       this.setState({ isLogin: false });
