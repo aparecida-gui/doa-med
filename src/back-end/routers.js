@@ -9,6 +9,7 @@ import DonorController from './controller/DonorController';
 import MedicineBeneficiaryController from './controller/MedicineBeneficiaryController';
 import PhotoController from './controller/PhotoController';
 
+import verifyAuthentication from '../back-end/help/verifyAuthentication';
 import multer from 'multer';
 import multerConfig from '../config/multerConfig';
 
@@ -16,16 +17,19 @@ import multerConfig from '../config/multerConfig';
 router.post('/register_user', RegisterUserController.register);
 router.post('/login', LoginController.login);
 
+// doar medicamentos
+router.post(
+  '/medicine/:user_id/register_medicine',
+  verifyAuthentication,
+  MedicineController.registerMedicine
+);
+
 router.get(
   '/beneficiary/show_beneficiary',
   BeneficiaryController.showMedicineBeneficiary
 );
 
 router.get('/medicine/:name', MedicineController.medicineSearch);
-router.post(
-  '/medicine/:donor_id/register_medicine',
-  MedicineController.registerMedicine
-);
 
 router.post('/donor/register_donor', DonorController.registerDonor);
 router.post(
