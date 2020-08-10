@@ -16,11 +16,9 @@ const generationToken = async () => {
   }
 };
 
-const checkTokenIsValid = (token) => {
-  let decoded = null;
+const checkTokenIsValid = async (token) => {
   try {
-    decoded = jsonwebtoken.verify(token, process.env.JWT_SECRET);
-    return { messageSuccess: 'Token Valido.' };
+    return await jsonwebtoken.verify(token, process.env.JWT_SECRET);
   } catch (messageError) {
     return { messageError: 'Token inválido.' };
   }

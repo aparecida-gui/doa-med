@@ -1,15 +1,15 @@
 import jwt from './jwt';
+import { async } from 'regenerator-runtime';
 
-const verifyAuthentication = (req, res, next) => {
+const verifyAuthentication = async (req, res, next) => {
   const authHeader = req.headers.authorization;
   const token = authHeader.split(' ')[1];
-  const tokenValid = jwt.checkTokenIsValid(token);
+  const tokenValid = await jwt.checkTokenIsValid(token);
 
   if (!tokenValid.messageError) {
-    res.status(200).json(tokenValid);
     next();
   } else {
-    res.status(401).json({ message: 'Uauário não autenticado.' });
+    return res.status(401).json({ message: 'Usuário não autenticado.' });
   }
 };
 
