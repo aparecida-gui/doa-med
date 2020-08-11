@@ -2,6 +2,14 @@
 
 Aplicação web para doação de medicamentos.
 
+## Status do Projeto
+Em desenvolvimento
+
+## Pré-requisitos
+Você precisa ter instalado em seu computador as seguintes ferramentas para poder executar o projeto local:
+
+[git](https://git-scm.com/downloads), [node.js](https://nodejs.org/en/download/)
+
 ## Para executar o projeto local siga os passos abaixo.
 
 1. Clone o repositório
