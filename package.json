@@ -10,8 +10,8 @@
   "main": "configServer.js",
   "scripts": {
     "test": "jest --watch --detectOpenHandles",
-    "dev": "nodemon --exec babel-node configServer.js",
-    "start": "babel-node configServer.js"
+    "dev": " NODE_ENV=development nodemon --exec babel-node configServer.js",
+    "start": "NODE_ENV=production babel-node configServer.js"
   },
   "repository": {
     "type": "git",
