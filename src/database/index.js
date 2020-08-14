@@ -8,24 +8,18 @@ import RegisterUser from '../back-end/model/RegisterUser';
 import Medicine_Beneficiary from '../back-end/model/Medicine_Beneficiary';
 import Photo from '../back-end/model/Photo';
 const env = process.env.NODE_ENV || 'development';
-
-console.log(process.env.NODE_ENV);
-console.log('>>>>>>>>>>> env: ', env);
-console.log(
-  '>>>>>>>>>>> databaseConfig[env].use_env_variable',
-  databaseConfig[env].use_env_variable
-);
-console.log('>>>>>>>>>>> databaseConfig: ', databaseConfig);
-console.log('>>>>>>>>>>> databaseConfig.production', databaseConfig.production);
-console.log(
-  '>>>>>>>>>>< databaseConfig.use_env_variable: ',
-  databaseConfig.use_env_variable
-);
+import path from 'path';
+const dotenv = require('dotenv');
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
 let connection;
 if (process.env.NODE_ENV === 'production') {
-  connection = new Sequelize(process.env.use_env_variable, databaseConfig);
+  connection = new Sequelize(
+    process.env.DATABASE_URL,
+    databaseConfig.production
+  );
   console.log('>>>>>>>>>>>>>>>>>>>> estou no if');
+  console.log('>>>>>>>>>> databaseConfig', databaseConfig.production);
 }
 if (process.env.NODE_ENV === 'development') {
   connection = new Sequelize(
