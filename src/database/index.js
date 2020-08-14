@@ -7,7 +7,6 @@ import Beneficiary from '../back-end/model/Beneficiary';
 import RegisterUser from '../back-end/model/RegisterUser';
 import Medicine_Beneficiary from '../back-end/model/Medicine_Beneficiary';
 import Photo from '../back-end/model/Photo';
-const env = process.env.NODE_ENV || 'development';
 import path from 'path';
 const dotenv = require('dotenv');
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
@@ -18,8 +17,6 @@ if (process.env.NODE_ENV === 'production') {
     process.env.DATABASE_URL,
     databaseConfig.production
   );
-  console.log('>>>>>>>>>>>>>>>>>>>> estou no if');
-  console.log('>>>>>>>>>> databaseConfig', databaseConfig.production);
 }
 if (process.env.NODE_ENV === 'development') {
   connection = new Sequelize(
