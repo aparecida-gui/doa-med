@@ -26,6 +26,11 @@ app.use((req, res, next) => {
   next();
 });
 
+// All remaining requests return the React app, so it can handle routing.
+app.get('*', function (req, res) {
+  res.sendFile(path.resolve(__dirname, './src/front-end/public/index.html'));
+});
+
 const server = () => {
   app.listen(port);
   console.log(`>>>>> server run port: ${port}`);
