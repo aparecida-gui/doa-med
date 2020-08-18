@@ -45,9 +45,9 @@ router.post(
 
 router.get('/photo', PhotoController.showPhoto);
 
-router.get('/', (req, res, next) => {
-  res.send('Hello Heroku');
-  next();
-});
+// router.get('/', (req, res, next) => {
+//   res.send('Hello Heroku');
+//   next();
+// });
 
 export default router;

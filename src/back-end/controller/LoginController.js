@@ -4,7 +4,7 @@ import encryptData from '../help/encryptData';
 import jwt from '../help/jwt';
 
 class LoginController {
-  async login(req, res) {
+  async login(req, res, next) {
     const validateDataLogin = validatesData.loginData(req.body);
     const { email, password } = req.body;
     let emailExists = null;
@@ -41,6 +41,7 @@ class LoginController {
     } catch (error) {
       res.status(400).json({ messageError: error });
     }
+    next();
   }
 }
 

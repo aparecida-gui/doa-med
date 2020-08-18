@@ -16,7 +16,7 @@ class RegisterUser {
     }
   }
 
-  async register(req, res) {
+  async register(req, res, next) {
     const isUserExit = await RegisterUser.userVerify(req.body);
     let validData = validatesData.userDatas(req.body);
 
@@ -44,6 +44,7 @@ class RegisterUser {
         messageError: error,
       });
     }
+    next();
   }
 }
 
