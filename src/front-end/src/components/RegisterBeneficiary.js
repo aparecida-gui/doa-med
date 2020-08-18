@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 import InputMask from 'react-input-mask';
 import { Redirect } from 'react-router-dom';
 
@@ -28,7 +28,7 @@ class RegisterBeneficiary extends Component {
     let registerUser = null;
 
     try {
-      registerUser = await axios.post('http://localhost:7009/register_user', {
+      registerUser = await api.post('register_user', {
         name,
         phone,
         city,

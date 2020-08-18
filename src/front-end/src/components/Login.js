@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 import { Redirect } from 'react-router-dom';
 
 class Login extends Component {
@@ -20,7 +20,7 @@ class Login extends Component {
     let acessoLogin = null;
 
     try {
-      acessoLogin = await axios.post('http://localhost:7009/login', {
+      acessoLogin = await api.post('login', {
         email,
         password,
       });
