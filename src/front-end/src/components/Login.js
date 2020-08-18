@@ -20,7 +20,7 @@ class Login extends Component {
     let acessoLogin = null;
 
     try {
-      acessoLogin = await api.post('/login', {
+      acessoLogin = await api.post('login', {
         email,
         password,
       });
