@@ -34,11 +34,13 @@ db.sync()
     console.log('>>>> Err database : ', err);
   });
 
-app.use(express.static(path.resolve(__dirname, './src/front-end/build')));
+if (process.env.Node_ENV === 'production') {
+  app.use(express.static(path.resolve(__dirname, './src/front-end/build')));
 
-app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, './src/front-end/build/index.html'));
-});
+  app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, './src/front-end/build/index.html'));
+  });
+}
 
 const server = () => {
   app.listen(port);
