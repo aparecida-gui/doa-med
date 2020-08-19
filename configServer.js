@@ -26,11 +26,6 @@ app.use((req, res, next) => {
   next();
 });
 
-const server = () => {
-  app.listen(port);
-  console.log(`>>>>> server run port: ${port}`);
-};
-
 db.sync()
   .then(() => {
     server();
@@ -39,8 +34,15 @@ db.sync()
     console.log('>>>> Err database : ', err);
   });
 
+app.use(express.static(path.resolve(__dirname, './src/front-end/build')));
+
 app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, '.', 'src/front-end/build/index.html'));
+  res.sendFile(path.join(__dirname, './src/front-end/build/index.html'));
 });
+
+const server = () => {
+  app.listen(port);
+  console.log(`>>>>> server run port: ${port}`);
+};
 
 export default app;
