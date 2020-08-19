@@ -23,7 +23,7 @@ class LoginController {
           const token = await jwt.generationToken();
 
           if (checkData.messageSucess && token) {
-            res
+            return res
               .status(200)
               .json({ messageOk: 'Olá seja bem-vindo(a)', token: token });
           } else {
@@ -33,13 +33,13 @@ class LoginController {
             });
           }
         } else {
-          res.status(401).json({ message: 'Usuário não cadastrado.' });
+          return res.status(401).json({ message: 'Usuário não cadastrado.' });
         }
       } else {
-        res.status(400).json(validateDataLogin);
+        return res.status(400).json(validateDataLogin);
       }
     } catch (error) {
-      res.status(400).json({ messageError: error });
+      return res.status(400).json({ messageError: error });
     }
   }
 }
