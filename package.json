@@ -14,6 +14,10 @@
     "start": "NODE_ENV=production babel-node configServer.js",
     "build": "cd src/front-end && npm install && npm run build"
   },
+  "cacheDirectories": [
+    "node_modules",
+    "cd src/front-end/node_modules"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Suele/final-project.git"
