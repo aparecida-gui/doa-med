@@ -40,9 +40,7 @@ db.sync()
   });
 
 app.get('*', function (req, res) {
-  res.sendFile(
-    path.resolve(__dirname, '.', 'src', 'front-end', 'build/index.html')
-  );
+  res.sendFile(path.join(__dirname, '.', 'src/front-end/build/index.html'));
 });
 
 export default app;
