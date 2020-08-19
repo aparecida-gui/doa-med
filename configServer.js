@@ -26,10 +26,12 @@ app.use((req, res, next) => {
   next();
 });
 
-  // All remaining requests return the React app, so it can handle routing.
-  app.get('*', function(req, res) {
-    res.sendFile(path.resolve(__dirname, '.', 'src', 'front-end', 'build', 'index.html')
-  });
+// All remaining requests return the React app, so it can handle routing.
+app.get('*', function (req, res) {
+  res.sendFile(
+    path.resolve(__dirname, '.', 'src', 'front-end', 'build', 'index.html')
+  );
+});
 
 const server = () => {
   app.listen(port);
