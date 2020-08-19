@@ -11,7 +11,8 @@
   "scripts": {
     "test": "jest --watch --detectOpenHandles",
     "dev": " NODE_ENV=development nodemon --exec babel-node configServer.js",
-    "start": "NODE_ENV=production babel-node configServer.js"
+    "start": "NODE_ENV=production babel-node configServer.js",
+    "build": "cd src/front-end && npm install && npm run build"
   },
   "repository": {
     "type": "git",
