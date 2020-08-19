@@ -10,7 +10,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-const port = process.env.PORT || 7009;
+const port = process.env.PORT || 5000;
 
 app.use(
   '/files/',
@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 
   // All remaining requests return the React app, so it can handle routing.
   app.get('*', function(req, res) {
-    res.sendFile(path.resolve(__dirname, '.', 'src', 'front-end', 'public', 'index.html');
+    res.sendFile(path.resolve(__dirname, '.', 'src', 'front-end', 'build', 'index.html');
   });
 
 const server = () => {
