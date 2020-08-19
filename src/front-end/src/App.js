@@ -15,7 +15,7 @@ function App() {
       <Nav />
       <div className="container">
         <Switch>
-          <Route exact path="/" component={Login} />
+          <Route exact path="/login" component={Login} />
           <Route exact path="/search_medicine" component={SearchMedicine} />
           <Route exact path="/record_options" component={RecordsOptions} />
           <Route exact path="/register_user" component={RegisterBeneficiary} />

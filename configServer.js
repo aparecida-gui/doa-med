@@ -26,10 +26,18 @@ app.use((req, res, next) => {
   next();
 });
 
+if (process.env.Node_ENV === 'production') {
+  app.use(
+    express.static(
+      path.join(__dirname, '.', 'src', 'front-end', 'public', 'index.html')
+    )
+  );
+}
+
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', function (req, res) {
   res.sendFile(
-    path.resolve(__dirname, '.', 'src', 'front-end', 'public', 'index.html')
+    path.join(__dirname, '.', 'src', 'front-end', 'public', 'index.html')
   );
 });
 
