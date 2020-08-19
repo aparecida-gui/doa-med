@@ -28,7 +28,7 @@ class RegisterBeneficiary extends Component {
     let registerUser = null;
 
     try {
-      registerUser = await api.post('/register_user', {
+      registerUser = await api.post('register_user', {
         name,
         phone,
         city,
