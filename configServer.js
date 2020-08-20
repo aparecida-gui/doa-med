@@ -22,7 +22,7 @@ app.use('/', router);
 app.use((req, res, next) => {
   res
     .status(404)
-    .json({ message: 'Não foi possível encontrar a página solicitada.' });
+    .json({ message: 'Não foi possível encontrar a página solicitada...' });
   next();
 });
 
