@@ -35,6 +35,12 @@ app.get('*', (req, res) => {
   );
 });
 
+app.get('/*', (req, res) => {
+  res.sendFile(
+    path.resolve(__dirname, './src', '/front-end', '/build', '/index.html')
+  );
+});
+
 app.use((req, res, next) => {
   res
     .status(404)
