@@ -10,9 +10,11 @@
   "main": "configServer.js",
   "scripts": {
     "test": "jest --watch --detectOpenHandles",
+    "build": "cd src/front-end && npm run build",
+    "install-client": "cd src/front-end && npm install",
+    "heroku-postbuild": "npm run install-client && npm run build",
     "dev": " NODE_ENV=development nodemon --exec babel-node configServer.js",
-    "start": "NODE_ENV=production babel-node configServer.js",
-    "build": "cd src/front-end && npm install && npm run build"
+    "start": "NODE_ENV=production babel-node configServer.js"
   },
   "cacheDirectories": [
     "node_modules",
