@@ -36,10 +36,6 @@ db.sync()
 
 if (process.env.Node_ENV === 'production') {
   app.use(express.static(path.resolve(__dirname, './src/front-end/build')));
-
-  app.get('*', function (req, res) {
-    res.sendFile(path.join(__dirname, './src/front-end/build/index.html'));
-  });
 }
 
 const server = () => {
