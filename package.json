@@ -10,16 +10,10 @@
   "main": "configServer.js",
   "scripts": {
     "test": "jest --watch --detectOpenHandles",
-    "build": "cd src/front-end && npm run build",
-    "install-client": "cd src/front-end && npm install",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run install-client && npm run build",
     "dev": " NODE_ENV=development nodemon --exec babel-node configServer.js",
-    "start": "NODE_ENV=production babel-node configServer.js"
+    "start": "NODE_ENV=production babel-node configServer.js",
+    "heroku-postbuild": "cd src/front-end && npm install --only=dev && npm install && npm run build"
   },
-  "cacheDirectories": [
-    "node_modules",
-    "cd src/front-end/node_modules"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Suele/final-project.git"
