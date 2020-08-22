@@ -12,7 +12,7 @@
     "test": "jest --watch --detectOpenHandles",
     "build": "cd src/front-end && npm run build",
     "install-client": "cd src/front-end && npm install",
-    "heroku-postbuild": "npm run install-client && npm run build",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run install-client && npm run build",
     "dev": " NODE_ENV=development nodemon --exec babel-node configServer.js",
     "start": "NODE_ENV=production babel-node configServer.js"
   },
