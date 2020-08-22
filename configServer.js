@@ -1,6 +1,6 @@
 import cors from 'cors';
 import express from 'express';
-import router from './src/back-end/routers';
+//import router from './src/back-end/routers';
 import bodyParser from 'body-parser';
 import db from './src/database';
 import path from 'path';
@@ -9,7 +9,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use('/', router);
+//app.use('/', router);
 
 app.use(
   '/files/',
@@ -24,13 +24,13 @@ db.sync()
     console.log('>>>> Err database : ', err);
   });
 
-if (process.env.Node_ENV === 'production') {
-  app.get('*', (req, res) => {
-    res.sendFile(
-      path.resolve(__dirname, './src', '/front-end', '/build', '/index.html')
-    );
-  });
-}
+app.use(express.static(path.resolve(__dirname, './src/front-end/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(
+    path.resolve(__dirname, './src', '/front-end', '/build', '/index.html')
+  );
+});
 
 app.use((req, res, next) => {
   res
