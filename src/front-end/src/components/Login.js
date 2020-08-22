@@ -20,7 +20,7 @@ class Login extends Component {
     let acessoLogin = null;
 
     try {
-      acessoLogin = await axios.post('login', {
+      acessoLogin = await axios.post('/login', {
         email,
         password,
       });
