@@ -6,9 +6,12 @@ import db from './src/database';
 import path from 'path';
 
 const app = express();
+const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+//Quando for fazer deploy comenta está linha das rotas.
 //app.use('/', router);
 
 app.use(
@@ -38,8 +41,6 @@ app.use((req, res, next) => {
     .json({ message: 'Não foi possível encontrar a página solicitada...' });
   next();
 });
-
-const port = process.env.PORT || 5000;
 
 const server = () => {
   app.listen(port);
