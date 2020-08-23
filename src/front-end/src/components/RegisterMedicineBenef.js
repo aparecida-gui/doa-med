@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 
 class RegisterMedicineBenef extends Component {
   state = {
@@ -21,8 +21,8 @@ class RegisterMedicineBenef extends Component {
     let registerMedicine = null;
 
     try {
-      registerMedicine = await axios.post(
-        `http://localhost:7009/medicine/${beneficiary_id}/register_medicine_benef`,
+      registerMedicine = await api.post(
+        `${beneficiary_id}/register_medicine_benef`,
         registerMedicineBenef
       );
 
@@ -42,8 +42,8 @@ class RegisterMedicineBenef extends Component {
     if (medicine_beneficiary_id) {
       formData.append('name', this.state.photo);
 
-      const register = await axios.post(
-        `http://localhost:7009/medicine/${medicine_beneficiary_id}/photo`,
+      const register = await api.post(
+        `${medicine_beneficiary_id}/photo`,
         formData
       );
       this.setState({
