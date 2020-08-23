@@ -27,13 +27,9 @@ db.sync()
     console.log('>>>> Err database : ', err);
   });
 
+app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, 'build')));
 app.use(express.static(path.resolve(__dirname, './src/front-end/build')));
-
-app.get('*', (req, res) => {
-  res.sendFile(
-    path.resolve(__dirname, './src', '/front-end', '/build', '/index.html')
-  );
-});
 
 app.get('/*', (req, res) => {
   res.sendFile(
