@@ -5,7 +5,7 @@ Aplicação web para doação de medicamentos.
 ## Status do Projeto
 Em desenvolvimento
 
-## Demonstração da aplicação - Ajustando
+## Demonstração da aplicação - em ajuste
 Infelizmente muita coisa que funciona local não funciona no heroku.
 Para visualizar acesse: https://doa-med.herokuapp.com/
 
