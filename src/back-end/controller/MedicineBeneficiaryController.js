@@ -1,4 +1,4 @@
-import Beneficiary from '../model/Beneficiary';
+import Beneficiary from '../model/RegisterUser';
 import MedicineBeneficiaryModel from '../model/Medicine_Beneficiary';
 
 class MedicineBeneficiary {

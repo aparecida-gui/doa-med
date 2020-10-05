@@ -11,7 +11,9 @@ class RegisterMedicineBenef extends Component {
   };
 
   handleClick = async () => {
-    const beneficiary_id = localStorage.getItem('api-register');
+    const {
+      match: { params },
+    } = this.props;
 
     const registerMedicineBenef = {
       name: this.state.name,
@@ -20,42 +22,45 @@ class RegisterMedicineBenef extends Component {
 
     let registerMedicine = null;
 
-    try {
-      registerMedicine = await api.post(
-        `${beneficiary_id}/register_medicine_benef`,
-        registerMedicineBenef
-      );
+    registerMedicine = await api.post(
+      `${params.beneficiary_id}/register_medicine_benef`,
+      registerMedicineBenef
+    );
 
-      if (registerMedicine.status === 200) {
-        this.registerPhoto();
-      }
+    console.log('>>> registerMedicine: ', registerMedicine);
+
+    // if (registerMedicine.status === 200) {
+    //   this.registerPhoto();
+    // }
+
+    try {
     } catch (error) {
       this.setState({ message: registerMedicine.data.message });
     }
   };
 
-  registerPhoto = async () => {
-    const formData = new FormData();
+  // registerPhoto = async () => {
+  //   const formData = new FormData();
 
-    const medicine_beneficiary_id = localStorage.getItem('api-register');
+  //   const medicine_beneficiary_id = localStorage.getItem('api-register');
 
-    if (medicine_beneficiary_id) {
-      formData.append('name', this.state.photo);
+  //   if (medicine_beneficiary_id) {
+  //     formData.append('name', this.state.photo);
 
-      const register = await api.post(
-        `${medicine_beneficiary_id}/photo`,
-        formData
-      );
-      this.setState({
-        isRegisterMedicineOk: true,
-      });
-      console.log(register.data.message);
-    } else {
-      this.setState({ message: 'Não foi possivel registrar a foto.' });
-    }
+  //     const register = await api.post(
+  //       `${medicine_beneficiary_id}/photo`,
+  //       formData
+  //     );
+  //     this.setState({
+  //       isRegisterMedicineOk: true,
+  //     });
+  //     console.log(register.data.message);
+  //   } else {
+  //     this.setState({ message: 'Não foi possivel registrar a foto.' });
+  //   }
 
-    this.setState({ name: '', quantity: '', photo: null });
-  };
+  //   this.setState({ name: '', quantity: '', photo: null });
+  // };
   render() {
     return (
       <div>
@@ -101,7 +106,7 @@ class RegisterMedicineBenef extends Component {
               placeholder="Qual a quantidade do medicamento?"
             />
           </div>
-          <div className="form-group">
+          {/* <div className="form-group">
             <input
               required
               type="file"
@@ -114,7 +119,7 @@ class RegisterMedicineBenef extends Component {
             <label className="custom-file-label" htmlFor="photo">
               Adicione uma imagem da receita medica
             </label>
-          </div>
+          </div> */}
           <div className="form-group">
             <button
               onClick={this.handleClick}

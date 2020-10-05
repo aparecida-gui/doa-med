@@ -21,7 +21,7 @@ function App() {
           <Route exact path="/register_user" component={RegisterBeneficiary} />
           <Route
             exact
-            path="/register_medicine_benef"
+            path="/:beneficiary_id/register_medicine_benef"
             component={RegisterMedicineBenef}
           />
           <Route

@@ -1,5 +1,4 @@
 import jwt from './jwt';
-import { async } from 'regenerator-runtime';
 
 const verifyAuthentication = async (req, res, next) => {
   const authHeader = req.headers.authorization;

@@ -55,7 +55,6 @@ class RegisterBeneficiary extends Component {
           message: error.response.data.validData.message,
         });
       }
-      console.log(this.state.message);
     }
   };
 

@@ -1,6 +1,6 @@
 import cors from 'cors';
 import express from 'express';
-//import router from './src/back-end/routers';
+import router from './src/back-end/routers';
 import bodyParser from 'body-parser';
 import db from './src/database';
 import path from 'path';
@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //Quando for fazer deploy comenta está linha das rotas.
-//app.use('/', router);
+app.use('/', router);
 
 app.use(
   '/files/',
@@ -27,9 +27,13 @@ db.sync()
     console.log('>>>> Err database : ', err);
   });
 
-app.use(express.static(__dirname));
-app.use(express.static(path.join(__dirname, 'build')));
 app.use(express.static(path.resolve(__dirname, './src/front-end/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(
+    path.resolve(__dirname, './src', '/front-end', '/build', '/index.html')
+  );
+});
 
 app.get('/*', (req, res) => {
   res.sendFile(

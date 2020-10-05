@@ -8,6 +8,7 @@ class Login extends Component {
     password: '',
     isLogin: null,
     message: '',
+    beneficiary_id: '',
   };
 
   handleSubmit = async () => {
@@ -17,16 +18,17 @@ class Login extends Component {
     };
 
     const { email, password } = login;
-    let acessoLogin = null;
+    let acessoLogin = await api.post('/', {
+      email,
+      password,
+    });
 
     try {
-      acessoLogin = await api.post('login', {
-        email,
-        password,
-      });
-
       if (acessoLogin.status === 200) {
-        this.setState({ isLogin: true });
+        this.setState({
+          isLogin: true,
+          beneficiary_id: acessoLogin.data.emailExists.id,
+        });
         localStorage.setItem('tokenUser', acessoLogin.data.token);
       }
     } catch (error) {
@@ -61,7 +63,11 @@ class Login extends Component {
           {this.state.isLogin === true && (
             <div className="alert alert-success" role="alert">
               <h4 className="text-center">Seja bem-vindo(a) ao DoaMed</h4>
-              {<Redirect exact to="/register_medicine_benef" />}
+              {
+                <Redirect
+                  to={`${this.state.beneficiary_id}/register_medicine_benef`}
+                />
+              }
             </div>
           )}
 

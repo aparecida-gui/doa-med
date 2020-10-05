@@ -23,9 +23,11 @@ class LoginController {
           const token = await jwt.generationToken();
 
           if (checkData.messageSucess && token) {
-            return res
-              .status(200)
-              .json({ messageOk: 'Olá seja bem-vindo(a)', token: token });
+            return res.status(200).json({
+              messageOk: 'Olá seja bem-vindo(a)',
+              token: token,
+              emailExists,
+            });
           } else {
             return res.status(404).json({
               messagePassword: checkData.messageError,

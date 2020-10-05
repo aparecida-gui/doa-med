@@ -15,7 +15,7 @@ import multerConfig from '../config/multerConfig';
 
 // register user and login
 router.post('/register_user', RegisterUserController.register);
-router.post('/login', LoginController.login);
+router.post('/', LoginController.login);
 
 // doar medicamentos
 router.post(
@@ -33,7 +33,7 @@ router.get('/medicine/:name', MedicineController.medicineSearch);
 
 router.post('/donor/register_donor', DonorController.registerDonor);
 router.post(
-  '/medicine/:beneficiary_id/register_medicine_benef',
+  '/:beneficiary_id/register_medicine_benef',
   MedicineBeneficiaryController.registerMedicineBeneficiary
 );
 

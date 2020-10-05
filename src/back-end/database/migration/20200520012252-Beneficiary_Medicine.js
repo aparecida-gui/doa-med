@@ -14,7 +14,7 @@ module.exports = {
         beneficiary_id: {
           type: Sequelize.INTEGER,
           allowNull: false,
-          references: { model: 'Beneficiary', key: 'id' },
+          references: { model: 'RegisterUser', key: 'id' },
           onUpdate: 'CASCADE',
           onDelete: 'CASCADE',
         },

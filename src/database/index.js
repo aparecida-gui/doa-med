@@ -65,17 +65,17 @@ RegisterUser.belongsToMany(Medicine_Donation, {
   as: 'medicines',
 });
 
-Photo.belongsTo(Medicine_Beneficiary, {
-  foreignKey: 'medicine_beneficiary_id',
-  as: 'medicine_beneficiary',
-});
+// Photo.belongsTo(Medicine_Beneficiary, {
+//   foreignKey: 'medicine_beneficiary_id',
+//   as: 'medicine_beneficiary',
+// });
 
-Medicine_Beneficiary.belongsToMany(Beneficiary, {
+Medicine_Beneficiary.belongsToMany(RegisterUser, {
   foreignKey: 'medicine_id',
   through: 'Beneficiary_Medicine',
   as: 'beneficiaries',
 });
-Beneficiary.belongsToMany(Medicine_Beneficiary, {
+RegisterUser.belongsToMany(Medicine_Beneficiary, {
   foreignKey: 'beneficiary_id',
   through: 'Beneficiary_Medicine',
   as: 'medicinesBeneficiary',
