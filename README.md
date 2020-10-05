@@ -5,6 +5,11 @@ Aplicação web para doação de medicamentos.
 ## Status do Projeto
 Em desenvolvimento
 
+## Demonstração da aplicação - em ajuste
+Infelizmente muita coisa que funciona local não funciona no heroku.
+Para visualizar acesse: https://doa-med.herokuapp.com/
+
+
 ## Pré-requisitos
 Você precisa ter instalado em seu computador as seguintes ferramentas para poder executar o projeto local:
 
@@ -28,6 +33,6 @@ Você precisa ter instalado em seu computador as seguintes ferramentas para pode
 
 ## Porque estas tecnologias foram escolhidas?
 
-Estas tecnologias foram escolhidas para o desenvolvimento do projeto DoaMed pela facilidade de implementa-las, sendo esta uma aplicação web e tendo apenas uma unica linguagem de programação no backend e no frontend.
+Porque a aplicação é web o que facilita o acesso a todos, já que basta ter apenas um navegador web para acessa-la e pela facilidade em poder utilizar apenas uma linguagem no backend e no frontend.
 
 
