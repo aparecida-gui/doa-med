@@ -5,7 +5,7 @@ class RegisterMedicineBenef extends Component {
   state = {
     name: '',
     quantity: '',
-    photo: null,
+    prescription: null,
     isRegisterMedicineOk: false,
     message: '',
   };
@@ -18,49 +18,26 @@ class RegisterMedicineBenef extends Component {
     const registerMedicineBenef = {
       name: this.state.name,
       quantity: this.state.quantity,
+      prescription: this.state.prescription,
     };
 
     let registerMedicine = null;
 
-    registerMedicine = await api.post(
-      `${params.beneficiary_id}/register_medicine_benef`,
-      registerMedicineBenef
-    );
-
-    console.log('>>> registerMedicine: ', registerMedicine);
-
-    // if (registerMedicine.status === 200) {
-    //   this.registerPhoto();
-    // }
-
     try {
+      registerMedicine = await api.post(
+        `${params.beneficiary_id}/register_medicine_benef`,
+        registerMedicineBenef
+      );
+
+      this.setState({ isRegisterMedicineOk: true });
+
+      console.log('>>> registerMedicineBenef: ', registerMedicineBenef);
     } catch (error) {
       this.setState({ message: registerMedicine.data.message });
     }
+
+    this.setState({ name: '', quantity: '', prescription: null });
   };
-
-  // registerPhoto = async () => {
-  //   const formData = new FormData();
-
-  //   const medicine_beneficiary_id = localStorage.getItem('api-register');
-
-  //   if (medicine_beneficiary_id) {
-  //     formData.append('name', this.state.photo);
-
-  //     const register = await api.post(
-  //       `${medicine_beneficiary_id}/photo`,
-  //       formData
-  //     );
-  //     this.setState({
-  //       isRegisterMedicineOk: true,
-  //     });
-  //     console.log(register.data.message);
-  //   } else {
-  //     this.setState({ message: 'Não foi possivel registrar a foto.' });
-  //   }
-
-  //   this.setState({ name: '', quantity: '', photo: null });
-  // };
   render() {
     return (
       <div>
@@ -106,20 +83,22 @@ class RegisterMedicineBenef extends Component {
               placeholder="Qual a quantidade do medicamento?"
             />
           </div>
-          {/* <div className="form-group">
+          <div className="form-group">
             <input
               required
               type="file"
               name="name"
-              onChange={(e) => this.setState({ photo: e.target.files[0] })}
+              onChange={(e) =>
+                this.setState({ prescription: e.target.files[0] })
+              }
               className="custom-file-input"
-              id="photo"
+              id="prescription"
               placeholder="image"
             />
-            <label className="custom-file-label" htmlFor="photo">
+            <label className="custom-file-label" htmlFor="prescription">
               Adicione uma imagem da receita medica
             </label>
-          </div> */}
+          </div>
           <div className="form-group">
             <button
               onClick={this.handleClick}

@@ -6,6 +6,7 @@ class Medicine_Beneficiary extends Model {
       {
         name: { type: DataTypes.STRING },
         quantity: { type: DataTypes.INTEGER },
+        prescription: { type: DataTypes.BLOB },
       },
       {
         freezeTableName: true,

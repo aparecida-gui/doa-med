@@ -6,7 +6,7 @@ import Donor_Medicine from '../back-end/model/Donor_Medicine';
 import Beneficiary from '../back-end/model/Beneficiary';
 import RegisterUser from '../back-end/model/RegisterUser';
 import Medicine_Beneficiary from '../back-end/model/Medicine_Beneficiary';
-import Photo from '../back-end/model/Photo';
+//import Photo from '../back-end/model/Photo';
 import path from 'path';
 const dotenv = require('dotenv');
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
@@ -52,7 +52,7 @@ Donor_Medicine.init(connection);
 Medicine_Beneficiary.init(connection);
 Beneficiary.init(connection);
 RegisterUser.init(connection);
-Photo.init(connection);
+//Photo.init(connection);
 
 Medicine_Donation.belongsToMany(RegisterUser, {
   foreignKey: 'medicine_donation_id',

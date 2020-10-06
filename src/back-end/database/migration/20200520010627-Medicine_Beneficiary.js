@@ -19,6 +19,7 @@ module.exports = {
           type: Sequelize.INTEGER,
           allowNull: false,
         },
+        prescription: { type: Sequelize.BLOB, allowNull: false },
       },
       { freezeTableName: true, timestamps: false }
     );

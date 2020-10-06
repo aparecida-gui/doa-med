@@ -6,17 +6,18 @@ class MedicineBeneficiary {
     const { beneficiary_id } = req.params;
     const beneficiary = await Beneficiary.findByPk(beneficiary_id);
 
-    const { name, quantity } = req.body;
+    const { name, quantity, prescription } = req.body;
 
     if (!beneficiary) {
       res
         .status(400)
         .json({ message: 'Não foi encontrado o beneficiário indicado.' });
     } else {
-      if (name !== '' && quantity !== '') {
+      if (name !== '' && quantity !== '' && prescription !== null) {
         const medicineBeneficiary = await MedicineBeneficiaryModel.create({
           name,
           quantity,
+          prescription,
         });
         const associanteBeneficiary = await beneficiary.addMedicinesBeneficiary(
           medicineBeneficiary
