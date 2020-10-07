@@ -13,8 +13,10 @@ import verifyAuthentication from '../back-end/help/verifyAuthentication';
 import multer from 'multer';
 import multerConfig from '../config/multerConfig';
 
-// register user and login
+// rota para registrar usuários.
 router.post('/register_user', RegisterUserController.register);
+
+// rota de login
 router.post('/', LoginController.login);
 
 // doar medicamentos
