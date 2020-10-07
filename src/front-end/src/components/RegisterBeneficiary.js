@@ -74,7 +74,7 @@ class RegisterBeneficiary extends Component {
         <div style={{ paddingTop: ' 4rem' }} className="row">
           {this.state.isRegisterOk === true && (
             <div className="alert alert-success" role="alert">
-              {<Redirect exact to="/register_medicine_benef" />}
+              {<Redirect exact to="/" />}
             </div>
           )}
           {this.state.isRegisterOk === false && (
