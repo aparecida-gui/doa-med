@@ -7,8 +7,7 @@ import BeneficiaryController from './controller/BeneficiaryController';
 import MedicineController from './controller/MedicineController';
 import DonorController from './controller/DonorController';
 import MedicineBeneficiaryController from './controller/MedicineBeneficiaryController';
-// import PhotoController from './controller/PhotoController';
-
+import ViewRegisteredMedicationsController from './controller/ViewRegisteredMedicationsController';
 import verifyAuthentication from '../back-end/help/verifyAuthentication';
 import multer from 'multer';
 import multerConfig from '../config/multerConfig';
@@ -31,6 +30,11 @@ router.post(
   '/:beneficiary_id/register_medicine_benef',
   multer(multerConfig).single('prescription'),
   MedicineBeneficiaryController.registerMedicineBeneficiary
+);
+
+router.get(
+  '/:beneficiary_id/view_register_medicines',
+  ViewRegisteredMedicationsController.showData
 );
 
 router.get(
