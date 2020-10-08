@@ -34,7 +34,6 @@ if (process.env.NODE_ENV === 'development') {
       timestamps: false,
     }
   );
-  console.log('estou no else');
 }
 
 connection
