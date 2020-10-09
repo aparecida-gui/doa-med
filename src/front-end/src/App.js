@@ -7,6 +7,7 @@ import RegisterBeneficiary from './components/RegisterBeneficiary';
 import RecordsOptions from './components/RecordsOptions';
 import RegisterMedicineBenef from './components/RegisterMedicineBenef';
 import ShowMedicineBeneficiary from './components/ShowMedicineBeneficiary';
+import ViewMedicinesRegister from './components/ViewMedicinesRegister';
 import Error404 from './components/Error404';
 
 function App() {
@@ -19,6 +20,11 @@ function App() {
           <Route exact path="/search_medicine" component={SearchMedicine} />
           <Route exact path="/record_options" component={RecordsOptions} />
           <Route exact path="/register_user" component={RegisterBeneficiary} />
+          <Route
+            exact
+            path="/view_medicine_register"
+            component={ViewMedicinesRegister}
+          />
           <Route
             exact
             path="/:beneficiary_id/register_medicine_benef"
