@@ -26,17 +26,12 @@ const Nav = () => (
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="record_options">
+          <Link className="nav-link" to="/record_options">
             Registro
           </Link>
         </li>
         <li className="nav-item">
-          <Link
-            className="nav-link"
-            to="/search_medicine"
-            tabindex="-1"
-            aria-disabled="true"
-          >
+          <Link className="nav-link" to="/search_medicine">
             Pesquisar Medicamentos
           </Link>
         </li>
