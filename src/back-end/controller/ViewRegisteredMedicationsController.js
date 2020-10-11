@@ -13,13 +13,23 @@ class ViewRegisteredMedications {
           {
             model: Medicine_Beneficiary,
             as: 'medicinesBeneficiary',
-            attributes: ['name', 'quantity', 'prescription'],
+            attributes: ['id', 'name', 'quantity', 'prescription'],
           },
         ],
       });
-      res.status(200).json({ dados });
+      if (dados.medicinesBeneficiary.length > 0) {
+        res.status(200).json({ dados });
+      } else {
+        const user = await Beneficiary.findByPk(beneficiary_id, {
+          attributes: ['name', 'email', 'phone', 'city'],
+        });
+        console.log('user: ', user);
+        res
+          .status(200)
+          .json({ user, message: 'Você não possui medicamentos cadastrados.' });
+      }
     } else {
-      res.status(400).json({ MessageError: 'Usuario não existe.' });
+      res.status(403).json({ messageError: 'Usuario não existe.' });
     }
   }
 }
