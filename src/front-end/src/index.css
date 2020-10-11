@@ -45,3 +45,12 @@ header {
   padding: 0;
   position: relative;
 }
+
+.space-media {
+  padding-top: 5rem;
+  padding-bottom: 10rem;
+}
+
+.data-user {
+  padding-bottom: 5rem;
+}
