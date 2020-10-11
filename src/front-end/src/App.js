@@ -22,7 +22,7 @@ function App() {
           <Route exact path="/register_user" component={RegisterBeneficiary} />
           <Route
             exact
-            path="/view_medicine_register"
+            path="/:beneficiary_id/view_medicine_register"
             component={ViewMedicinesRegister}
           />
           <Route
