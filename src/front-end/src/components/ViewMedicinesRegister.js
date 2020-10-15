@@ -1,45 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import api from '../services/api';
-
-const DatasUser = ({ index, name, email, phone, city }) => (
-  <div className="media data-user">
-    <div className="media-body">
-      <ul key={index}>
-        <li>{name}</li>
-        <li>{email}</li>
-        <li>{phone}</li>
-        <li>{city}</li>
-      </ul>
-    </div>
-  </div>
-);
-
-const DataMedicines = ({ index, name, quantity, prescription }) => (
-  <div className="card" style={{ width: '18rem' }}>
-    <div className="card-body">
-      <ul key={index}>
-        <li className="card-title">{name}</li>
-        <li className="card-text">{quantity}</li>
-        <li className="card-text">
-          <img
-            src={prescription}
-            className="card-img-top"
-            alt="imagem da receita medica"
-          />
-        </li>
-      </ul>
-    </div>
-    <div className="card-body">
-      <Link to="/" className="card-link">
-        Editar
-      </Link>
-      <Link to="/" className="card-link">
-        Excluir
-      </Link>
-    </div>
-  </div>
-);
+import DatasUser from '../components/DatasUser';
+import DataMedicines from '../components/DataMedicines';
 
 export default class ViewMedicinesRegister extends Component {
   state = {
@@ -58,16 +20,18 @@ export default class ViewMedicinesRegister extends Component {
       dados = await api.get(`${params.beneficiary_id}/view_register_medicines`);
 
       if (dados.status === 200) {
-        this.setState({ datasUser: dados.data.dados });
-        this.setState({ dataMedicines: dados.data.dados.medicinesBeneficiary });
-        console.log('Dados do usuario: ', this.state.datasUser);
-        console.log('Medicamentos cadastrados:', this.state.dataMedicines);
+        this.setState({
+          datasUser: dados.data.dados,
+          dataMedicines: dados.data.dados.medicinesBeneficiary,
+        });
       }
     } catch (error) {
       if (error.response !== undefined) {
         this.setState({ messageError: error.response.data.messageError });
       } else {
-        this.setState({ messageError: 'Nenhum dado encontrado.' });
+        this.setState({
+          messageError: 'Erro de conexão tente atualizar a página.',
+        });
         console.log('messageError: ', this.state.messageError);
       }
     }
@@ -75,7 +39,7 @@ export default class ViewMedicinesRegister extends Component {
 
   render() {
     return (
-      <div className="space-media">
+      <div>
         {[this.state.datasUser].map((dataUser, index) => (
           <DatasUser
             key={index}
@@ -86,12 +50,14 @@ export default class ViewMedicinesRegister extends Component {
           />
         ))}
 
+        <h3>Seus Medicamentos</h3>
         {this.state.dataMedicines.map((dataMedicine, index) => (
           <DataMedicines
             key={index}
             name={dataMedicine.name}
             quantity={dataMedicine.quantity}
             prescription={dataMedicine.prescription}
+            Link={dataMedicine.id}
           />
         ))}
       </div>

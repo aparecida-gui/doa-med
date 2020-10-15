@@ -14,7 +14,7 @@ function App() {
   return (
     <BrowserRouter>
       <Nav />
-      <div className="container">
+      <div className="container my-3 py-3">
         <Switch>
           <Route exact path="/" component={Login} />
           <Route exact path="/search_medicine" component={SearchMedicine} />
