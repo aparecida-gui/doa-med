@@ -1,12 +1,9 @@
 import Sequelize from 'sequelize';
 import databaseConfig from '../config/config';
 import Medicine_Donation from '../back-end/model/Medicine_Donation';
-import Donor from '../back-end/model/Donor';
 import Donor_Medicine from '../back-end/model/Donor_Medicine';
-import Beneficiary from '../back-end/model/Beneficiary';
 import RegisterUser from '../back-end/model/RegisterUser';
 import Medicine_Beneficiary from '../back-end/model/Medicine_Beneficiary';
-//import Photo from '../back-end/model/Photo';
 import path from 'path';
 const dotenv = require('dotenv');
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
@@ -46,12 +43,9 @@ connection
   });
 
 Medicine_Donation.init(connection);
-Donor.init(connection);
 Donor_Medicine.init(connection);
 Medicine_Beneficiary.init(connection);
-Beneficiary.init(connection);
 RegisterUser.init(connection);
-//Photo.init(connection);
 
 Medicine_Donation.belongsToMany(RegisterUser, {
   foreignKey: 'medicine_donation_id',
@@ -63,11 +57,6 @@ RegisterUser.belongsToMany(Medicine_Donation, {
   through: 'Donor_Medicine',
   as: 'medicines',
 });
-
-// Photo.belongsTo(Medicine_Beneficiary, {
-//   foreignKey: 'medicine_beneficiary_id',
-//   as: 'medicine_beneficiary',
-// });
 
 Medicine_Beneficiary.belongsToMany(RegisterUser, {
   foreignKey: 'medicine_id',
