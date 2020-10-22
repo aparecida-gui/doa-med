@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import api from '../services/api';
 import moment from 'moment';
 class SearchMedicine extends React.Component {
   state = { search_medicine: '', medicines: [], message: '' };
@@ -11,7 +11,7 @@ class SearchMedicine extends React.Component {
   handleSubmit = async () => {
     const search = this.state.search_medicine;
 
-    let medicine = await axios.get(`http://localhost:7009/medicine/${search}`);
+    let medicine = await api.get(`medicine/${search}`);
 
     if (medicine.data.message) {
       this.setState({ message: medicine.data.message });
