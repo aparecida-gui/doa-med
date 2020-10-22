@@ -88,6 +88,7 @@ class RegisterMedicineBenef extends Component {
               required
               type="file"
               name="name"
+              accept=".jpeg, .png, .jpg"
               onChange={(e) =>
                 this.setState({ prescription: e.target.files[0] })
               }
