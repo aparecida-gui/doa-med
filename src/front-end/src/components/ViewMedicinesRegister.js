@@ -18,13 +18,13 @@ export default class ViewMedicinesRegister extends Component {
     let dados = null;
     try {
       dados = await api.get(`${params.beneficiary_id}/view_register_medicines`);
-
       if (dados.status === 200) {
         this.setState({
           datasUser: dados.data.dados,
           dataMedicines: dados.data.dados.medicinesBeneficiary,
         });
       }
+      console.log('>>>>>> dados', dados);
     } catch (error) {
       if (error.response !== undefined) {
         this.setState({ messageError: error.response.data.messageError });
@@ -49,7 +49,6 @@ export default class ViewMedicinesRegister extends Component {
             city={dataUser.city}
           />
         ))}
-
         <h3>Seus Medicamentos</h3>
         {this.state.dataMedicines.map((dataMedicine, index) => (
           <DataMedicines
@@ -57,7 +56,7 @@ export default class ViewMedicinesRegister extends Component {
             name={dataMedicine.name}
             quantity={dataMedicine.quantity}
             prescription={dataMedicine.prescription}
-            Link={dataMedicine.id}
+            id={dataMedicine.id}
           />
         ))}
       </div>
