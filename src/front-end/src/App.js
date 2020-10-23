@@ -8,6 +8,7 @@ import RecordsOptions from './components/RecordsOptions';
 import RegisterMedicineBenef from './components/RegisterMedicineBenef';
 import ShowMedicineBeneficiary from './components/ShowMedicineBeneficiary';
 import ViewMedicinesRegister from './components/ViewMedicinesRegister';
+import MedicineDonation from './components/MedicineDonation';
 import Error404 from './components/Error404';
 
 function App() {
@@ -34,6 +35,11 @@ function App() {
             exact
             path="/show_medicine_benef"
             component={ShowMedicineBeneficiary}
+          />
+          <Route
+            exact
+            path="/register_medicine/donantion"
+            component={MedicineDonation}
           />
           <Route component={Error404} />
         </Switch>
