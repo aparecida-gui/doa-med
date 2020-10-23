@@ -18,12 +18,11 @@ router.post('/register_user', RegisterUserController.register);
 // rota de login
 router.post('/', LoginController.login);
 
-// doar medicamentos
-router.post(
-  '/medicine/:user_id/register_medicine',
-  verifyAuthentication,
-  MedicineController.registerMedicine
-);
+// rota para adicionar os medicamentos dísponíveis para doação.
+router.post('/medicine/register_medicine', MedicineController.registerMedicine);
+
+// rota mostra os medicamentos dispoíveis para doação ou não.
+router.get('/medicine/:name', MedicineController.medicineSearch);
 
 // rota para o beneficiario adicionar o medicamento e a imagem da receita medica.
 router.post(
@@ -32,8 +31,10 @@ router.post(
   MedicineBeneficiaryController.registerMedicineBeneficiary
 );
 
+// rota mostra os dados do beneficiario logado e os medicamentos que ele tem cadastrados.
 router.get(
   '/:beneficiary_id/view_register_medicines',
+  multer(multerConfig).single('prescription'),
   ViewRegisteredMedicationsController.showData
 );
 
@@ -41,8 +42,6 @@ router.get(
   '/beneficiary/show_beneficiary',
   BeneficiaryController.showMedicineBeneficiary
 );
-
-router.get('/medicine/:name', MedicineController.medicineSearch);
 
 router.post('/donor/register_donor', DonorController.registerDonor);
 
