@@ -8,9 +8,6 @@ export const RecordsOptions = () => {
       <Link to="/register_user">
         <h4>Cadastrar Usuário</h4>
       </Link>
-      <Link to="/register_donor">
-        <h4>Registrar Doador</h4>
-      </Link>
     </div>
   );
 };
