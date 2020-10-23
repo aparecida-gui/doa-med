@@ -28,13 +28,24 @@ export default class MedicineDonation extends Component {
         this.setState({
           successMessage: registerMedicineDonantion.data.message,
         });
-        console.log('>>>>>>', registerMedicineDonantion.data.message);
       }
-    } catch (error) {}
+    } catch (error) {
+      this.setState({ errorMessage: error.response.data.error });
+    }
   };
   render() {
     return (
       <div>
+        {this.state.successMessage !== '' && (
+          <div className="alert alert-success" role="alert">
+            <h4 className="text-center">{this.state.successMessage}</h4>
+          </div>
+        )}
+        {this.state.errorMessage !== '' && (
+          <div className="alert alert-danger" role="alert">
+            <h4 className="text-center">{this.state.errorMessage}</h4>
+          </div>
+        )}
         <h2 className="text-center">Cadastrar Medicamento para Doação</h2>
         <form onSubmit={(e) => e.preventDefault()}>
           <div className="form-group">
