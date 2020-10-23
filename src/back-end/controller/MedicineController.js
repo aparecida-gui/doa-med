@@ -1,8 +1,4 @@
-'use strict';
-
 import MedicineDonationModel from '../model/Medicine_Donation';
-import User from '../model/RegisterUser';
-import moment from 'moment';
 
 class Medicine {
   async medicineSearch(req, res) {
@@ -26,37 +22,30 @@ class Medicine {
     res.end();
   }
 
-  async registerMedicine(req, res, next) {
+  async registerMedicine(req, res) {
     let { name, laboratory, quantity, expirationDate } = req.body;
-    const { user_id } = req.params;
-    const donor = await User.findByPk(user_id);
 
     try {
-      if (donor === null || typeof donor === 'undefined') {
-        res.status(401).json({ messageError: 'Usuário não cadastrado.' });
+      if (
+        name !== '' &&
+        laboratory !== '' &&
+        quantity !== '' &&
+        expirationDate !== ''
+      ) {
+        await MedicineDonationModel.create({
+          name,
+          laboratory,
+          quantity,
+          expirationDate,
+        });
+        res.status(201).json({ message: 'Medicamento cadastrado com sucesso' });
       } else {
-        if (
-          name !== '' &&
-          laboratory !== '' &&
-          quantity !== '' &&
-          expirationDate !== ''
-        ) {
-          expirationDate = moment(expirationDate, 'DD-MM-YYYY', true).format();
-          const medicine = await MedicineDonationModel.create({
-            name,
-            expirationDate,
-            quantity,
-            laboratory,
-          });
-          await donor.addMedicine(medicine);
-          return res
-            .status(200)
-            .json({ message: 'medicamento cadastrado com sucesso' });
-        }
-        next();
+        res.status(406).json({ error: 'O medicamento não foi cadastrado.' });
       }
     } catch (error) {
-      res.status(400).json({ error });
+      res
+        .status(404)
+        .json({ error: 'Não foi possível encontrar o conteúdo indicado.' });
     }
   }
 }
