@@ -1,45 +1,52 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import api from '../services/api';
 import DatasUser from '../components/DatasUser';
 import DataMedicines from '../components/DataMedicines';
 
-export default class ViewMedicinesRegister extends Component {
+class ViewMedicinesRegister extends Component {
   state = {
     messageError: '',
+    message: '',
     datasUser: [],
     dataMedicines: [],
   };
 
-  async componentDidMount() {
-    const {
+  handeler = async () => {
+    let {
       match: { params },
     } = this.props;
 
-    let dados = null;
+    let dados = await api.get(
+      `${params.beneficiary_id}/view_register_medicines`
+    );
+
     try {
-      dados = await api.get(`${params.beneficiary_id}/view_register_medicines`);
-      if (dados.status === 200) {
+      if (dados.status === 200 && dados.data.dados) {
         this.setState({
           datasUser: dados.data.dados,
           dataMedicines: dados.data.dados.medicinesBeneficiary,
         });
+      } else {
+        this.setState({
+          datasUser: dados.data.user,
+          message: dados.data.message,
+        });
+        console.log('dataUser: ', this.state.dataUser, this.state.message);
       }
-      console.log('>>>>>> dados', dados);
     } catch (error) {
       if (error.response !== undefined) {
         this.setState({ messageError: error.response.data.messageError });
-      } else {
-        this.setState({
-          messageError: 'Erro de conexão tente atualizar a página.',
-        });
-        console.log('messageError: ', this.state.messageError);
       }
     }
+  };
+
+  componentDidMount() {
+    this.handeler();
   }
 
   render() {
     return (
-      <div>
+      <Fragment>
         {[this.state.datasUser].map((dataUser, index) => (
           <DatasUser
             key={index}
@@ -49,17 +56,25 @@ export default class ViewMedicinesRegister extends Component {
             city={dataUser.city}
           />
         ))}
-        <h3>Seus Medicamentos</h3>
-        {this.state.dataMedicines.map((dataMedicine, index) => (
-          <DataMedicines
-            key={index}
-            name={dataMedicine.name}
-            quantity={dataMedicine.quantity}
-            prescription={dataMedicine.prescription}
-            id={dataMedicine.id}
-          />
-        ))}
-      </div>
+
+        {this.state.message === '' ? (
+          this.state.dataMedicines.map((dataMedicine, index) => (
+            <DataMedicines
+              key={index}
+              name={dataMedicine.name}
+              quantity={dataMedicine.quantity}
+              prescription={dataMedicine.prescription}
+              id={dataMedicine.id}
+            />
+          ))
+        ) : (
+          <div className="text-center text-primary px-4">
+            <h4>{this.state.message}</h4>
+          </div>
+        )}
+      </Fragment>
     );
   }
 }
+
+export default ViewMedicinesRegister;
