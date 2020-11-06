@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import api from '../services/api';
+import { Redirect } from 'react-router-dom';
 
 class RegisterMedicineBenef extends Component {
   state = {
@@ -11,9 +12,7 @@ class RegisterMedicineBenef extends Component {
   };
 
   handleClick = async () => {
-    const {
-      match: { params },
-    } = this.props;
+    const { match } = this.props;
 
     const registerMedicineBenef = {
       name: this.state.name,
@@ -25,20 +24,20 @@ class RegisterMedicineBenef extends Component {
 
     try {
       registerMedicine = await api.post(
-        `${params.beneficiary_id}/register_medicine_benef`,
+        `${match.params.beneficiary_id}/register_medicine_benef`,
         registerMedicineBenef
       );
 
       this.setState({ isRegisterMedicineOk: true });
-
-      console.log('>>> registerMedicineBenef: ', registerMedicineBenef);
     } catch (error) {
       this.setState({ message: registerMedicine.data.message });
     }
 
     this.setState({ name: '', quantity: '', prescription: null });
   };
+
   render() {
+    const { match } = this.props;
     return (
       <div>
         <div style={{ paddingTop: ' 4rem' }} className="row">
@@ -46,12 +45,12 @@ class RegisterMedicineBenef extends Component {
             <div className="alert alert-success" role="alert">
               <h4 className="text-center">
                 Medicamento cadastrado com sucesso.
+                {
+                  <Redirect
+                    to={`/${match.params.beneficiary_id}/view_medicine_register`}
+                  />
+                }
               </h4>
-            </div>
-          )}
-          {this.state.message !== '' && (
-            <div className="alert alert-danger" role="alert">
-              <h4 className="text-center">{this.state.message}</h4>
             </div>
           )}
         </div>
