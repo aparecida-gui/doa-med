@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Nav from './components/Nav';
+import NavDefault from './components/NavDefault';
+import NavUser from './components/NavUser';
 import SearchMedicine from './components/SearchMedicine';
 import Login from './components/Login';
 import RegisterBeneficiary from './components/RegisterBeneficiary';
@@ -11,10 +12,18 @@ import ViewMedicinesRegister from './components/ViewMedicinesRegister';
 import MedicineDonation from './components/MedicineDonation';
 import Error404 from './components/Error404';
 
-function App() {
+const App = () => {
   return (
     <BrowserRouter>
-      <Nav />
+      <Route
+        render={() => {
+          return localStorage.getItem('tokenUser') ? (
+            <NavUser />
+          ) : (
+            <NavDefault />
+          );
+        }}
+      />
       <div className="container my-3 py-3">
         <Switch>
           <Route exact path="/" component={Login} />
@@ -46,6 +55,6 @@ function App() {
       </div>
     </BrowserRouter>
   );
-}
+};
 
 export default App;
