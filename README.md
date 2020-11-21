@@ -1,6 +1,6 @@
 ## DoaMed
 
-Aplicação web para doação de medicamentos.
+O objetivo da aplicação é chegar o medicamento ate quem mais precisa e não tem condições de comprar. 
 
 ## Status do Projeto
 
