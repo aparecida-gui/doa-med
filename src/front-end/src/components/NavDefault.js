@@ -1,43 +1,59 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  MenuItem,
+} from '@material-ui/core';
+import { AccountCircle } from '@material-ui/icons';
+import { useHistory } from 'react-router-dom';
 
-const NavDefault = () => (
-  <nav className="navbar navbar-dark bg-dark">
-    <Link className="navbar-brand" to="/">
-      DoaMed
-    </Link>
-    <button
-      className="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarTogglerDemo02"
-      aria-controls="navbarTogglerDemo02"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span className="navbar-toggler-icon"></span>
-    </button>
+export default function NavDefault() {
+  const [anchorElement, setAnchorElement] = useState(null);
+  let history = useHistory();
 
-    <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-      <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li className="nav-item active">
-          <Link className="nav-link" to="/">
-            Home <span className="sr-only">(current)</span>
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/record_options">
-            Registro
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/search_medicine">
-            Pesquisar Medicamentos
-          </Link>
-        </li>
-      </ul>
-    </div>
-  </nav>
-);
+  function logout() {
+    localStorage.removeItem('tokenUser');
+    return history.push('/login');
+  }
 
-export default NavDefault;
+  const handleOpenMenu = (e) => {
+    setAnchorElement(e.target);
+  };
+
+  const handleClose = () => {
+    setAnchorElement(null);
+  };
+
+  return (
+    <NavBar>
+      <AppBar position="fixed">
+        <Toolbar>
+          <LogoContainer>DoaMed</LogoContainer>
+          <Typography color="inherit">Olá</Typography>
+          <IconButton color="inherit" onClick={handleOpenMenu}>
+            <AccountCircle />
+          </IconButton>
+          <Menu
+            open={Boolean(anchorElement)}
+            onClose={handleClose}
+            anchorEl={anchorElement}
+          >
+            <MenuItem onClick={logout}>Sair</MenuItem>
+          </Menu>
+        </Toolbar>
+      </AppBar>
+    </NavBar>
+  );
+}
+
+const LogoContainer = styled.div`
+  flex-grow: 1;
+`;
+
+const NavBar = styled.nav`
+  padding: 5.5rem;
+`;
