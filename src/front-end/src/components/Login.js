@@ -1,12 +1,32 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import { Grid, Button, TextField, makeStyles } from '@material-ui/core';
 import api from '../services/api';
 import { Redirect } from 'react-router-dom';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
+
+const useStyle = makeStyles((theme) => ({
+  root: {
+    margin: theme.spacing(1),
+    '&.MuiInputBase-input': {
+      width: '100%',
+    },
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+  },
+  margin: {
+    marginTop: theme.spacing(1),
+  },
+}));
 
 class Login extends Component {
   state = {
     email: '',
     password: '',
-    isLogin: null,
+    isLogin: false,
     message: '',
     beneficiary_id: '',
   };
@@ -57,9 +77,10 @@ class Login extends Component {
   };
 
   render() {
+    const classes = useStyle;
     return (
-      <div>
-        <div style={{ paddingTop: ' 4rem' }} className="row">
+      <Fragment>
+        <div>
           {this.state.isLogin === true && (
             <div className="alert alert-success" role="alert">
               <h4 className="text-center">Seja bem-vindo(a) ao DoaMed</h4>
@@ -77,44 +98,72 @@ class Login extends Component {
             </div>
           )}
         </div>
-        <form className="form" onSubmit={(e) => e.preventDefault()}>
-          <h2 className="text-center">Login</h2>
-          <div className="form-group">
-            <label htmlFor="exampleInputEmail1">Email</label>
-            <input
-              required
-              value={this.state.email}
-              onChange={(e) => this.setState({ email: e.target.value })}
-              type="email"
-              className="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              placeholder="Digite seu email"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="exampleInputPassword1">Senha</label>
-            <input
-              required
-              value={this.state.password}
-              onChange={(e) => this.setState({ password: e.target.value })}
-              type="password"
-              className="form-control"
-              id="exampleInputPassword1"
-              placeholder="Digite sua senha"
-            />
-          </div>
-          <div className="form-group">
-            <button
-              onClick={this.handleSubmit}
-              type="submit"
-              className="btn btn-primary"
-            >
-              Logar
-            </button>
-          </div>
-        </form>
-      </div>
+        <Grid
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
+          className={classes.root}
+        >
+          <h2>Login</h2>
+          <form onSubmit={(e) => e.preventDefault()}>
+            <Grid item>
+              <TextField
+                required
+                autoFocus
+                fullWidth
+                label="Email"
+                type="email"
+                style={{ margin: 8 }}
+                value={this.state.email}
+                onChange={(e) => this.setState({ email: e.target.value })}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="end">
+                      <MailOutlineIcon />
+                    </InputAdornment>
+                  ),
+                }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                required
+                fullWidth
+                label="Senha"
+                type="password"
+                style={{ margin: 15 }}
+                value={this.state.password}
+                onChange={(e) => this.setState({ password: e.target.value })}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="end">
+                      <LockOpenIcon />
+                    </InputAdornment>
+                  ),
+                }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </Grid>
+            <Grid item>
+              <Button
+                fullWidth
+                variant="outlined"
+                color="primary"
+                type="submit"
+                onClick={this.handleSubmit}
+              >
+                Logar
+              </Button>
+            </Grid>
+          </form>
+        </Grid>
+      </Fragment>
     );
   }
 }
