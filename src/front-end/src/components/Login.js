@@ -5,6 +5,8 @@ import { Redirect } from 'react-router-dom';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
+import { Typography } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -78,6 +80,8 @@ class Login extends Component {
 
   render() {
     const classes = useStyle;
+
+    const preventDefault = (event) => event.preventDefault();
     return (
       <Fragment>
         <div>
@@ -156,10 +160,16 @@ class Login extends Component {
                 variant="outlined"
                 color="primary"
                 type="submit"
+                style={{ margin: 5 }}
                 onClick={this.handleSubmit}
               >
                 Logar
               </Button>
+            </Grid>
+            <Grid item>
+              <Typography align="right" variant="caption">
+                <Link to="/register_user">Faça seu cadastro Aqui</Link>
+              </Typography>
             </Grid>
           </form>
         </Grid>
