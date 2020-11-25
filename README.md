@@ -30,7 +30,7 @@ Você precisa ter instalado em seu computador as seguintes ferramentas para pode
 - Sequelize
 - bcrypt
 - JWT
-- Bootstrap
+- Material-ui
 
 ## Porque estas tecnologias foram escolhidas?
 
