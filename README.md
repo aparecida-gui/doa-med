@@ -18,10 +18,10 @@ Você precisa ter instalado em seu computador as seguintes ferramentas para pode
 
 ## Para executar o projeto local siga os passos abaixo.
 
-1. Clone o repositório
-2. Execute o comando no terminal `npm install`
+1. Clone o repositório `git clone` + url do repositório
+2. Execute o comando no terminal `npm install` para instalar as dependencias do projeto
 3. Para criar o banco de dados execute o comando `npx sequelize db:create`
-4. Para criar as tabelas no banco de dados execute o comando `npx sequelize db:migrate`
+4. Para criar as tabelas no banco de dados execute o comando `npm run dev`
 
 ## Tecnologias utilizadas
 
