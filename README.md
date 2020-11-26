@@ -22,6 +22,7 @@ Você precisa ter instalado em seu computador as seguintes ferramentas para pode
 2. Execute o comando no terminal `npm install` para instalar as dependencias do projeto
 3. Para criar o banco de dados execute o comando `npx sequelize db:create`
 4. Para criar as tabelas no banco de dados execute o comando `npm run dev`
+5. Crie um arquivo .env na raíz do seu projeto e adicione as variaveis de ambiente`JWT_SECRET` e `JWT_EXPIRES`.
 
 ## Tecnologias utilizadas
 
