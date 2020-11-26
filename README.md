@@ -8,7 +8,6 @@ Em desenvolvimento
 
 ## Demonstração da aplicação - em ajuste
 
-Infelizmente muita coisa que funciona local não funciona no heroku, mas se você quiser visualizar acesse: https://doa-med.herokuapp.com/
 
 ## Pré-requisitos
 
