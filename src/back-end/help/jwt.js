@@ -3,10 +3,10 @@ import path from 'path';
 const dotenv = require('dotenv');
 dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
 
-const generationToken = async () => {
+const generationToken = async (userId) => {
   try {
     const token = await jsonwebtoken.sign(
-      { foo: 'burge' },
+      { id: userId },
       process.env.JWT_SECRET,
       { expiresIn: process.env.JWT_EXPIRES }
     );

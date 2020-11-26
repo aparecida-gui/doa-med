@@ -20,7 +20,7 @@ class LoginController {
             password,
             emailExists.password
           );
-          const token = await jwt.generationToken();
+          const token = await jwt.generationToken(emailExists.id);
 
           if (checkData.messageSucess && token) {
             return res.status(200).json({
