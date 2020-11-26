@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Grid, Button, TextField, makeStyles } from '@material-ui/core';
+import { Grid, Button, TextField } from '@material-ui/core';
 import api from '../services/api';
 import { Redirect } from 'react-router-dom';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -35,7 +35,7 @@ class Login extends Component {
           isLogin: true,
           beneficiary_id: acessoLogin.data.emailExists.id,
         });
-        localStorage.setItem('tokenUser', acessoLogin.data.token);
+        return localStorage.setItem('tokenUser', acessoLogin.data.token);
       }
     } catch (error) {
       this.setState({ isLogin: false });
