@@ -42,10 +42,18 @@ connection
     console.error('Unable to connect to the database:', err);
   });
 
+// tabela para o doador cadastrar
+// o medicamento que deseja doar.
 Medicine_Donation.init(connection);
-Donor_Medicine.init(connection);
+
+// tabela para o beneficiario cadastrar o medicamento
+// que precisa.
 Medicine_Beneficiary.init(connection);
+
+// tabela para cadastrar beneficiarios e doadores.
 RegisterUser.init(connection);
+
+Donor_Medicine.init(connection);
 
 Medicine_Donation.belongsToMany(RegisterUser, {
   foreignKey: 'medicine_donation_id',
