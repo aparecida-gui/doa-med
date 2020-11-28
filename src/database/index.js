@@ -1,7 +1,6 @@
 import Sequelize from 'sequelize';
 import databaseConfig from '../config/config';
 import Medicine_Donation from '../back-end/model/Medicine_Donation';
-import Donor_Medicine from '../back-end/model/Donor_Medicine';
 import RegisterUser from '../back-end/model/RegisterUser';
 import Medicine_Beneficiary from '../back-end/model/Medicine_Beneficiary';
 import path from 'path';
@@ -53,15 +52,14 @@ Medicine_Beneficiary.init(connection);
 // tabela para cadastrar beneficiarios e doadores.
 RegisterUser.init(connection);
 
-Donor_Medicine.init(connection);
-
 Medicine_Donation.belongsToMany(RegisterUser, {
   foreignKey: 'medicine_donation_id',
   through: 'Donor_Medicine',
   as: 'donors',
 });
+
 RegisterUser.belongsToMany(Medicine_Donation, {
-  foreignKey: 'user_id',
+  foreignKey: 'donor_id',
   through: 'Donor_Medicine',
   as: 'medicines',
 });
@@ -71,6 +69,7 @@ Medicine_Beneficiary.belongsToMany(RegisterUser, {
   through: 'Beneficiary_Medicine',
   as: 'beneficiaries',
 });
+
 RegisterUser.belongsToMany(Medicine_Beneficiary, {
   foreignKey: 'beneficiary_id',
   through: 'Beneficiary_Medicine',
