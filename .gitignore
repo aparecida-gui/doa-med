@@ -105,3 +105,4 @@ dist
 
 # file security nodejs
 package-lock.jsonnode_modules
+sendgrid.env
