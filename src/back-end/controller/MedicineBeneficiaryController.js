@@ -28,8 +28,9 @@ class MedicineBeneficiary {
           },
           include: [
             {
-              model: MedicineDonationModel,
-              as: 'medicines',
+              model: Beneficiary,
+              as: 'donors',
+              attributes: ['name', 'phone', 'city'],
             },
           ],
         });
