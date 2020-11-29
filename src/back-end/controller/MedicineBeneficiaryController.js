@@ -1,5 +1,6 @@
 import Beneficiary from '../model/RegisterUser';
 import MedicineBeneficiaryModel from '../model/Medicine_Beneficiary';
+import MedicineDonationModel from '../model/Medicine_Donation';
 
 class MedicineBeneficiary {
   async registerMedicineBeneficiary(req, res) {
@@ -19,18 +20,26 @@ class MedicineBeneficiary {
           quantity,
           prescription,
         });
-        const associanteBeneficiary = await beneficiary.addMedicinesBeneficiary(
-          medicineBeneficiary
-        );
+        await beneficiary.addMedicinesBeneficiary(medicineBeneficiary);
 
-        if (associanteBeneficiary) {
-          res.status(200).json({
-            message: `O medicamento ${medicineBeneficiary.name} foi cadastrado com sucesso.`,
-          });
+        const nameMedicine = await MedicineDonationModel.findAll({
+          where: {
+            name: medicineBeneficiary.name,
+          },
+          include: [
+            {
+              model: MedicineDonationModel,
+              as: 'medicines',
+            },
+          ],
+        });
+
+        if (nameMedicine.length > 0) {
+          res.status(200).json({ nameMedicine });
         } else {
-          res
-            .status(400)
-            .json({ message: 'Não foi possível cadastrar o medicamento.' });
+          res.json({
+            message: `Não tem nenhum registro do ${medicineBeneficiary.name} para doação no momento.`,
+          });
         }
       }
     }
