@@ -1,6 +1,16 @@
-## DoaMed
 
-O objetivo da aplicação é chegar o medicamento ate quem mais precisa e não tem condições de comprar. 
+<p align="center">
+  <a>
+    <img width="400" src="logo-doaMed.png">
+  </a>
+</p>
+<h1 align="center">DoaMed</h1>
+</br>
+</br>
+
+## Objetivo do DoaMed
+
+O nosso objetivo é conectar quem precisa de medicamento e quem tem um medicamento guardado em casa que esteja dentro do prazo de validade e queira doa-lo.
 
 ## Status do Projeto
 
@@ -11,9 +21,7 @@ Em desenvolvimento
 
 ## Pré-requisitos
 
-Você precisa ter instalado em seu computador as seguintes ferramentas para poder executar o projeto local:
-
-[git](https://git-scm.com/downloads), [node.js](https://nodejs.org/en/download/)
+Você precisa ter instalado em seu computador as seguintes ferramentas para poder executar o projeto local: [git](https://git-scm.com/downloads), [node.js](https://nodejs.org/en/download/)
 
 ## Para executar o projeto local siga os passos abaixo.
 
@@ -21,7 +29,8 @@ Você precisa ter instalado em seu computador as seguintes ferramentas para pode
 2. Execute o comando no terminal `npm install` para instalar as dependencias do projeto
 3. Para criar o banco de dados execute o comando `npx sequelize db:create`
 4. Para criar as tabelas no banco de dados execute o comando `npm run dev`
-5. Crie um arquivo .env na raíz do seu projeto e adicione as variaveis de ambiente`JWT_SECRET` e `JWT_EXPIRES`.
+5. Crie um arquivo `.env` na raíz do seu projeto e adicione as variaveis de ambiente`JWT_SECRET` e `JWT_EXPIRES`.
+6. Para a funcionalidade enviar e-mails foi utilizado [API Sendgrid](https://sendgrid.com/), para utiliza-la você precisa fazer o cadastro no site. Após fazer o cadastro, faça a integração com a API do Sendgrid veja os passos [aqui](https://github.com/sendgrid/sendgrid-nodejs/tree/main/packages/mail). No arquivo `.env` adicione a variavel de ambiente `SENDGRID_API_KEY` que é fornecida na integração com API e a variavel `YOUR_TEMPLATE_ID_BENEFICIARY` é o id do templante dinamico que a API oferece mais informações sobre a integração com templantes dinamicos veja [aqui](https://sendgrid.com/docs/api-reference/).
 
 ## Tecnologias utilizadas
 
