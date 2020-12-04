@@ -42,11 +42,14 @@ class MedicineDonationController {
         // no medicamento que o doador cadastrou.
         if (medicineBeneficiary.length > 0) {
           medicineBeneficiary = medicineBeneficiary.map((beneficiary) => {
-            return beneficiary.beneficiaries[0].email;
+            return {
+              name: beneficiary.beneficiaries[0].name,
+              email: beneficiary.beneficiaries[0].email,
+            };
           });
 
           medicineBeneficiary.forEach((element) => {
-            sendEmail(element);
+            sendEmail(element.name, element.email);
           });
 
           res.status(200).json({
@@ -55,7 +58,7 @@ class MedicineDonationController {
           });
         } else {
           res.status(200).json({
-            message: 'Obrigado por Doar.',
+            message: 'Obrigado por Doar, medicamento cadastrado com sucesso.',
           });
         }
       } else {
