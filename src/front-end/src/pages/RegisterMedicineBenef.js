@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import api from '../services/api';
 import { Redirect } from 'react-router-dom';
 import LayoutPrivate from '../layouts/LayoutPrivate';
+import Button from '../components/Button';
+import { Grid, TextField } from '@material-ui/core';
+import { ButtonImage, PreviewImage } from '../components/ButtonImage';
 
 class RegisterMedicineBenef extends Component {
   state = {
@@ -12,7 +15,7 @@ class RegisterMedicineBenef extends Component {
     message: '',
   };
 
-  handleClick = async () => {
+  handleClick = async (e) => {
     const { match } = this.props;
 
     const registerMedicineBenef = {
@@ -22,6 +25,9 @@ class RegisterMedicineBenef extends Component {
     };
 
     let registerMedicine = null;
+
+    console.log('>>>>> registerMedicineBenef:', registerMedicineBenef);
+    console.log(this.state.prescription);
 
     try {
       registerMedicine = await api.post(
@@ -55,61 +61,56 @@ class RegisterMedicineBenef extends Component {
             </div>
           )}
         </div>
-        <form className="form" onSubmit={(e) => e.preventDefault()}>
-          <h2 className="text-center">Registrar Medicamento</h2>
-          <div className="form-group">
-            <label htmlFor="name">Nome do medicamento</label>
-            <input
-              value={this.state.name}
-              onChange={(e) => this.setState({ name: e.target.value })}
-              required
-              type="text"
-              className="form-control"
-              id="name"
-              aria-describedby="nameHelp"
-              placeholder="Qual o nome do medicamento?"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="quantity">Quantidade</label>
-            <input
-              value={this.state.quantity}
-              onChange={(e) => this.setState({ quantity: e.target.value })}
-              required
-              type="number"
-              className="form-control"
-              id="quantity"
-              aria-describedby="quantityHelp"
-              placeholder="Qual a quantidade do medicamento?"
-            />
-          </div>
-          <div className="form-group">
-            <input
-              required
-              type="file"
-              name="name"
-              accept=".jpeg, .png, .jpg"
-              onChange={(e) =>
-                this.setState({ prescription: e.target.files[0] })
-              }
-              className="custom-file-input"
-              id="prescription"
-              placeholder="image"
-            />
-            <label className="custom-file-label" htmlFor="prescription">
-              Adicione uma imagem da receita medica
-            </label>
-          </div>
-          <div className="form-group">
-            <button
-              onClick={this.handleClick}
-              type="submit"
-              className="btn btn-primary"
-            >
-              Registrar Medicamento
-            </button>
-          </div>
-        </form>
+        <Grid container direction="column" justify="center" alignItems="center">
+          <form onSubmit={(e) => e.preventDefault()}>
+            <h2>Cadastre o medicamento que você precisa</h2>
+            <Grid item>
+              <TextField
+                required
+                autoFocus
+                fullWidth
+                type="text"
+                label="Nome do medicamento"
+                placeholder="Qual o nome do medicamento?"
+                style={{ margin: 18 }}
+                value={this.state.name}
+                onChange={(e) => this.setState({ name: e.target.value })}
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                required
+                fullWidth
+                label="Quantidade do medicamento"
+                type="number"
+                style={{ margin: 18 }}
+                value={this.state.quantity}
+                onChange={(e) => this.setState({ quantity: e.target.value })}
+                placeholder="Qual a quantidade do medicamento?"
+              />
+            </Grid>
+            <Grid item>
+              <ButtonImage
+                onChange={(e) =>
+                  this.setState({
+                    prescription: URL.createObjectURL(e.target.files[0]),
+                  })
+                }
+              />
+            </Grid>
+            <Grid item>
+              {this.state.files !== null && (
+                <PreviewImage src={this.state.prescription} />
+              )}
+            </Grid>
+            <Grid item>
+              <Button
+                onClick={this.handleClick}
+                label={'Cadastrar Medicamento'}
+              />
+            </Grid>
+          </form>
+        </Grid>
       </LayoutPrivate>
     );
   }
