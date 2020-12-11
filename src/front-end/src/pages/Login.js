@@ -1,11 +1,10 @@
 import React, { Component, Fragment } from 'react';
-import { Grid, Button, TextField } from '@material-ui/core';
+import { Grid, Button, TextField, Typography } from '@material-ui/core';
 import api from '../services/api';
 import { Redirect } from 'react-router-dom';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
-import { Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 class Login extends Component {
