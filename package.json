@@ -9,10 +9,13 @@
   "description": "App that connects people who need medication and who can donate",
   "main": "configServer.js",
   "scripts": {
-    "test": "jest --watch --detectOpenHandles",
+    "test": "jest  --watch",
     "dev": " NODE_ENV=development nodemon --exec babel-node configServer.js",
     "start": "NODE_ENV=production babel-node configServer.js",
     "heroku-postbuild": "cd src/front-end && npm install --only=dev && npm install && npm run build"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "repository": {
     "type": "git",
@@ -27,10 +30,10 @@
   "devDependencies": {
     "babel-jest": "24.9.0",
     "eslint": "^6.8.0",
-    "jest": "24.9.0",
+    "jest": "^24.9.0",
     "jest-extended": "^0.11.5",
     "nodemon": "^2.0.6",
-    "regenerator-runtime": "^0.13.5",
+    "regenerator-runtime": "^0.13.7",
     "sequelize-cli": "^5.5.1",
     "supertest": "^4.0.2"
   },
