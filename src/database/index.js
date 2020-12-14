@@ -32,6 +32,24 @@ if (process.env.NODE_ENV === 'development') {
   );
 }
 
+test: {
+  connection = new Sequelize(
+    databaseConfig.development.database,
+    databaseConfig.development.username,
+    databaseConfig.development.password,
+    {
+      host: databaseConfig.development.host,
+      dialect: databaseConfig.development.dialect,
+      pool: {
+        max: 5,
+        min: 0,
+        idle: 10000,
+      },
+      timestamps: false,
+    }
+  );
+}
+
 connection
   .authenticate()
   .then(() => {
