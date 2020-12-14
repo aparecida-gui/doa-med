@@ -30,7 +30,7 @@ Você precisa ter instalado em seu computador as seguintes ferramentas para pode
 3. Para criar o banco de dados execute o comando `npx sequelize db:create`
 4. Para criar as tabelas no banco de dados execute o comando `npm run dev`
 5. Crie um arquivo `.env` na raíz do seu projeto e adicione as variaveis de ambiente`JWT_SECRET` e `JWT_EXPIRES`.
-6. Para a funcionalidade enviar e-mails foi utilizado [API Sendgrid](https://sendgrid.com/), para utiliza-la você precisa fazer o cadastro no site. Após fazer o cadastro, faça a integração com a API do Sendgrid veja os passos [aqui](https://github.com/sendgrid/sendgrid-nodejs/tree/main/packages/mail). No arquivo `.env` adicione a variavel de ambiente `SENDGRID_API_KEY` que é fornecida na integração com API e a variavel `YOUR_TEMPLATE_ID_BENEFICIARY` é o id do templante dinamico que a API oferece mais informações sobre a integração com templantes dinamicos veja [aqui](https://sendgrid.com/docs/api-reference/).
+6. Para enviar e-mails foi utilizado [API Sendgrid](https://sendgrid.com/), para utiliza-la você precisa fazer o cadastro no site. Após faça, a integração com a API do Sendgrid veja os passos [aqui](https://github.com/sendgrid/sendgrid-nodejs/tree/main/packages/mail). No arquivo `.env` adicione a variavel de ambiente `SENDGRID_API_KEY` que é fornecida na integração com API e a variavel `YOUR_TEMPLATE_ID_BENEFICIARY` é o id do templante dinamico que a API oferece mais informações sobre a integração com templantes dinamicos veja [aqui](https://sendgrid.com/docs/api-reference/).
 
 ## Tecnologias utilizadas
 
