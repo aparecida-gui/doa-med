@@ -40,6 +40,8 @@ Você precisa ter instalado em seu computador as seguintes ferramentas para pode
 - bcrypt
 - JWT
 - Material-ui
+- Jest
+- Supertest
 
 ## Porque estas tecnologias foram escolhidas?
 
