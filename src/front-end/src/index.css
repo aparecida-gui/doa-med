@@ -1,0 +1,13 @@
+* {
+  height: auto;
+  width: auto;
+}
+
+.grid {
+  padding-top: 15rem;
+}
+
+h2 {
+  font-size: 1.6rem;
+  text-align: center;
+}

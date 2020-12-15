@@ -8,7 +8,7 @@ export const ButtonImage = (props) => (
       required
       type="file"
       placeholder="Adicione sua Receita"
-      style={{ display: 'none' }}
+      style={{ padding: '1rem', display: 'none' }}
       onChange={props.onChange}
     />
   </Button>
@@ -16,7 +16,12 @@ export const ButtonImage = (props) => (
 
 export const PreviewImage = (props) => (
   <img
-    style={{ paddingTop: '2rem', width: '50%', height: 'auto' }}
+    style={{
+      paddingLeft: '0.8rem',
+      paddingTop: '2rem',
+      width: '50%',
+      height: 'auto',
+    }}
     src={props.src}
   />
 );

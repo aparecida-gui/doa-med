@@ -6,6 +6,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import { Link } from 'react-router-dom';
+import '../index.css';
 
 class Login extends Component {
   state = {
@@ -82,7 +83,13 @@ class Login extends Component {
             </div>
           )}
         </div>
-        <Grid container direction="column" justify="center" alignItems="center">
+        <Grid
+          className="grid"
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
+        >
           <h2>Login</h2>
           <form onSubmit={(e) => e.preventDefault()}>
             <Grid item>
@@ -92,7 +99,7 @@ class Login extends Component {
                 fullWidth
                 label="Email"
                 type="email"
-                style={{ margin: 8 }}
+                style={{ margin: 18 }}
                 value={this.state.email}
                 onChange={(e) => this.setState({ email: e.target.value })}
                 InputProps={{
@@ -113,7 +120,7 @@ class Login extends Component {
                 fullWidth
                 label="Senha"
                 type="password"
-                style={{ margin: 15 }}
+                style={{ margin: 18 }}
                 value={this.state.password}
                 onChange={(e) => this.setState({ password: e.target.value })}
                 InputProps={{
