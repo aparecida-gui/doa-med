@@ -28,7 +28,7 @@ describe('Test Login status code 200', () => {
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .end(function (err, res) {
-        expect(res.body).toEqual({ message: 'Usuário não cadastrado.' });
+        expect(res.text).toContain('message');
         expect(res.status).toEqual(401);
         done();
       });
