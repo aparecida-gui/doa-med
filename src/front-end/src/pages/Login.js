@@ -75,6 +75,7 @@ function Login() {
               InputLabelProps={{
                 shrink: true,
               }}
+              data-testid="form-email"
             />
           </Grid>
           <Grid item>
@@ -96,6 +97,7 @@ function Login() {
               InputLabelProps={{
                 shrink: true,
               }}
+              data-testid="form-password"
             />
           </Grid>
           <Grid item>
@@ -106,6 +108,7 @@ function Login() {
               type="submit"
               style={{ margin: 5 }}
               onClick={handleSubmit}
+              data-testid="form-btn"
             >
               Logar
             </Button>
