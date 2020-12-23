@@ -1,30 +1,18 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import api from '../services/api';
 import InputMask from 'react-input-mask';
 import { Redirect } from 'react-router-dom';
 
-class RegisterBeneficiary extends Component {
-  state = {
-    name: '',
-    phone: '',
-    city: '',
-    email: '',
-    password: '',
-    isRegisterOk: null,
-    message: '',
-  };
+export default function RegisterBeneficiary() {
+  let [name, setName] = useState('');
+  let [phone, setPhone] = useState('');
+  let [city, setCity] = useState('');
+  let [email, setEmail] = useState('');
+  let [password, setPassword] = useState('');
+  let [isRegisterOk, setIsRegisterOk] = useState(null);
+  let [message, setMessage] = useState('');
 
-  handleSubmit = async () => {
-    const user = {
-      name: this.state.name,
-      phone: this.state.phone,
-      city: this.state.city,
-      email: this.state.email,
-      password: this.state.password,
-    };
-
-    const { name, phone, city, email, password } = user;
-
+  const handleSubmit = async () => {
     let registerUser = null;
 
     try {
@@ -37,131 +25,103 @@ class RegisterBeneficiary extends Component {
       });
 
       if (registerUser.status === 201) {
-        this.setState({
-          isRegisterOk: true,
-        });
+        setIsRegisterOk((isRegisterOk = true));
       }
     } catch (error) {
       if (error.response.data.isUserExit.message) {
-        this.setState({
-          isRegisterOk: false,
-          message: error.response.data.isUserExit.message,
-        });
-        this.getInitialState();
+        setIsRegisterOk((isRegisterOk = false));
+        setMessage((message = error.response.data.isUserExit.message));
+
+        getInitialState();
       }
       if (error.response.data.validData.message) {
-        this.setState({
-          isRegisterOk: false,
-          message: error.response.data.validData.message,
-        });
+        setIsRegisterOk((isRegisterOk = false));
+        setMessage((message = error.response.data.validData.message));
       }
     }
   };
 
-  getInitialState = () => {
-    this.setState({
-      name: '',
-      phone: '',
-      city: '',
-      email: '',
-      password: '',
-    });
-  };
+  const getInitialState = () => (
+    setName((name = '')),
+    setPhone((phone = '')),
+    setCity((city = '')),
+    setEmail((email = '')),
+    setPassword((password = ''))
+  );
 
-  render() {
-    return (
-      <div>
-        <div style={{ paddingTop: ' 4rem' }} className="row">
-          {this.state.isRegisterOk === true && (
-            <div className="alert alert-success" role="alert">
-              {<Redirect exact to="/" />}
-            </div>
-          )}
-          {this.state.isRegisterOk === false && (
-            <div className="alert alert-danger" role="alert">
-              <h4 className="text-center">{this.state.message}</h4>
-            </div>
-          )}
-        </div>
-        <form onSubmit={(e) => e.preventDefault()}>
-          <h1 className="text-center">Cadastro</h1>
-          <div className="form-group">
-            <label htmlFor="name">Nome</label>
-            <input
-              required
-              value={this.state.name}
-              onChange={(e) => this.setState({ name: e.target.value })}
-              type="text"
-              className="form-control"
-              id="name"
-              aria-describedby="emailHelp"
-            />
+  return (
+    <>
+      <div style={{ paddingTop: ' 4rem' }}>
+        {isRegisterOk === true && <div>{<Redirect exact to="/" />}</div>}
+        {isRegisterOk === false && (
+          <div>
+            <h4>{message}</h4>
           </div>
-
-          <div className="form-group">
-            <label htmlFor="phone">Telefone</label>
-            <InputMask
-              required
-              mask="(99) 99999-9999"
-              onChange={(e) => this.setState({ phone: e.target.value })}
-              value={this.state.phone}
-              type="tel"
-              id="phone"
-              placeholder="Ex.: (00) 0000-0000"
-              className="form-control"
-              aria-describedby="emailHelp"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="city">Cidade</label>
-            <input
-              required
-              value={this.state.city}
-              onChange={(e) => this.setState({ city: e.target.value })}
-              type="text"
-              className="form-control"
-              id="city"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input
-              required
-              value={this.state.email}
-              onChange={(e) => this.setState({ email: e.target.value })}
-              type="email"
-              className="form-control"
-              id="email"
-              aria-describedby="emailHelp"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Senha</label>
-            <input
-              required
-              value={this.state.password}
-              onChange={(e) => this.setState({ password: e.target.value })}
-              type="password"
-              className="form-control"
-              id="password"
-              aria-describedby="passwordHelp"
-            />
-          </div>
-          <div className="form-group">
-            <button
-              onClick={this.handleSubmit}
-              type="submit"
-              className="btn btn-primary"
-            >
-              Cadastrar
-            </button>
-          </div>
-        </form>
+        )}
       </div>
-    );
-  }
-}
+      <form onSubmit={(e) => e.preventDefault()}>
+        <h1>Cadastro</h1>
+        <div>
+          <label htmlFor="name">Nome</label>
+          <input
+            required
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            type="text"
+            id="name"
+          />
+        </div>
 
-export default RegisterBeneficiary;
+        <div>
+          <label htmlFor="phone">Telefone</label>
+          <InputMask
+            required
+            mask="(99) 99999-9999"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            type="tel"
+            id="phone"
+            placeholder="Ex.: (00) 0000-0000"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="city">Cidade</label>
+          <input
+            required
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            type="text"
+            id="city"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="email">Email</label>
+          <input
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            id="email"
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Senha</label>
+          <input
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            id="password"
+          />
+        </div>
+        <div>
+          <button onClick={handleSubmit} type="submit">
+            Cadastrar
+          </button>
+        </div>
+      </form>
+    </>
+  );
+}
