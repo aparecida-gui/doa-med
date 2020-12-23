@@ -1,5 +1,4 @@
-import React, { Fragment, useState } from 'react';
-import '../index.css';
+import React, { useState } from 'react';
 import { Grid, Button, TextField, Typography } from '@material-ui/core';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
@@ -43,7 +42,7 @@ function Login() {
   };
 
   return (
-    <Fragment>
+    <>
       {message && <AlertError msg={message} />}
 
       <Grid
@@ -60,7 +59,7 @@ function Login() {
               required
               autoFocus
               fullWidth
-              label="Emaill"
+              label="Email"
               type="email"
               style={{ margin: 18 }}
               value={email}
@@ -120,7 +119,7 @@ function Login() {
           </Grid>
         </form>
       </Grid>
-    </Fragment>
+    </>
   );
 }
 
