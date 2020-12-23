@@ -15,7 +15,8 @@
     "heroku-postbuild": "cd src/front-end && npm install --only=dev && npm install && npm run build"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "verbose": true
   },
   "repository": {
     "type": "git",
@@ -28,22 +29,21 @@
   },
   "homepage": "https://github.com/Suele/final-project#readme",
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
     "babel-jest": "24.9.0",
     "eslint": "^6.8.0",
     "jest": "^24.9.0",
     "jest-extended": "^0.11.5",
+    "node-notifier": ">=8.0.1",
     "nodemon": "^2.0.6",
     "regenerator-runtime": "^0.13.7",
     "sequelize-cli": "^5.5.1",
-    "supertest": "^4.0.2",
-    "node-notifier": ">=8.0.1"
+    "supertest": "^4.0.2"
   },
-
   "dependencies": {
     "@babel/cli": "^7.12.8",
     "@babel/core": "^7.12.9",
     "@babel/node": "^7.12.6",
-    "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/preset-env": "^7.12.7",
     "@sendgrid/mail": "^7.4.0",
     "bcrypt": "^5.0.0",
