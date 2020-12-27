@@ -16,7 +16,15 @@
   },
   "jest": {
     "testEnvironment": "node",
-    "verbose": true
+    "verbose": true,
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "identity-obj-proxy"
+    }
   },
   "repository": {
     "type": "git",
@@ -30,7 +38,7 @@
   "homepage": "https://github.com/Suele/final-project#readme",
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.12.1",
-    "babel-jest": "24.9.0",
+    "babel-jest": "^24.9.0",
     "eslint": "^6.8.0",
     "jest": "^24.9.0",
     "jest-extended": "^0.11.5",
@@ -45,12 +53,15 @@
     "@babel/core": "^7.12.9",
     "@babel/node": "^7.12.6",
     "@babel/preset-env": "^7.12.7",
+    "@babel/preset-react": "^7.12.10",
+    "@babel/runtime": "^7.12.5",
     "@sendgrid/mail": "^7.4.0",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "identity-obj-proxy": "^3.0.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
     "multer": "^1.4.2",

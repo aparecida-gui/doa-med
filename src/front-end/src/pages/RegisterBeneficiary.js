@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import '../index.css';
 import api from '../services/api';
-import InputMask from 'react-input-mask';
+import { Button, Grid, TextField } from '@material-ui/core';
 import { Redirect } from 'react-router-dom';
+import { AlertError } from '../components/Alert';
 
 export default function RegisterBeneficiary() {
   let [name, setName] = useState('');
@@ -51,77 +53,85 @@ export default function RegisterBeneficiary() {
 
   return (
     <>
-      <div style={{ paddingTop: ' 4rem' }}>
-        {isRegisterOk === true && <div>{<Redirect exact to="/" />}</div>}
-        {isRegisterOk === false && (
+      {isRegisterOk === true && <Redirect exact to="/login" />}
+      {isRegisterOk === false && <AlertError msg={message} />}
+
+      <Grid container direction="column" justify="center" alignItems="center">
+        <form onSubmit={(e) => e.preventDefault()}>
+          <h2>Cadastro</h2>
+          <Grid item>
+            <TextField
+              required
+              autoFocus
+              fullWidth
+              label="Nome"
+              type="text"
+              value={name}
+              style={{ margin: 18 }}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </Grid>
+
+          <Grid item>
+            <TextField
+              required
+              fullWidth
+              label="Telefone"
+              type="tel"
+              value={phone}
+              style={{ margin: 18 }}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </Grid>
+
+          <Grid item>
+            <TextField
+              required
+              fullWidth
+              label="Cidade"
+              type="text"
+              value={city}
+              style={{ margin: 18 }}
+              onChange={(e) => setCity(e.target.value)}
+            />
+          </Grid>
+
+          <Grid item>
+            <TextField
+              required
+              fullWidth
+              label="Email"
+              type="email"
+              value={email}
+              style={{ margin: 18 }}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </Grid>
+          <Grid item>
+            <TextField
+              required
+              fullWidth
+              label="Senha"
+              type="password"
+              value={password}
+              style={{ margin: 18 }}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </Grid>
           <div>
-            <h4>{message}</h4>
+            <Button
+              fullWidth
+              variant="outlined"
+              color="primary"
+              type="submit"
+              style={{ margin: 5 }}
+              onClick={handleSubmit}
+            >
+              Cadastrar
+            </Button>
           </div>
-        )}
-      </div>
-      <form onSubmit={(e) => e.preventDefault()}>
-        <h1>Cadastro</h1>
-        <div>
-          <label htmlFor="name">Nome</label>
-          <input
-            required
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            type="text"
-            id="name"
-          />
-        </div>
-
-        <div>
-          <label htmlFor="phone">Telefone</label>
-          <InputMask
-            required
-            mask="(99) 99999-9999"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            type="tel"
-            id="phone"
-            placeholder="Ex.: (00) 0000-0000"
-          />
-        </div>
-
-        <div>
-          <label htmlFor="city">Cidade</label>
-          <input
-            required
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            type="text"
-            id="city"
-          />
-        </div>
-
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            type="email"
-            id="email"
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Senha</label>
-          <input
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-            id="password"
-          />
-        </div>
-        <div>
-          <button onClick={handleSubmit} type="submit">
-            Cadastrar
-          </button>
-        </div>
-      </form>
+        </form>
+      </Grid>
     </>
   );
 }
