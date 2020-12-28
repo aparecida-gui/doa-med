@@ -9,22 +9,14 @@
   "description": "App that connects people who need medication and who can donate",
   "main": "configServer.js",
   "scripts": {
-    "test": "jest  --watch",
+    "test": "jest  --watch --coverage",
     "dev": " NODE_ENV=development nodemon --exec babel-node configServer.js",
     "start": "NODE_ENV=production babel-node configServer.js",
     "heroku-postbuild": "cd src/front-end && npm install --only=dev && npm install && npm run build"
   },
   "jest": {
     "testEnvironment": "node",
-    "verbose": true,
-    "moduleDirectories": [
-      "node_modules",
-      "src"
-    ],
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
-      "\\.(css|less)$": "identity-obj-proxy"
-    }
+    "verbose": true
   },
   "repository": {
     "type": "git",
@@ -38,7 +30,10 @@
   "homepage": "https://github.com/Suele/final-project#readme",
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "babel-jest": "^24.9.0",
+    "babel-plugin-syntax-class-properties": "^6.13.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "eslint": "^6.8.0",
     "jest": "^24.9.0",
     "jest-extended": "^0.11.5",
