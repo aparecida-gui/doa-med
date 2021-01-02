@@ -4,7 +4,7 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { fireEvent, render } from '@testing-library/react';
-import Login from './Login.js';
+import Login from '../src/pages/Login.js';
 
 describe('tests the login screen.', () => {
   test('Filling in email, password and button click', () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { fireEvent, render } from '@testing-library/react';
-import RegisterBeneficiary from './RegisterBeneficiary';
+import RegisterBeneficiary from '../src/pages/RegisterBeneficiary';
 
 describe('Page register beneficiary', () => {
   const registerUser = {
@@ -53,6 +53,7 @@ describe('Page register beneficiary', () => {
     expect(buttonRegister).toHaveTextContent('Cadastrar');
   });
 
+  //TODO: Testar a validação dos campos.
   test('Click button fill input', () => {
     // clicar no botão sem preencher os campos do cadastro.
     // mostrar mensagem de erro.
