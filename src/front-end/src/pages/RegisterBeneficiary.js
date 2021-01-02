@@ -69,6 +69,7 @@ export default function RegisterBeneficiary() {
               value={name}
               style={{ margin: 18 }}
               onChange={(e) => setName(e.target.value)}
+              data-testid="reg-name"
             />
           </Grid>
 
@@ -81,6 +82,7 @@ export default function RegisterBeneficiary() {
               value={phone}
               style={{ margin: 18 }}
               onChange={(e) => setPhone(e.target.value)}
+              data-testid="reg-phone"
             />
           </Grid>
 
@@ -93,6 +95,7 @@ export default function RegisterBeneficiary() {
               value={city}
               style={{ margin: 18 }}
               onChange={(e) => setCity(e.target.value)}
+              data-testid="reg-city"
             />
           </Grid>
 
@@ -105,6 +108,7 @@ export default function RegisterBeneficiary() {
               value={email}
               style={{ margin: 18 }}
               onChange={(e) => setEmail(e.target.value)}
+              data-testid="reg-email"
             />
           </Grid>
           <Grid item>
@@ -116,6 +120,7 @@ export default function RegisterBeneficiary() {
               value={password}
               style={{ margin: 18 }}
               onChange={(e) => setPassword(e.target.value)}
+              data-testid="reg-password"
             />
           </Grid>
           <div>
