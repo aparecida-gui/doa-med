@@ -13,32 +13,58 @@ export default function RegisterBeneficiary() {
   let [password, setPassword] = useState('');
   let [isRegisterOk, setIsRegisterOk] = useState(null);
   let [message, setMessage] = useState('');
+  let listaMenssagens = [];
+
+  const validaCampos = () => {
+    if (name.length < 4) {
+      listaMenssagens.push('O campo nome deve ter no minimo 4 caracteres.');
+    }
+    if (phone.length < 8) {
+      listaMenssagens.push('O campo telefone deve ter 8 ou 9 caracteres.');
+    }
+
+    if (phone.length > 9) {
+      listaMenssagens.push('O campo telefone deve ter 8 ou 9 caracteres.');
+    }
+
+    if (city.length < 5) {
+      listaMenssagens.push('O campo cidade é pequeno.');
+    }
+    if (password.length < 6) {
+      listaMenssagens.push('O campo senha deve ter no minimo 6 caracteres.');
+    }
+    if (password.length > 20) {
+      listaMenssagens.push(
+        'O campo senha é muito grande no maximo são 20 caracteres.'
+      );
+    }
+    if (listaMenssagens.length > 0) {
+      return listaMenssagens;
+    }
+  };
 
   const handleSubmit = async () => {
-    let registerUser = null;
+    validaCampos();
+    if (listaMenssagens.length === 0) {
+      try {
+        let registerUser = await api.post('register_user', {
+          name,
+          phone,
+          city,
+          email,
+          password,
+        });
 
-    try {
-      registerUser = await api.post('register_user', {
-        name,
-        phone,
-        city,
-        email,
-        password,
-      });
+        if (registerUser.status === 201) {
+          setIsRegisterOk((isRegisterOk = true));
+        }
+      } catch (error) {
+        if (error.response.data.isUserExit.message) {
+          setIsRegisterOk((isRegisterOk = false));
+          setMessage((message = error.response.data.isUserExit.message));
 
-      if (registerUser.status === 201) {
-        setIsRegisterOk((isRegisterOk = true));
-      }
-    } catch (error) {
-      if (error.response.data.isUserExit.message) {
-        setIsRegisterOk((isRegisterOk = false));
-        setMessage((message = error.response.data.isUserExit.message));
-
-        getInitialState();
-      }
-      if (error.response.data.validData.message) {
-        setIsRegisterOk((isRegisterOk = false));
-        setMessage((message = error.response.data.validData.message));
+          getInitialState();
+        }
       }
     }
   };
