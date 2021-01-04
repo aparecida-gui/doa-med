@@ -15,7 +15,7 @@ export default function RegisterBeneficiary() {
   let [message, setMessage] = useState('');
   let listaMenssagens = [];
 
-  const validaCampos = () => {
+  const validateFields = () => {
     if (name.length < 4) {
       listaMenssagens.push('O campo nome deve ter no minimo 4 caracteres.');
     }
@@ -44,7 +44,7 @@ export default function RegisterBeneficiary() {
   };
 
   const handleSubmit = async () => {
-    validaCampos();
+    validateFields();
     if (listaMenssagens.length === 0) {
       try {
         let registerUser = await api.post('register_user', {
