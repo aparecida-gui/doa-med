@@ -47,7 +47,7 @@ function Login() {
       {message && <AlertError msg={message} />}
 
       <Grid
-        className="grid"
+        Grid
         container
         direction="column"
         justify="center"
@@ -65,16 +65,6 @@ function Login() {
               style={{ margin: 18 }}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="end">
-                    <MailOutlineIcon />
-                  </InputAdornment>
-                ),
-              }}
-              InputLabelProps={{
-                shrink: true,
-              }}
               data-testid="form-email"
             />
           </Grid>
@@ -87,16 +77,6 @@ function Login() {
               style={{ margin: 18 }}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="end">
-                    <LockOpenIcon />
-                  </InputAdornment>
-                ),
-              }}
-              InputLabelProps={{
-                shrink: true,
-              }}
               data-testid="form-password"
             />
           </Grid>
