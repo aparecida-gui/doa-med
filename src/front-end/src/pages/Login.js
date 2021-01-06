@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import '../index.css';
 import api from '../services/api';
 import { Grid, Button, TextField, Typography } from '@material-ui/core';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
 import { Link, useHistory } from 'react-router-dom';
 import { AlertError } from '../components/Alert';
 
