@@ -1,6 +1,6 @@
 import 'regenerator-runtime/runtime.js';
 import supertest from 'supertest';
-import serverTest from './serverTest';
+import serverTest from '../controller/serverTest';
 
 describe('Test Login status code 200', () => {
   test('return status 200', (done) => {
