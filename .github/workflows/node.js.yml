@@ -26,4 +26,4 @@ jobs:
     - name: Clean install dependencies and runs tests
       run: 
           npm install
-          npm test
+          npm test --coverage
