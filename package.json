@@ -9,7 +9,7 @@
   "description": "App that connects people who need medication and who can donate",
   "main": "configServer.js",
   "scripts": {
-    "test": "jest  --watch --coverage",
+    "test": "jest",
     "dev": " NODE_ENV=development nodemon --exec babel-node configServer.js",
     "start": "NODE_ENV=production babel-node configServer.js",
     "heroku-postbuild": "cd src/front-end && npm install --only=dev && npm install && npm run build"
