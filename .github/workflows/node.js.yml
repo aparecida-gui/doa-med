@@ -11,7 +11,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-20.04
 
     strategy:
@@ -24,5 +23,9 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    
+    - name: install dependencies  
     - run: npm install
-    - run: npm test
+      
+    - name: runs tests  
+    - run: npm test --coverage
