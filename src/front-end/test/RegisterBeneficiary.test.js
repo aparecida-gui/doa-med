@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { fireEvent, render } from '@testing-library/react';
 import RegisterBeneficiary from '../src/pages/RegisterBeneficiary';
@@ -13,15 +14,16 @@ describe('Page register beneficiary', () => {
   };
 
   test('Insert data with success', () => {
-    const { getByTestId, getByText } = render(<RegisterBeneficiary />);
+    let { getByTestId, getByText } = render(<RegisterBeneficiary />, {
+      wrapper: BrowserRouter,
+    });
 
-    // preencher os campos do cadastro.
-    const inputName = getByTestId('reg-name').querySelector('input');
-    const inputPhone = getByTestId('reg-phone').querySelector('input');
-    const inputCity = getByTestId('reg-city').querySelector('input');
-    const inputEmail = getByTestId('reg-email').querySelector('input');
-    const inputPassword = getByTestId('reg-password').querySelector('input');
-    const buttonRegister = getByText('Cadastrar');
+    let inputName = getByTestId('reg-name').querySelector('input');
+    let inputPhone = getByTestId('reg-phone').querySelector('input');
+    let inputCity = getByTestId('reg-city').querySelector('input');
+    let inputEmail = getByTestId('reg-email').querySelector('input');
+    let inputPassword = getByTestId('reg-password').querySelector('input');
+    let buttonRegister = getByText('Cadastrar');
 
     fireEvent.input(inputName, {
       target: { value: 'maria' },
@@ -54,7 +56,7 @@ describe('Page register beneficiary', () => {
   });
 
   //TODO: Testar a validação dos campos.
-  test('Click button fill input', () => {
+  test('Validate inputs', () => {
     // clicar no botão sem preencher os campos do cadastro.
     // mostrar mensagem de erro.
   });
