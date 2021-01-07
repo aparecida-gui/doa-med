@@ -93,7 +93,7 @@ export default function RegisterBeneficiary() {
               data-testid="reg-name"
             />
             {validateInputs.name !== undefined && (
-              <span>{validateInputs.name}</span>
+              <span className="errorMessage">{validateInputs.name}</span>
             )}
           </Grid>
 
@@ -109,7 +109,7 @@ export default function RegisterBeneficiary() {
               data-testid="reg-phone"
             />
             {validateInputs.phone !== undefined && (
-              <span>{validateInputs.phone}</span>
+              <span className="errorMessage">{validateInputs.phone}</span>
             )}
           </Grid>
 
@@ -125,7 +125,7 @@ export default function RegisterBeneficiary() {
               data-testid="reg-city"
             />
             {validateInputs.city !== undefined && (
-              <span>{validateInputs.city}</span>
+              <span className="errorMessage">{validateInputs.city}</span>
             )}
           </Grid>
 
@@ -153,7 +153,7 @@ export default function RegisterBeneficiary() {
               data-testid="reg-password"
             />
             {validateInputs.password !== undefined && (
-              <span>{validateInputs.password}</span>
+              <span className="errorMessage">{validateInputs.password}</span>
             )}
           </Grid>
           <div>
