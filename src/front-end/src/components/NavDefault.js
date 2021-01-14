@@ -17,7 +17,7 @@ export default function NavDefault() {
 
   function logout() {
     localStorage.removeItem('tokenUser');
-    return history.push('/login');
+    return history.push('/');
   }
 
   const handleOpenMenu = (e) => {
