@@ -164,6 +164,7 @@ export default function RegisterBeneficiary() {
               type="submit"
               style={{ margin: 5 }}
               onClick={handleSubmit}
+              data-testid="reg-button"
             >
               Cadastrar
             </Button>

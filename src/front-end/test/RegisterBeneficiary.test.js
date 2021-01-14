@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import '@testing-library/jest-dom/extend-expect';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, act } from '@testing-library/react';
 import RegisterBeneficiary from '../src/pages/RegisterBeneficiary';
 
 describe('Page register beneficiary', () => {
@@ -17,7 +17,6 @@ describe('Page register beneficiary', () => {
     let { getByTestId, getByText } = render(<RegisterBeneficiary />, {
       wrapper: BrowserRouter,
     });
-
     let inputName = getByTestId('reg-name').querySelector('input');
     let inputPhone = getByTestId('reg-phone').querySelector('input');
     let inputCity = getByTestId('reg-city').querySelector('input');
@@ -56,8 +55,22 @@ describe('Page register beneficiary', () => {
   });
 
   //TODO: Testar a validação dos campos.
-  test('Validate inputs', () => {
-    // clicar no botão sem preencher os campos do cadastro.
-    // mostrar mensagem de erro.
+  test('Validate inputs', async () => {
+    const mockOnClick = jest.fn();
+
+    let { getByTestId, getByText } = render(<RegisterBeneficiary />, {
+      wrapper: BrowserRouter,
+    });
+
+    const inputName = getByTestId('reg-name').querySelector('input');
+    const buttonRegister = getByText('Cadastrar');
+
+    fireEvent.input(inputName, {
+      target: { value: '' },
+    });
+
+    await act(async () => {
+      fireEvent.submit(buttonRegister);
+    });
   });
 });
