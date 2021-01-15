@@ -52,8 +52,10 @@ export default function NavDefault() {
 
 const LogoContainer = styled.div`
   flex-grow: 1;
+  padding: 1rem;
 `;
 
 const NavBar = styled.nav`
-  padding: 5.5rem;
+  padding: 6rem;
+  font-size: 1.5rem;
 `;

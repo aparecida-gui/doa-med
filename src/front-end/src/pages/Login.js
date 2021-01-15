@@ -43,15 +43,9 @@ function Login() {
     <>
       {message && <AlertError msg={message} />}
 
-      <Grid
-        Grid
-        container
-        direction="column"
-        justify="center"
-        alignItems="center"
-      >
-        <h2>Login</h2>
-        <form onSubmit={(e) => e.preventDefault()}>
+      <Grid direction="column" alignItems="center">
+        <form onSubmit={(e) => e.preventDefault()} className="main login">
+          <h2>Login</h2>
           <Grid item>
             <TextField
               required
@@ -83,16 +77,18 @@ function Login() {
               variant="outlined"
               color="primary"
               type="submit"
-              style={{ margin: 5 }}
               onClick={handleSubmit}
               data-testid="form-btn"
+              style={{ margin: 12 }}
             >
               Logar
             </Button>
           </Grid>
           <Grid item>
             <Typography align="right" variant="caption">
-              <Link to="/register_user">Faça seu cadastro Aqui</Link>
+              <Link className="adjustItem" to="/register_user">
+                Faça seu cadastro Aqui
+              </Link>
             </Typography>
           </Grid>
         </form>

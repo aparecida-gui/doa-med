@@ -78,7 +78,7 @@ export default function RegisterBeneficiary() {
       {isRegisterOk === false && <AlertError msg={message} />}
 
       <Grid container direction="column" justify="center" alignItems="center">
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form onSubmit={(e) => e.preventDefault()} className="main register">
           <h2>Cadastro</h2>
           <Grid item>
             <TextField
@@ -156,22 +156,25 @@ export default function RegisterBeneficiary() {
               <span className="errorMessage">{validateInputs.password}</span>
             )}
           </Grid>
-          <div>
+          <Grid item>
             <Button
               fullWidth
               variant="outlined"
               color="primary"
               type="submit"
-              style={{ margin: 5 }}
               onClick={handleSubmit}
               data-testid="reg-button"
+              style={{ margin: 12 }}
             >
               Cadastrar
             </Button>
-          </div>
+          </Grid>
+
           <Grid item>
             <Typography align="right" variant="caption">
-              <Link to="/">Faça seu Login aqui</Link>
+              <Link className="adjustItem" to="/">
+                Faça seu Login aqui
+              </Link>
             </Typography>
           </Grid>
         </form>
