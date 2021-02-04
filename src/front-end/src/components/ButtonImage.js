@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, TextField } from '@material-ui/core';
+import '../index.css';
 
 export const ButtonImage = (props) => (
   <Button variant="contained" component="label">
@@ -10,6 +11,7 @@ export const ButtonImage = (props) => (
       placeholder="Adicione sua Receita"
       style={{ padding: '1rem', display: 'none' }}
       onChange={props.onChange}
+      className="centerButton"
     />
   </Button>
 );

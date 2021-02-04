@@ -6,6 +6,7 @@ import RegisterBeneficiary from './pages/RegisterBeneficiary';
 import RegisterMedicineBenef from './pages/RegisterMedicineBenef';
 import PrivateRoute from './PrivateRoute';
 import ViewMedicinesRegister from './pages/ViewMedicinesRegister';
+import MedicineDonation from './components/MedicineDonation';
 
 const Routers = () => {
   return (
@@ -20,8 +21,13 @@ const Routers = () => {
         />
         <PrivateRoute
           exact
-          path="/:beneficiary_id/register_medicine_benef"
+          path="/register_medicine/:beneficiary_id"
           component={RegisterMedicineBenef}
+        />
+        <PrivateRoute
+          exact
+          path="/medicine_donation/:beneficiary_id"
+          component={MedicineDonation}
         />
         <Route component={Error404} />
       </Switch>
