@@ -10,10 +10,12 @@ import {
 } from '@material-ui/core';
 import { AccountCircle } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
+import { useAuth } from '../contexts/UserContex';
 
 export default function NavDefault() {
   const [anchorElement, setAnchorElement] = useState(null);
   let history = useHistory();
+  let { user } = useAuth();
 
   function logout() {
     localStorage.removeItem('tokenUser');
@@ -33,7 +35,7 @@ export default function NavDefault() {
       <AppBar position="fixed">
         <Toolbar>
           <LogoContainer>DoaMed</LogoContainer>
-          <Typography color="inherit">Olá</Typography>
+          <Typography color="inherit">Olá, {user.name}</Typography>
           <IconButton color="inherit" onClick={handleOpenMenu}>
             <AccountCircle />
           </IconButton>

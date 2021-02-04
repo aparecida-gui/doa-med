@@ -4,38 +4,39 @@ import api from '../services/api';
 import { Grid, Button, TextField, Typography } from '@material-ui/core';
 import { Link, useHistory } from 'react-router-dom';
 import { AlertError } from '../components/Alert';
+import { useAuth } from '../contexts/UserContex';
 
 function Login() {
   let [email, setEmail] = useState('');
   let [password, setPassword] = useState('');
-  let [message, setMessage] = useState('');
-  let [isLogin, setIsLogin] = useState(false);
-  let [beneficiaryId, setBeneficiaryId] = useState('');
-  let history = useHistory();
+  let [message] = useState('');
 
-  const handleSubmit = async () => {
-    let acessoLogin = await api.post('/', {
+  let history = useHistory();
+  let { setUser } = useAuth();
+  let userData = {};
+
+  const checksUser = async () => {
+    let loginAccess = await api.post('/', {
       email,
       password,
     });
 
-    if (acessoLogin.status === 200) {
-      setIsLogin((isLogin = true));
-      setBeneficiaryId((beneficiaryId = acessoLogin.data.emailExists.id));
-      console.log(
-        'email: ',
-        email,
-        'password: ',
-        password,
-        'beneficiaryId: ',
-        beneficiaryId,
-        'message: ',
-        message,
-        'isLogin: ',
-        isLogin
-      );
-      localStorage.setItem('tokenUser', acessoLogin.data.token);
-      return history.push(`${beneficiaryId}/register_medicine_benef`);
+    if (loginAccess.status === 200) {
+      for (let column in loginAccess.data) {
+        userData = loginAccess.data[column];
+      }
+      await setUser(userData);
+      return loginAccess;
+    } else {
+      console.log('Acesso negado.', loginAccess);
+    }
+  };
+
+  const generateToken = async () => {
+    let loginAccess = await checksUser();
+    localStorage.setItem('tokenUser', loginAccess.data.token);
+    if (localStorage) {
+      history.push(`register_medicine/${userData.id}`);
     }
   };
 
@@ -77,7 +78,7 @@ function Login() {
               variant="outlined"
               color="primary"
               type="submit"
-              onClick={handleSubmit}
+              onClick={generateToken}
               data-testid="form-btn"
               style={{ margin: 12 }}
             >
