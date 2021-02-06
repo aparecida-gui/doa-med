@@ -39,7 +39,8 @@ class MedicineBeneficiary {
           res.status(200).json({ nameMedicine });
         } else {
           res.json({
-            message: `Não tem nenhum registro do ${medicineBeneficiary.name} para doação no momento.`,
+            message: `Não temos o medicamento ${medicineBeneficiary.name} cadastrado para doação, 
+            quando estiver disponível avisaremos você por e-mail.`,
           });
         }
       }
