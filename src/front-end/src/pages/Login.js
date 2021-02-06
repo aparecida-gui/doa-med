@@ -52,7 +52,7 @@ function Login() {
               required
               autoFocus
               fullWidth
-              label="Emaill"
+              label="Email"
               type="email"
               style={{ margin: 18 }}
               value={email}
