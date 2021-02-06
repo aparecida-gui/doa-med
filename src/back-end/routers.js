@@ -32,7 +32,7 @@ router.get('/medicine/:name', MedicineController.medicineSearch);
 // rota para o beneficiario adicionar
 // o medicamento e a imagem da receita medica.
 router.post(
-  '/:beneficiary_id/register_medicine_benef',
+  '/register_medicine_benef/:beneficiary_id',
   multer(multerConfig).single('prescription'),
   MedicineBeneficiaryController.registerMedicineBeneficiary
 );
