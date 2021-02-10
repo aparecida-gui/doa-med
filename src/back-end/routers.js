@@ -40,7 +40,7 @@ router.post(
 // rota mostra os dados do beneficiario logado
 // e os medicamentos que ele tem cadastrados.
 router.get(
-  '/:beneficiary_id/view_register_medicines',
+  '/view_register_medicines/:beneficiary_id',
   multer(multerConfig).single('prescription'),
   ViewRegisteredMedicationsController.showData
 );
