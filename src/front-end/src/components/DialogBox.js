@@ -11,45 +11,38 @@ import { useTheme } from '@material-ui/core/styles';
 export default function DialogBox({
   titleDialog,
   message,
-  onClickButton1,
   titleButton1,
-  onClickButton2,
   titleButton2,
+  onClickButton1,
+  onClickButton2,
 }) {
   const [open, setOpen] = useState(true);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleClose = () => {
-    setOpen(true);
-  };
-
-  onClickButton1 = () => {
     setOpen(false);
   };
 
-  console.log(open);
   return (
-    <div>
-      <Dialog
-        fullScreen={fullScreen}
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="responsive-dialog-title"
-      >
-        <DialogTitle id="responsive-dialog-title">{titleDialog}</DialogTitle>
-        <DialogContent>
-          <DialogContentText>{message}</DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={onClickButton1} color="primary">
-            {titleButton1}
-          </Button>
-          <Button onClick={onClickButton2} color="primary" autoFocus>
-            {titleButton2}
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+    <Dialog
+      fullScreen={fullScreen}
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="responsive-dialog-title"
+    >
+      <DialogTitle id="responsive-dialog-title">{titleDialog}</DialogTitle>
+      <DialogContent>
+        <DialogContentText>{message}</DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClickButton1} color="primary" autoFocus>
+          {titleButton1}
+        </Button>
+        <Button onClick={onClickButton2} color="primary" autoFocus>
+          {titleButton2}
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 }

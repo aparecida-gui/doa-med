@@ -6,14 +6,16 @@ import { Grid, TextField } from '@material-ui/core';
 import { ButtonImage, PreviewImage } from '../components/ButtonImage';
 import DialogBox from '../components/DialogBox';
 import { useAuth } from '../contexts/UserContex';
+import { useHistory } from 'react-router-dom';
 
-function RegisterMedicineBenef() {
+export default function RegisterMedicineBenef() {
   const [name, setName] = useState('');
   const [quantity, setQuantity] = useState('');
   const [prescription, setPrescription] = useState(null);
   const [message, setMessage] = useState('');
 
   let { user } = useAuth();
+  let history = useHistory();
 
   const handleClick = async () => {
     const dataMedicine = {
@@ -38,15 +40,18 @@ function RegisterMedicineBenef() {
     }
   };
 
-  const onClickButton1 = () => {
-    console.log('onClickButton1');
+  const initialState = () => {
     setName('');
     setQuantity('');
     setPrescription(null);
     setMessage('');
   };
+
+  const onClickButton1 = () => {
+    initialState();
+  };
   const onClickButton2 = () => {
-    console.log('onClickButton2');
+    history.push(`view_register_medicines/${user.id}`);
   };
 
   return (
@@ -54,7 +59,6 @@ function RegisterMedicineBenef() {
       <div style={{ paddingTop: ' 4rem' }} className="row"></div>
       <Grid container direction="column" justify="center" alignItems="center">
         <form onSubmit={(e) => e.preventDefault()}>
-          {console.log('>>>>> message:', message)}
           <h2>Cadastre o medicamento que você precisa</h2>
           <Grid item>
             <TextField
@@ -92,7 +96,11 @@ function RegisterMedicineBenef() {
             <PreviewImage src={prescription} />
           </Grid>
           <Grid item>
-            <Button onClick={handleClick} label={'Cadastrar Medicamento'} />
+            <Button
+              type="submit"
+              onClick={handleClick}
+              label={'Cadastrar Medicamento'}
+            />
           </Grid>
         </form>
       </Grid>
@@ -108,5 +116,3 @@ function RegisterMedicineBenef() {
     </LayoutPrivate>
   );
 }
-
-export default RegisterMedicineBenef;
