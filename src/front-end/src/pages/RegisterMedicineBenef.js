@@ -51,7 +51,7 @@ export default function RegisterMedicineBenef() {
     initialState();
   };
   const onClickButton2 = () => {
-    history.push(`view_register_medicines/${user.id}`);
+    history.push(`/view_medicine_register/${user.id}`);
   };
 
   return (

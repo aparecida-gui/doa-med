@@ -16,7 +16,7 @@ const Routers = () => {
         <Route exact path="/register_user" component={RegisterBeneficiary} />
         <PrivateRoute
           exact
-          path="/:beneficiary_id/view_medicine_register"
+          path="/view_medicine_register/:beneficiary_id"
           component={ViewMedicinesRegister}
         />
         <PrivateRoute
