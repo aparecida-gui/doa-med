@@ -1,81 +1,67 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import api from '../services/api';
 import DatasUser from '../components/DatasUser';
 import DataMedicines from '../components/DataMedicines';
 import LayoutPrivate from '../layouts/LayoutPrivate';
+import { useAuth } from '../contexts/UserContex';
 
-class ViewMedicinesRegister extends Component {
-  state = {
-    messageError: '',
-    message: '',
-    datasUser: [],
-    dataMedicines: [],
-  };
+export default function ViewMedicinesRegister() {
+  const [messageError, setMessageError] = useState('');
+  const [message, setMessage] = useState('');
+  const [datasUser, setDatasUser] = useState([]);
+  const [dataMedicines, setDataMedicines] = useState([]);
 
-  handeler = async () => {
-    let {
-      match: { params },
-    } = this.props;
+  let { user } = useAuth();
 
-    let dados = await api.get(
-      `${params.beneficiary_id}/view_register_medicines`
-    );
+  const handeler = async () => {
+    let dados = await api.get(`view_register_medicines/${user.id}`);
 
     try {
       if (dados.status === 200 && dados.data.dados) {
-        this.setState({
-          datasUser: dados.data.dados,
-          dataMedicines: dados.data.dados.medicinesBeneficiary,
-        });
+        setDatasUser(dados.data.dados);
+        setDataMedicines(dados.data.dados.medicinesBeneficiary);
       } else {
-        this.setState({
-          datasUser: dados.data.user,
-          message: dados.data.message,
-        });
-        console.log('dataUser: ', this.state.dataUser, this.state.message);
+        setDatasUser(dados.data.user);
+        setMessage(dados.data.message);
       }
     } catch (error) {
       if (error.response !== undefined) {
-        this.setState({ messageError: error.response.data.messageError });
+        setMessageError(error.response.data.messageError);
       }
     }
   };
 
-  componentDidMount() {
-    this.handeler();
-  }
+  useEffect(() => {
+    handeler();
+  }, []);
 
-  render() {
-    return (
-      <LayoutPrivate>
-        {[this.state.datasUser].map((dataUser, index) => (
-          <DatasUser
+  return (
+    <LayoutPrivate>
+      {[datasUser].map((dataUser, index) => (
+        <DatasUser
+          key={index}
+          name={dataUser.name}
+          email={dataUser.email}
+          phone={dataUser.phone}
+          city={dataUser.city}
+        />
+      ))}
+
+      {message === '' ? (
+        dataMedicines.map((dataMedicine, index) => (
+          <DataMedicines
             key={index}
-            name={dataUser.name}
-            email={dataUser.email}
-            phone={dataUser.phone}
-            city={dataUser.city}
+            name={dataMedicine.name}
+            quantity={dataMedicine.quantity}
+            prescription={dataMedicine.prescription}
+            id={dataMedicine.id}
           />
-        ))}
-
-        {this.state.message === '' ? (
-          this.state.dataMedicines.map((dataMedicine, index) => (
-            <DataMedicines
-              key={index}
-              name={dataMedicine.name}
-              quantity={dataMedicine.quantity}
-              prescription={dataMedicine.prescription}
-              id={dataMedicine.id}
-            />
-          ))
-        ) : (
-          <div className="text-center text-primary px-4">
-            <h4>{this.state.message}</h4>
-          </div>
-        )}
-      </LayoutPrivate>
-    );
-  }
+        ))
+      ) : (
+        <div className="text-center text-primary px-4">
+          <h4>{message}</h4>
+        </div>
+      )}
+    </LayoutPrivate>
+  );
 }
-
-export default ViewMedicinesRegister;
