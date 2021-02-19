@@ -1,6 +1,7 @@
 import React from 'react';
 import api from '../services/api';
 import moment from 'moment';
+import LayoutPrivate from '../layouts/LayoutPrivate';
 class SearchMedicine extends React.Component {
   state = { search_medicine: '', medicines: [], message: '' };
 
@@ -30,7 +31,7 @@ class SearchMedicine extends React.Component {
 
   render() {
     return (
-      <div>
+      <LayoutPrivate>
         <form className="form" onSubmit={(e) => e.preventDefault()}>
           <div className="form-group">
             <label htmlFor="search-medicine">Nome do medicamento</label>
@@ -89,7 +90,7 @@ class SearchMedicine extends React.Component {
             {this.state.message.length > 0 && <h4>{this.state.message}</h4>}
           </div>
         </div>
-      </div>
+      </LayoutPrivate>
     );
   }
 }
