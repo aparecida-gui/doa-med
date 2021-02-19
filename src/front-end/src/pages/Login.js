@@ -6,7 +6,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { AlertError } from '../components/Alert';
 import { useAuth } from '../contexts/UserContex';
 
-function Login() {
+export default function Login() {
   let [email, setEmail] = useState('');
   let [password, setPassword] = useState('');
   let [message] = useState('');
@@ -36,7 +36,8 @@ function Login() {
     let loginAccess = await checksUser();
     localStorage.setItem('tokenUser', loginAccess.data.token);
     if (localStorage) {
-      history.push(`register_medicine/${userData.id}`);
+      history.push(`home`);
+      //history.push(`register_medicine/${userData.id}`);
     }
   };
 
@@ -44,7 +45,7 @@ function Login() {
     <>
       {message && <AlertError msg={message} />}
 
-      <Grid direction="column" alignItems="center">
+      <Grid container direction="column" justify="center" alignItems="center">
         <form onSubmit={(e) => e.preventDefault()} className="main login">
           <h2>Login</h2>
           <Grid item>
@@ -97,5 +98,3 @@ function Login() {
     </>
   );
 }
-
-export default Login;
