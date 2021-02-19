@@ -6,7 +6,9 @@ import RegisterBeneficiary from './pages/RegisterBeneficiary';
 import RegisterMedicineBenef from './pages/RegisterMedicineBenef';
 import PrivateRoute from './PrivateRoute';
 import ViewMedicinesRegister from './pages/ViewMedicinesRegister';
-import MedicineDonation from './components/MedicineDonation';
+import MedicineDonation from './pages/MedicineDonation';
+import Home from './pages/Home';
+import SearchMedicine from './pages/SearchMedicine';
 
 const Routers = () => {
   return (
@@ -14,6 +16,8 @@ const Routers = () => {
       <Switch>
         <Route exact path="/" component={Login} />
         <Route exact path="/register_user" component={RegisterBeneficiary} />
+        <Route exact path="/search_medicine" component={SearchMedicine} />
+        <PrivateRoute exact path="/home" component={Home} />
         <PrivateRoute
           exact
           path="/view_medicine_register/:beneficiary_id"
