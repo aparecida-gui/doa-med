@@ -3,6 +3,7 @@ import '../index.css';
 import { Button, Grid, TextField } from '@material-ui/core';
 import api from '../services/api';
 import { useAuth } from '../contexts/UserContex';
+import LayoutPrivate from '../layouts/LayoutPrivate';
 
 export default function MedicineDonation() {
   const [name, setName] = useState('');
@@ -37,7 +38,7 @@ export default function MedicineDonation() {
     }
   };
   return (
-    <div>
+    <LayoutPrivate>
       {successMessage !== '' && (
         <div>
           <h4>{successMessage}</h4>
@@ -111,6 +112,6 @@ export default function MedicineDonation() {
           </Grid>
         </form>
       </Grid>
-    </div>
+    </LayoutPrivate>
   );
 }
