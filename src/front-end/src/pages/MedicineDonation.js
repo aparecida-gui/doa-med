@@ -50,7 +50,7 @@ export default function MedicineDonation() {
         </div>
       )}
       <Grid container direction="column" justify="center" alignItems="center">
-        <form onSubmit={(e) => e.preventDefault()} className="main register">
+        <form onSubmit={(e) => e.preventDefault()}>
           <h2>Cadastrar Medicamento para Doação</h2>
           <Grid item>
             <TextField
@@ -94,8 +94,12 @@ export default function MedicineDonation() {
               required
               fullWidth
               type="date"
+              label="Data de Validade"
               value={expirationDate}
               style={{ margin: 18 }}
+              InputLabelProps={{
+                shrink: true,
+              }}
               onChange={(e) => setExpirationDate(e.target.value)}
             />
           </Grid>
