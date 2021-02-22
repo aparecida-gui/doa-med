@@ -1,98 +1,103 @@
-import React from 'react';
+import React, { useState } from 'react';
 import api from '../services/api';
 import moment from 'moment';
 import LayoutPrivate from '../layouts/LayoutPrivate';
-class SearchMedicine extends React.Component {
-  state = { search_medicine: '', medicines: [], message: '' };
+import {
+  Grid,
+  Table,
+  TableContainer,
+  TableBody,
+  TableRow,
+  TableHead,
+  TextField,
+} from '@material-ui/core';
+import Button from '../components/Button';
 
-  handleChange = (event) => {
-    this.setState({ search_medicine: event.target.value });
-  };
+export default function SearchMedicine() {
+  const [searchMedicine, setSearchMedicine] = useState('');
+  const [medicines, setMedicines] = useState([]);
+  const [message, setMessage] = useState('');
 
-  handleSubmit = async () => {
-    const search = this.state.search_medicine;
+  const handleSubmit = async () => {
+    let medicine = await api.get(`medicine/${searchMedicine}`);
 
-    let medicine = await api.get(`medicine/${search}`);
+    console.log(medicine);
 
     if (medicine.data.message) {
-      this.setState({ message: medicine.data.message });
-      this.setState({ medicines: [] });
+      setMessage(medicine.data.message);
+      setMedicines([]);
     } else {
-      this.setState({ medicines: medicine.data.medicine });
-      this.setState({ message: '' });
+      setMedicines(medicine.data.medicine);
+      setMessage('');
     }
 
-    this.getInitialState();
+    getInitialState();
   };
 
-  getInitialState = () => {
-    this.setState({ search_medicine: '' });
+  const getInitialState = () => {
+    setSearchMedicine('');
   };
 
-  render() {
-    return (
-      <LayoutPrivate>
-        <form className="form" onSubmit={(e) => e.preventDefault()}>
-          <div className="form-group">
-            <label htmlFor="search-medicine">Nome do medicamento</label>
-            <input
-              value={this.state.search_medicine}
-              onChange={this.handleChange}
+  return (
+    <LayoutPrivate>
+      <Grid container direction="column" justify="center" alignItems="center">
+        <form onSubmit={(e) => e.preventDefault()}>
+          <Grid item>
+            <TextField
+              autoFocus
+              required
+              fullWidth
               type="text"
-              className="form-control"
-              id="search-medicine"
-              aria-describedby="emailHelp"
+              label="Nome do medicamento"
               placeholder="Qual o nome do medicamento?"
+              value={searchMedicine}
+              onChange={(e) => setSearchMedicine(e.target.value)}
+              style={{ margin: 18 }}
             />
-          </div>
-          {this.state.search_medicine.length > 0 && (
-            <div className="form-group">
-              <button
-                onClick={this.handleSubmit}
+          </Grid>
+          <Grid item>
+            {searchMedicine.length > 0 && (
+              <Button
                 type="submit"
-                className="btn btn-primary"
-              >
-                Pesquisar
-              </button>
-            </div>
-          )}
+                onClick={handleSubmit}
+                label={'Pesquisar'}
+              />
+            )}
+          </Grid>
         </form>
 
-        <div>
-          {this.state.medicines.length > 0 && (
+        <Grid item>
+          {medicines.length > 0 && (
             <div>
               <h4>Medicamentos Disponiveis para Doação</h4>
-              <table className="table table-hover">
-                <thead>
-                  <tr>
+              <TableContainer></TableContainer>
+              <Table>
+                <TableHead>
+                  <TableRow>
                     <th>Medicamento</th>
                     <th>Data de Validade</th>
                     <th>Quantidade</th>
                     <th>Laboratório</th>
-                  </tr>
-                </thead>
-                {this.state.medicines.map((medicine) => (
-                  <tbody key={medicine.id}>
+                  </TableRow>
+                </TableHead>
+                {medicines.map((medicine) => (
+                  <TableBody key={medicine.id}>
                     <tr>
-                      <th>{medicine.name}</th>
-                      <th>
+                      <TableCell>{medicine.name}</TableCell>
+                      <TableCell>
                         {moment(medicine.expirationDate).format('DD/MM/YYYY')}
-                      </th>
-                      <th>{medicine.quantity}</th>
-                      <th>{medicine.laboratory}</th>
+                      </TableCell>
+                      <TableCell>{medicine.quantity}</TableCell>
+                      <TableCell>{medicine.laboratory}</TableCell>
                     </tr>
-                  </tbody>
+                  </TableBody>
                 ))}
-              </table>
+              </Table>
             </div>
           )}
-          <div className="text-center text-primary px-5">
-            {this.state.message.length > 0 && <h4>{this.state.message}</h4>}
-          </div>
-        </div>
-      </LayoutPrivate>
-    );
-  }
+          <div>{message.length > 0 && <h4>{message}</h4>}</div>
+        </Grid>
+      </Grid>
+    </LayoutPrivate>
+  );
 }
-
-export default SearchMedicine;
