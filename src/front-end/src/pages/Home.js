@@ -14,7 +14,7 @@ export default function Home() {
         </li>
         <li>
           <Link to="/search_medicine">
-            Visualizar Medicamentos Disponiveis para Doação
+            Visualizar Medicamentos Disponíveis para Doação
           </Link>
         </li>
         <li>

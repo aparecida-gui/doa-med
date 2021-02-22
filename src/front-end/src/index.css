@@ -12,6 +12,12 @@
   padding: 0rem;
   border-radius: 1rem;
 }
+.menuOptions {
+  text-decoration: none;
+  color: #ffffff;
+  flex-grow: 1;
+  padding: 1rem;
+}
 
 .login {
   margin-top: 12.7rem;
