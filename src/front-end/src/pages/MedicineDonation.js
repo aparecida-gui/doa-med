@@ -4,6 +4,8 @@ import { Button, Grid, TextField } from '@material-ui/core';
 import api from '../services/api';
 import { useAuth } from '../contexts/UserContex';
 import LayoutPrivate from '../layouts/LayoutPrivate';
+import DialogBox from '../components/DialogBox';
+import { useHistory } from 'react-router-dom';
 
 export default function MedicineDonation() {
   const [name, setName] = useState('');
@@ -14,6 +16,7 @@ export default function MedicineDonation() {
   const [errorMessage, setErrorMessage] = useState('');
 
   let { user } = useAuth();
+  let history = useHistory();
 
   const handleClick = async () => {
     const dataMedicineDonation = {
@@ -23,27 +26,32 @@ export default function MedicineDonation() {
       expirationDate,
     };
 
+    let registerMedicineDonantion = null;
     try {
-      let registerMedicineDonantion = await api.post(
+      registerMedicineDonantion = await api.post(
         `register_medicine/donor/${user.id}`,
         dataMedicineDonation
       );
-      if (registerMedicineDonantion.status === 201) {
+      if (registerMedicineDonantion.status === 200) {
         setSuccessMessage(registerMedicineDonantion.data.message);
-        console.log('>>>>>>...', dataMedicineDonation);
       }
     } catch (error) {
       setErrorMessage(error.response.data.error);
-      console.log('>>>>>>...', errorMessage);
     }
   };
+  const initialState = () => {
+    setName('');
+    setLaboratory('');
+    setQuantity('');
+    setExpirationDate('');
+    setErrorMessage('');
+    setSuccessMessage('');
+  };
+  const onClickButton1 = () => initialState();
+  const onClickButton2 = () => history.push(`/home`);
+
   return (
     <LayoutPrivate>
-      {successMessage !== '' && (
-        <div>
-          <h4>{successMessage}</h4>
-        </div>
-      )}
       {errorMessage !== '' && (
         <div>
           <h4>{errorMessage}</h4>
@@ -115,6 +123,15 @@ export default function MedicineDonation() {
             </Button>
           </Grid>
         </form>
+        {successMessage && (
+          <DialogBox
+            message={successMessage}
+            onClickButton1={onClickButton1}
+            titleButton1={'Continuar Cadastrando'}
+            titleButton2={'Finalizar Cadastro'}
+            onClickButton2={onClickButton2}
+          />
+        )}
       </Grid>
     </LayoutPrivate>
   );
