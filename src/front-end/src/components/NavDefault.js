@@ -9,8 +9,9 @@ import {
   MenuItem,
 } from '@material-ui/core';
 import { AccountCircle } from '@material-ui/icons';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from '../contexts/UserContex';
+import '../index.css';
 
 export default function NavDefault() {
   const [anchorElement, setAnchorElement] = useState(null);
@@ -34,7 +35,12 @@ export default function NavDefault() {
     <NavBar>
       <AppBar position="fixed">
         <Toolbar>
-          <LogoContainer>DoaMed</LogoContainer>
+          <Link to="/home" className="menuOptions">
+            DoaMed
+          </Link>
+          <Link to="/home" className="menuOptions">
+            Home
+          </Link>
           <Typography color="inherit">Olá, {user.name}</Typography>
           <IconButton color="inherit" onClick={handleOpenMenu}>
             <AccountCircle />
@@ -51,11 +57,6 @@ export default function NavDefault() {
     </NavBar>
   );
 }
-
-const LogoContainer = styled.div`
-  flex-grow: 1;
-  padding: 1rem;
-`;
 
 const NavBar = styled.nav`
   padding: 6rem;
