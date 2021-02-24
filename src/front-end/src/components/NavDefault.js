@@ -41,6 +41,12 @@ export default function NavDefault() {
           <Link to="/home" className="menuOptions">
             Home
           </Link>
+          <Link
+            to={`/view_medicine_register/${user.id}`}
+            className="menuOptions"
+          >
+            Seus Medicamentos Cadastrados
+          </Link>
           <Typography color="inherit">Olá, {user.name}</Typography>
           <IconButton color="inherit" onClick={handleOpenMenu}>
             <AccountCircle />
