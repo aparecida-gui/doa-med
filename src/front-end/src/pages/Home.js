@@ -19,7 +19,7 @@ export default function Home() {
         </li>
         <li>
           <Link to={`/register_medicine/${user.id}`}>
-            Adicionar medicamentos que você precisa
+            Cadastrar o medicamento que você precisa
           </Link>
         </li>
       </ul>

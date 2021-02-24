@@ -5,6 +5,11 @@
   font-weight: bold;
 }
 
+li {
+  list-style: none;
+  padding-top: 0.8rem;
+}
+
 .main {
   width: 100%;
   justify-content: center;
