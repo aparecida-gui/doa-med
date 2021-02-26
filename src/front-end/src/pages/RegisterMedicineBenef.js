@@ -32,8 +32,7 @@ export default function RegisterMedicineBenef() {
 
       if (registerMedicine.status === 200 && registerMedicine.data.message) {
         setMessage(registerMedicine.data.message);
-      }
-      if (registerMedicine.status === 200 && registerMedicine.data) {
+      } else {
         setMessage(
           'O medicamento que você cadastrou já têm disponível para doação.'
         );
