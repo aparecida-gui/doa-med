@@ -32,8 +32,11 @@ export default function RegisterMedicineBenef() {
 
       if (registerMedicine.status === 200 && registerMedicine.data.message) {
         setMessage(registerMedicine.data.message);
-      } else {
-        console.log('>>>>>', registerMedicine.data);
+      }
+      if (registerMedicine.status === 200 && registerMedicine.data) {
+        setMessage(
+          'O medicamento que você cadastrou já têm disponível para doação.'
+        );
       }
     } catch (error) {
       console.log('error: ', error);
@@ -56,7 +59,6 @@ export default function RegisterMedicineBenef() {
 
   return (
     <LayoutPrivate>
-      <div style={{ paddingTop: ' 4rem' }} className="row"></div>
       <Grid container direction="column" justify="center" alignItems="center">
         <form onSubmit={(e) => e.preventDefault()}>
           <h2>Cadastre o medicamento que você precisa</h2>
