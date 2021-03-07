@@ -2,46 +2,75 @@ import React, { useState } from 'react';
 import api from '../services/api';
 import moment from 'moment';
 import LayoutPrivate from '../layouts/LayoutPrivate';
-import {
-  Grid,
-  Table,
-  TableContainer,
-  TableBody,
-  TableRow,
-  TableHead,
-  TextField,
-} from '@material-ui/core';
-import Button from '../components/Button';
+import { Grid, TextField, Button, Typography } from '@material-ui/core';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import DatasUser from '../components/DatasUser';
+
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 27,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+  },
+}))(TableRow);
+
+const useStyles = makeStyles({
+  table: {
+    minWidth: 900,
+  },
+});
 
 export default function SearchMedicine() {
   const [searchMedicine, setSearchMedicine] = useState('');
   const [medicines, setMedicines] = useState([]);
   const [message, setMessage] = useState('');
+  const [donor, setDonor] = useState([]);
 
   const handleSubmit = async () => {
     let medicine = await api.get(`medicine/${searchMedicine}`);
-
-    console.log(medicine);
 
     if (medicine.data.message) {
       setMessage(medicine.data.message);
       setMedicines([]);
     } else {
-      setMedicines(medicine.data.medicine);
+      setMedicines(medicine.data);
       setMessage('');
     }
-
     getInitialState();
   };
 
-  const getInitialState = () => {
-    setSearchMedicine('');
+  const getInitialState = () => setSearchMedicine('');
+
+  const classes = useStyles();
+
+  const moreDetails = (object) => {
+    setDonor(object);
   };
 
   return (
     <LayoutPrivate>
-      <Grid container direction="column" justify="center" alignItems="center">
+      <Grid container direction="row" justify="center" alignItems="baseline">
         <form onSubmit={(e) => e.preventDefault()}>
+          <Typography variant="h5" align="center">
+            Pesquisar Medicamentos Disponíveis para Doação
+          </Typography>
           <Grid item>
             <TextField
               autoFocus
@@ -52,7 +81,10 @@ export default function SearchMedicine() {
               placeholder="Qual o nome do medicamento?"
               value={searchMedicine}
               onChange={(e) => setSearchMedicine(e.target.value)}
-              style={{ margin: 18 }}
+              style={{ margin: 20 }}
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
           </Grid>
           <Grid item>
@@ -68,34 +100,69 @@ export default function SearchMedicine() {
 
         <Grid item>
           {medicines.length > 0 && (
-            <div>
-              <h4>Medicamentos Disponiveis para Doação</h4>
-              <TableContainer></TableContainer>
-              <Table>
+            <TableContainer component={Paper}>
+              <Table className={classes.table} aria-label="customized table">
                 <TableHead>
                   <TableRow>
-                    <th>Medicamento</th>
-                    <th>Data de Validade</th>
-                    <th>Quantidade</th>
-                    <th>Laboratório</th>
+                    <StyledTableCell align="center">
+                      Medicamento
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      Data de Validade
+                    </StyledTableCell>
+                    <StyledTableCell align="center">Quantidade</StyledTableCell>
+                    <StyledTableCell align="center">
+                      Laboratório
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      Entrar em Contato com Doador
+                    </StyledTableCell>
                   </TableRow>
                 </TableHead>
-                {medicines.map((medicine) => (
-                  <TableBody key={medicine.id}>
-                    <tr>
-                      <TableCell>{medicine.name}</TableCell>
-                      <TableCell>
+                <TableBody>
+                  {medicines.map((medicine) => (
+                    <StyledTableRow key={medicine.id}>
+                      <StyledTableCell align="center">
+                        {medicine.name}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
                         {moment(medicine.expirationDate).format('DD/MM/YYYY')}
-                      </TableCell>
-                      <TableCell>{medicine.quantity}</TableCell>
-                      <TableCell>{medicine.laboratory}</TableCell>
-                    </tr>
-                  </TableBody>
-                ))}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {medicine.quantity}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {medicine.laboratory}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        <Button
+                          size="small"
+                          color="primary"
+                          variant="outlined"
+                          onClick={() => moreDetails(medicine.donors)}
+                        >
+                          + Detalhes
+                        </Button>
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  ))}
+                </TableBody>
               </Table>
-            </div>
+            </TableContainer>
           )}
           <div>{message.length > 0 && <h4>{message}</h4>}</div>
+        </Grid>
+        <Grid item>
+          {donor.length > 0 &&
+            donor.map((donorData) => (
+              <DatasUser
+                key={donorData.id}
+                name={donorData.name}
+                city={donorData.city}
+                email={donorData.email}
+                title={'Dados do Doador'}
+              />
+            ))}
         </Grid>
       </Grid>
     </LayoutPrivate>
