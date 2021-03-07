@@ -1,4 +1,5 @@
 import MedicineDonationModel from '../model/Medicine_Donation';
+import RegisterUserModel from '../model/RegisterUser';
 
 class Medicine {
   async medicineSearch(req, res) {
@@ -7,9 +8,26 @@ class Medicine {
       if (name) {
         let medicine = await MedicineDonationModel.findAll({
           where: { name },
+          include: [
+            {
+              model: RegisterUserModel,
+              as: 'donors',
+              attributes: ['id', 'name', 'email', 'city'],
+            },
+          ],
         });
+
+        let data = [];
+
+        medicine.forEach((element) => {
+          if (element.dataValues) {
+            data.push(element.dataValues);
+          }
+          return data;
+        });
+
         if (medicine.length > 0) {
-          res.status(200).json({ medicine });
+          res.status(200).json(data);
         } else {
           res.status(200).json({
             message: `${name} não tem cadastro para doação.`,
