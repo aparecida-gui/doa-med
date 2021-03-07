@@ -1,8 +1,9 @@
 * {
   text-decoration: none;
   font-size: 1.1rem;
-  margin-top: 0rem;
-  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  font-weight: 900;
 }
 
 li {
@@ -12,10 +13,12 @@ li {
 
 .main {
   width: 100%;
+  height: auto;
+  border-radius: 1.3rem;
+  display: block;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  margin: 0rem;
-  padding: 0rem;
-  border-radius: 1rem;
 }
 .menuOptions {
   text-decoration: none;
@@ -57,4 +60,21 @@ h5 {
 
 .adjustItem {
   margin: 1.2rem;
+}
+
+.dataUser {
+  font-weight: 900;
+  margin: 0.8rem;
+  padding-top: 1.4rem;
+  border-radius: 0.3rem;
+  background-color: #f3f3f3;
+  width: 19rem;
+  height: 15rem;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bolder;
+}
+
+.mioloDoPao {
+  background-color: #f3f3f3;
 }

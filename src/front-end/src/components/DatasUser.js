@@ -1,19 +1,19 @@
 import React from 'react';
+import { Button, Typography } from '@material-ui/core';
+import '../index.css';
 
-export default function DatasUser({ index, name, email, phone, city }) {
+export default function DatasUser({ index, name, email, phone, city, title }) {
   return (
-    <div className="row">
-      <div className="card">
-        <div className="card-body">
-          <h3 className="card-text">Seus Dados</h3>
-          <p className="card-title" key={index}>
-            {name}
-          </p>
-          <p className="card-text">{email}</p>
-          <p className="card-text">{phone}</p>
-          <p className="card-text">{city}</p>
-        </div>
-      </div>
+    <div className="dataUser">
+      <Typography variant="h6">{title}</Typography>
+      <p>{index}</p>
+      <Typography>Nome: {name}</Typography>
+      <Typography>Email: {email}</Typography>
+      <Typography>{phone}</Typography>
+      <Typography>Cidade: {city}</Typography>
+      <Button size="small" color="primary" variant="outlined">
+        <Typography>Contatar Doador</Typography>
+      </Button>
     </div>
   );
 }
