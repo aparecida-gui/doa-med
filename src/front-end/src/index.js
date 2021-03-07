@@ -7,7 +7,7 @@ import App from './App';
 ReactDOM.render(
   <React.StrictMode>
     <CssBaseline />
-    <Container maxWidth="sm">
+    <Container maxWidth="md">
       <AuthProvider>
         <App />
       </AuthProvider>

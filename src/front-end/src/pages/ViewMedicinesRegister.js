@@ -58,7 +58,7 @@ export default function ViewMedicinesRegister() {
           />
         ))
       ) : (
-        <div className="text-center text-primary px-4">
+        <div>
           <h4>{message}</h4>
         </div>
       )}
