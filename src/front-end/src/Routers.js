@@ -9,6 +9,7 @@ import ViewMedicinesRegister from './pages/ViewMedicinesRegister';
 import MedicineDonation from './pages/MedicineDonation';
 import Home from './pages/Home';
 import SearchMedicine from './pages/SearchMedicine';
+import ContactDonor from './components/ContactDonor';
 
 const Routers = () => {
   return (
@@ -28,6 +29,7 @@ const Routers = () => {
           path="/register_medicine/:beneficiary_id"
           component={RegisterMedicineBenef}
         />
+        <PrivateRoute exact path="/contact_donor" component={ContactDonor} />
         <PrivateRoute
           exact
           path="/medicine_donation/:beneficiary_id"
