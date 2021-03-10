@@ -12,6 +12,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import DatasUser from '../components/DatasUser';
+import { useHistory } from 'react-router-dom';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -42,6 +43,7 @@ export default function SearchMedicine() {
   const [medicines, setMedicines] = useState([]);
   const [message, setMessage] = useState('');
   const [donor, setDonor] = useState([]);
+  let history = useHistory();
 
   const handleSubmit = async () => {
     let medicine = await api.get(`medicine/${searchMedicine}`);
@@ -63,6 +65,8 @@ export default function SearchMedicine() {
   const moreDetails = (object) => {
     setDonor(object);
   };
+
+  const contactDonor = () => history.push('/contact_donor');
 
   return (
     <LayoutPrivate>
@@ -161,6 +165,8 @@ export default function SearchMedicine() {
                 city={donorData.city}
                 email={donorData.email}
                 title={'Dados do Doador'}
+                labelButton={'Contatar Doador'}
+                onClick={contactDonor}
               />
             ))}
         </Grid>
