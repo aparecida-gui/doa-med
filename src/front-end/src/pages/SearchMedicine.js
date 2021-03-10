@@ -13,6 +13,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import DatasUser from '../components/DatasUser';
 import { useHistory } from 'react-router-dom';
+import { Alert } from '@material-ui/lab';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -71,24 +72,25 @@ export default function SearchMedicine() {
   return (
     <LayoutPrivate>
       <Grid container direction="row" justify="center" alignItems="baseline">
+        {message.length > 0 && (
+          <Alert icon variant="filled" severity="error">
+            {message}
+          </Alert>
+        )}
         <form onSubmit={(e) => e.preventDefault()}>
           <Typography variant="h5" align="center">
-            Pesquisar Medicamentos Disponíveis para Doação
+            Medicamentos Disponíveis para Doação
           </Typography>
           <Grid item>
             <TextField
-              autoFocus
               required
+              autoFocus
               fullWidth
-              type="text"
               label="Nome do medicamento"
-              placeholder="Qual o nome do medicamento?"
+              type="text"
+              style={{ margin: 18 }}
               value={searchMedicine}
               onChange={(e) => setSearchMedicine(e.target.value)}
-              style={{ margin: 20 }}
-              InputLabelProps={{
-                shrink: true,
-              }}
             />
           </Grid>
           <Grid item>
@@ -154,7 +156,6 @@ export default function SearchMedicine() {
               </Table>
             </TableContainer>
           )}
-          <div>{message.length > 0 && <h4>{message}</h4>}</div>
         </Grid>
         <Grid item>
           {donor.length > 0 &&
