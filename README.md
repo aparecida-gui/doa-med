@@ -14,7 +14,11 @@ Não é um problema apenas no Brasil, mas mundial o desperdicio de medicamentos.
 
 ## Solução
 Conectar quem precisa do medicamento com quem tem em casa e quer doa-lo. Mas como?
+A imagem abaixo apresenta fluxo simples da aplicação e tem o intuito de mostrar o problema e a soluçao de forma simplificado.
 
+<a>
+  <img width="900" height="960" src="fluxo-simples-doamed.png">
+</a>
 
 ## Status do Projeto
 
