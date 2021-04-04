@@ -12,6 +12,7 @@ import verifyAuthentication from '../back-end/help/verifyAuthentication';
 import multer from 'multer';
 import multerConfig from '../config/multerConfig';
 import MedicineDonationController from './controller/MedicineDonationController';
+import ContactDonorController from './controller/ContactDonorController';
 
 // rota para o doador cadastrar o medicamento
 // que quer doar.
@@ -43,6 +44,13 @@ router.get(
   '/view_register_medicines/:beneficiary_id',
   multer(multerConfig).single('prescription'),
   ViewRegisteredMedicationsController.showData
+);
+
+// rota onde o beneficiario entre em contado com
+// o doador.
+router.post(
+  '/contact_donor/notification/:donor_id',
+  ContactDonorController.messageNotification
 );
 
 router.get(
