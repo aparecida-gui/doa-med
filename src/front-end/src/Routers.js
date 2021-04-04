@@ -10,6 +10,8 @@ import MedicineDonation from './pages/MedicineDonation';
 import Home from './pages/Home';
 import SearchMedicine from './pages/SearchMedicine';
 import ContactDonor from './components/ContactDonor';
+import Notification from './components/Notification';
+import { DonorProvider } from './contexts/DonorContex';
 
 const Routers = () => {
   return (
@@ -17,7 +19,6 @@ const Routers = () => {
       <Switch>
         <Route exact path="/" component={Login} />
         <Route exact path="/register_user" component={RegisterBeneficiary} />
-        <Route exact path="/search_medicine" component={SearchMedicine} />
         <PrivateRoute exact path="/home" component={Home} />
         <PrivateRoute
           exact
@@ -29,12 +30,26 @@ const Routers = () => {
           path="/register_medicine/:beneficiary_id"
           component={RegisterMedicineBenef}
         />
-        <PrivateRoute exact path="/contact_donor" component={ContactDonor} />
+        <DonorProvider>
+          <Route exact path="/search_medicine" component={SearchMedicine} />
+          <PrivateRoute
+            exact
+            path="/contact_donor/:donor_id"
+            component={ContactDonor}
+          />
+        </DonorProvider>
         <PrivateRoute
           exact
           path="/medicine_donation/:beneficiary_id"
           component={MedicineDonation}
         />
+
+        <PrivateRoute
+          exact
+          path="/notification/:beneficiary_id"
+          component={Notification}
+        />
+
         <Route component={Error404} />
       </Switch>
     </BrowserRouter>
