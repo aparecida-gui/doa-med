@@ -12,7 +12,7 @@ import verifyAuthentication from '../back-end/help/verifyAuthentication';
 import multer from 'multer';
 import multerConfig from '../config/multerConfig';
 import MedicineDonationController from './controller/MedicineDonationController';
-import ContactDonorController from './controller/ContactDonorController';
+import DonationController from './controller/DonationController';
 
 // rota para o doador cadastrar o medicamento
 // que quer doar.
@@ -50,8 +50,12 @@ router.get(
 // o doador.
 router.post(
   '/contact_donor/notification/:donor_id',
-  ContactDonorController.messageNotification
+  DonationController.setDonation
 );
+
+// rota que mostra as notificações
+// que o usuario tem.
+router.get('/notification/:user_id', DonationController.getDonation);
 
 router.get(
   '/beneficiary/show_beneficiary',

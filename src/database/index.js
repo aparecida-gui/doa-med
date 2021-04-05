@@ -108,6 +108,11 @@ RegisterUser.hasMany(Contact_Donor, {
 });
 // uma notificação é enviada para
 // apenas um usuario.
-Contact_Donor.belongsTo(RegisterUser);
+Contact_Donor.belongsTo(RegisterUser, {
+  foreignKey: 'idBeneficiary',
+  constraints: 'true',
+  foreignKey: 'idDonor',
+  constraints: 'true',
+});
 
 export default connection;
