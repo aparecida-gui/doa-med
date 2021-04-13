@@ -17,7 +17,7 @@ Conectar quem precisa do medicamento com quem tem em casa e quer doa-lo. Mas com
 A imagem abaixo apresenta fluxo simples da aplicação e tem o intuito de mostrar o problema e a soluçao de forma simplificado.
 
 <a>
-  <img width="900" height="960" src="fluxo-simples-doamed.png">
+  <img width="1000" src="fluxo-simples-doaMed.png">
 </a>
 
 ## Status do Projeto
