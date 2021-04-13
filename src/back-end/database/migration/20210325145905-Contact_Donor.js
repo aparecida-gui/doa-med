@@ -31,7 +31,7 @@ module.exports = {
         address: { type: Sequelize.STRING, allowNull: false },
         nameMedicine: { type: Sequelize.STRING, allowNull: false },
         quantityDonate: { type: Sequelize.INTEGER, allowNull: false },
-        date: { type: Sequelize.DATE, allowNull: false },
+        date: { type: Sequelize.DATEONLY, allowNull: false },
         time: { type: Sequelize.TIME, allowNull: false },
       },
       { freezeTableName: true, timestamps: false }

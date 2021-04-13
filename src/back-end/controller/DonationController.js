@@ -51,10 +51,10 @@ class DonationController {
       if (notificationsUser) {
         res.status(200).json(notificationsUser);
       } else {
-        res.status(200).json({ message: 'Nenhuma Doação Cadastrada.' });
+        res.status(202).json({ message: 'Nenhuma Doação Cadastrada.' });
       }
     } catch (error) {
-      res.status(200).json({ error });
+      res.status(400).json({ error });
     }
   }
 }
