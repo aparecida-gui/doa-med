@@ -6,14 +6,18 @@ import Alert from '@material-ui/lab/Alert';
 import { useAuth } from '../contexts/UserContex';
 import { DonorData } from '../contexts/DonorContex';
 import api from '../services/api';
+import DialogBox from '../components/DialogBox';
+import { useHistory } from 'react-router-dom';
 
 export default function ContactDonor() {
   const [message, setMessage] = useState('');
   const [address, setAddress] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
+  const [messageNotification, setMessageNotification] = useState('');
   let { user } = useAuth();
   let { donor1 } = DonorData();
+  let history = useHistory();
 
   const sendData = async () => {
     const nameBeneficiary = user.name;
@@ -44,14 +48,14 @@ export default function ContactDonor() {
         dataMessage
       );
       if (sendNotificationDonor.status === 201) {
-        console.log(sendNotificationDonor.data.successMessage);
-        console.log('sendNotificationDonor: ', sendNotificationDonor);
+        setMessageNotification(sendNotificationDonor.data.successMessage);
       }
     } catch (error) {
       console.log('>>>> error:', error.response.data.errorMessage);
     }
-    console.log('dataMessage: ', dataMessage);
   };
+
+  const onClickButton1 = () => history.push(`/home`);
 
   return (
     <LayoutPrivate>
@@ -62,7 +66,7 @@ export default function ContactDonor() {
         </Alert>
 
         <form onSubmit={(e) => e.preventDefault()} className="main">
-          <h2>Dados da Doação</h2>
+          <h2>Agendar Doação</h2>
           <Grid item>
             <TextField
               disabled
@@ -174,6 +178,13 @@ export default function ContactDonor() {
             </Button>
           </Grid>
         </form>
+        {messageNotification && (
+          <DialogBox
+            message={messageNotification}
+            onClickButton1={onClickButton1}
+            titleButton1={'OK'}
+          />
+        )}
       </Grid>
     </LayoutPrivate>
   );
