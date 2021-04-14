@@ -22,6 +22,9 @@ export default function Home() {
             Cadastrar o medicamento que você precisa
           </Link>
         </li>
+        <li>
+          <Link to={`/donation_data/${user.id}`}>Doações Agendadas</Link>
+        </li>
       </ul>
     </LayoutPrivate>
   );
