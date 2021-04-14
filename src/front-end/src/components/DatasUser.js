@@ -16,10 +16,10 @@ export default function DatasUser({
     <div className="dataUser">
       <Typography variant="h6">{title}</Typography>
       <p>{index}</p>
-      <Typography>Nome: {name}</Typography>
-      <Typography>Email: {email}</Typography>
+      <Typography>{name}</Typography>
+      <Typography>{email}</Typography>
       <Typography>{phone}</Typography>
-      <Typography>Cidade: {city}</Typography>
+      <Typography>{city}</Typography>
       <Button size="small" color="primary" variant="outlined" onClick={onClick}>
         <Typography>{labelButton}</Typography>
       </Button>
