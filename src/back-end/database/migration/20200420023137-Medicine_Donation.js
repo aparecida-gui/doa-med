@@ -27,6 +27,10 @@ module.exports = {
           type: Sequelize.STRING,
           allowNull: false,
         },
+        status: {
+          type: Sequelize.BOOLEAN,
+          defaultValue: true,
+        },
       },
       { freezeTableName: true, timestamps: false }
     );

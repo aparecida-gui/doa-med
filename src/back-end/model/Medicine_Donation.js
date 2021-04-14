@@ -8,6 +8,7 @@ class Medicine_Donation extends Model {
         expirationDate: { type: DataTypes.DATEONLY },
         quantity: { type: DataTypes.INTEGER },
         laboratory: { type: DataTypes.STRING },
+        status: { type: DataTypes.BOOLEAN, defaultValue: true },
       },
       {
         freezeTableName: true,
