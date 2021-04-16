@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../index.css';
 import api from '../services/api';
 import moment from 'moment';
 import LayoutPrivate from '../layouts/LayoutPrivate';
@@ -14,6 +15,7 @@ import Paper from '@material-ui/core/Paper';
 import DatasUser from '../components/DatasUser';
 import { useHistory } from 'react-router-dom';
 import { Alert } from '@material-ui/lab';
+import { DonorData } from '../contexts/DonorContex';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -21,7 +23,7 @@ const StyledTableCell = withStyles((theme) => ({
     color: theme.palette.common.white,
   },
   body: {
-    fontSize: 27,
+    fontSize: 22,
   },
 }))(TableCell);
 
@@ -44,7 +46,9 @@ export default function SearchMedicine() {
   const [medicines, setMedicines] = useState([]);
   const [message, setMessage] = useState('');
   const [donor, setDonor] = useState([]);
+
   let history = useHistory();
+  let { donor1, setDonor1 } = DonorData();
 
   const handleSubmit = async () => {
     let medicine = await api.get(`medicine/${searchMedicine}`);
@@ -63,23 +67,28 @@ export default function SearchMedicine() {
 
   const classes = useStyles();
 
-  const moreDetails = (object) => {
-    setDonor(object);
+  const moreDetails = (donorSelect, medineDonor) => {
+    let dataMedicineAndDonor = [];
+    dataMedicineAndDonor.push(medineDonor);
+
+    setDonor(donorSelect);
+    setDonor1(dataMedicineAndDonor);
   };
 
-  const contactDonor = () => history.push('/contact_donor');
+  const contactDonor = () =>
+    history.push(`/contact_donor/${donor1[0].donors[0].id}`);
 
   return (
     <LayoutPrivate>
-      <Grid container direction="row" justify="center" alignItems="baseline">
+      <Grid container direction="column" justify="center" alignItems="center">
         {message.length > 0 && (
           <Alert icon variant="filled" severity="error">
             {message}
           </Alert>
         )}
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form onSubmit={(e) => e.preventDefault()} className="main">
           <Typography variant="h5" align="center">
-            Medicamentos Disponíveis para Doação
+            Consulte aqui o Medicamento que você Precisa
           </Typography>
           <Grid item>
             <TextField
@@ -116,17 +125,20 @@ export default function SearchMedicine() {
                     <StyledTableCell align="center">
                       Data de Validade
                     </StyledTableCell>
-                    <StyledTableCell align="center">Quantidade</StyledTableCell>
+                    <StyledTableCell align="center">
+                      Quantidade para Doar
+                    </StyledTableCell>
                     <StyledTableCell align="center">
                       Laboratório
                     </StyledTableCell>
                     <StyledTableCell align="center">
-                      Entrar em Contato com Doador
+                      Status do Medicamento
                     </StyledTableCell>
+                    <StyledTableCell align="center"></StyledTableCell>
                   </TableRow>
                 </TableHead>
-                <TableBody>
-                  {medicines.map((medicine) => (
+                {medicines.map((medicine) => (
+                  <TableBody>
                     <StyledTableRow key={medicine.id}>
                       <StyledTableCell align="center">
                         {medicine.name}
@@ -140,36 +152,64 @@ export default function SearchMedicine() {
                       <StyledTableCell align="center">
                         {medicine.laboratory}
                       </StyledTableCell>
-                      <StyledTableCell align="center">
-                        <Button
-                          size="small"
-                          color="primary"
-                          variant="outlined"
-                          onClick={() => moreDetails(medicine.donors)}
-                        >
-                          + Detalhes
-                        </Button>
-                      </StyledTableCell>
+                      {medicine.status === false ? (
+                        <React.Fragment>
+                          <StyledTableCell align="center">
+                            Doação Agendada
+                          </StyledTableCell>
+                          <StyledTableCell align="center">
+                            <Button
+                              disabled
+                              size="small"
+                              color="primary"
+                              variant="outlined"
+                              onClick={() =>
+                                moreDetails(medicine.donors, medicine)
+                              }
+                            >
+                              Entre em contato com o Doador
+                            </Button>
+                          </StyledTableCell>
+                        </React.Fragment>
+                      ) : (
+                        <React.Fragment>
+                          <StyledTableCell align="center">
+                            Disponível para Doação
+                          </StyledTableCell>
+
+                          <StyledTableCell align="center">
+                            <Button
+                              size="small"
+                              color="primary"
+                              variant="outlined"
+                              onClick={() =>
+                                moreDetails(medicine.donors, medicine)
+                              }
+                            >
+                              Entre em contato com o Doador
+                            </Button>
+                          </StyledTableCell>
+                        </React.Fragment>
+                      )}
                     </StyledTableRow>
-                  ))}
-                </TableBody>
+                  </TableBody>
+                ))}
               </Table>
             </TableContainer>
           )}
-        </Grid>
-        <Grid item>
-          {donor.length > 0 &&
-            donor.map((donorData) => (
-              <DatasUser
-                key={donorData.id}
-                name={donorData.name}
-                city={donorData.city}
-                email={donorData.email}
-                title={'Dados do Doador'}
-                labelButton={'Contatar Doador'}
-                onClick={contactDonor}
-              />
-            ))}
+          <Grid item>
+            {donor.length > 0 &&
+              donor.map((donorData) => (
+                <DatasUser
+                  key={donorData.id}
+                  name={donorData.name}
+                  city={donorData.city}
+                  title={'Dados do Doador '}
+                  labelButton={'Click aqui para marcar o local da Doação'}
+                  onClick={contactDonor}
+                />
+              ))}
+          </Grid>
         </Grid>
       </Grid>
     </LayoutPrivate>
