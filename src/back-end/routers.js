@@ -1,11 +1,9 @@
 import express from 'express';
 const router = express.Router();
 
-import RegisterUserController from './controller/RegisterUserController';
+import UserController from './controller/User';
 import LoginController from './controller/LoginController';
-import BeneficiaryController from './controller/BeneficiaryController';
 import MedicineController from './controller/MedicineController';
-import DonorController from './controller/DonorController';
 import MedicineBeneficiaryController from './controller/MedicineBeneficiaryController';
 import ViewRegisteredMedicationsController from './controller/ViewRegisteredMedicationsController';
 import verifyAuthentication from '../back-end/help/verifyAuthentication';
@@ -22,7 +20,7 @@ router.post(
 );
 
 // rota para registrar usuários.
-router.post('/register_user', RegisterUserController.register);
+router.post('/register_user', UserController.register);
 
 // rota de login
 router.post('/', LoginController.login);
@@ -56,13 +54,6 @@ router.post(
 // rota que mostra as notificações
 // que o usuario tem.
 router.get('/notification/:user_id', DonationController.getDonation);
-
-router.get(
-  '/beneficiary/show_beneficiary',
-  BeneficiaryController.showMedicineBeneficiary
-);
-
-router.post('/donor/register_donor', DonorController.registerDonor);
 
 // router.post(
 //   '/medicine/:medicine_beneficiary_id/photo',
