@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
 import databaseConfig from '../config/config';
 import Medicine_Donation from '../back-end/model/Medicine_Donation';
-import RegisterUser from '../back-end/model/RegisterUser';
+import User from '../back-end/model/User';
 import Medicine_Beneficiary from '../back-end/model/Medicine_Beneficiary';
 import Contact_Donor from '../back-end/model/Contact_Donor';
 import path from 'path';
@@ -69,38 +69,38 @@ Medicine_Donation.init(connection);
 Medicine_Beneficiary.init(connection);
 
 // tabela para cadastrar beneficiarios e doadores.
-RegisterUser.init(connection);
+User.init(connection);
 
 Contact_Donor.init(connection);
 
-Medicine_Donation.belongsToMany(RegisterUser, {
-  foreignKey: 'medicine_donation_id',
+Medicine_Donation.belongsToMany(User, {
+  foreignKey: 'idDonationMedicine',
   through: 'Donor_Medicine',
   as: 'donors',
 });
 
-RegisterUser.belongsToMany(Medicine_Donation, {
-  foreignKey: 'donor_id',
+User.belongsToMany(Medicine_Donation, {
+  foreignKey: 'idDonor',
   through: 'Donor_Medicine',
   as: 'medicines',
 });
 
-Medicine_Beneficiary.belongsToMany(RegisterUser, {
-  foreignKey: 'medicine_id',
+Medicine_Beneficiary.belongsToMany(User, {
+  foreignKey: 'idMedicine',
   through: 'Beneficiary_Medicine',
   as: 'beneficiaries',
 });
 
-RegisterUser.belongsToMany(Medicine_Beneficiary, {
-  foreignKey: 'beneficiary_id',
+User.belongsToMany(Medicine_Beneficiary, {
+  foreignKey: 'idBeneficiary',
   through: 'Beneficiary_Medicine',
   as: 'medicinesBeneficiary',
 });
 
 // um usuario pode enviar notificação para
 // varios usuarios.
-// RegisterUser tem os metodos de busca
-RegisterUser.hasMany(Contact_Donor, {
+// User tem os metodos de busca
+User.hasMany(Contact_Donor, {
   foreignKey: 'idBeneficiary',
   constraints: 'true',
   foreignKey: 'idDonor',
@@ -108,7 +108,7 @@ RegisterUser.hasMany(Contact_Donor, {
 });
 // uma notificação é enviada para
 // apenas um usuario.
-Contact_Donor.belongsTo(RegisterUser, {
+Contact_Donor.belongsTo(User, {
   foreignKey: 'idBeneficiary',
   constraints: 'true',
   foreignKey: 'idDonor',

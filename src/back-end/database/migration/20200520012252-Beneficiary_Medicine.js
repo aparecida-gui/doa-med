@@ -11,14 +11,14 @@ module.exports = {
           autoIncrement: true,
           allowNull: false,
         },
-        beneficiary_id: {
+        idBeneficiary: {
           type: Sequelize.INTEGER,
           allowNull: false,
-          references: { model: 'RegisterUser', key: 'id' },
+          references: { model: 'User', key: 'id' },
           onUpdate: 'CASCADE',
           onDelete: 'CASCADE',
         },
-        medicine_id: {
+        idMedicine: {
           type: Sequelize.INTEGER,
           allowNull: false,
           references: { model: 'Medicine_Beneficiary', key: 'id' },
