@@ -1,4 +1,6 @@
 import ContactDonorModel from '../model/Contact_Donor';
+import MedicineDonationModel from '../model/Medicine_Donation';
+const { Op } = require('sequelize');
 
 class DonationController {
   async setDonation(req, res) {
@@ -9,6 +11,7 @@ class DonationController {
       idDonor,
       message,
       address,
+      idMedicine,
       nameMedicine,
       quantityDonate,
       date,
@@ -29,8 +32,12 @@ class DonationController {
         time
       ) {
         await ContactDonorModel.create(req.body);
+        await MedicineDonationModel.update(
+          { status: false },
+          { where: { id: idMedicine } }
+        );
         res.status(201).json({
-          successMessage: `Notificação foi enviada.`,
+          successMessage: 'Notificação foi enviada.',
         });
       } else {
         res.status(406).json({
@@ -38,7 +45,7 @@ class DonationController {
         });
       }
     } catch (error) {
-      res.status(400).json({ error: error });
+      res.status(400).json({ error });
     }
   }
 
@@ -46,7 +53,11 @@ class DonationController {
     const { user_id } = req.params;
 
     try {
-      const notificationsUser = await ContactDonorModel.findByPk(user_id);
+      const notificationsUser = await ContactDonorModel.findAll({
+        where: {
+          [Op.or]: [{ idBeneficiary: user_id }, { idDonor: user_id }],
+        },
+      });
 
       if (notificationsUser) {
         res.status(200).json(notificationsUser);
