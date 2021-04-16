@@ -4,8 +4,8 @@ class Donor_Medicine extends Model {
   static init(sequelize) {
     super.init(
       {
-        donor_id: { type: DataTypes.INTEGER },
-        medicine_donation_id: { type: DataTypes.INTEGER },
+        idDonor: { type: DataTypes.INTEGER },
+        idDonationMedicine: { type: DataTypes.INTEGER },
       },
       {
         freezeTableName: true,
