@@ -51,7 +51,7 @@ export default function ContactDonor() {
         setMessageNotification(sendNotificationDonor.data.successMessage);
       }
     } catch (error) {
-      console.log('>>>> error:', error.response.data.errorMessage);
+      console.log('>>>> error:', error);
     }
   };
 
