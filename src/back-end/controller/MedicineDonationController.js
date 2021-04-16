@@ -1,5 +1,5 @@
 import MedicineDonationModel from '../model/Medicine_Donation';
-import RegisterUserModel from '../model/RegisterUser';
+import UserModel from '../model/User';
 import MedicineBeneficiaryModel from '../model/Medicine_Beneficiary';
 import sendEmail from '../help/sendEmail';
 
@@ -8,7 +8,7 @@ class MedicineDonationController {
     const { donor_id } = req.params;
     const { name, expirationDate, quantity, laboratory } = req.body;
 
-    const donor = await RegisterUserModel.findByPk(donor_id);
+    const donor = await UserModel.findByPk(donor_id);
 
     if (donor) {
       // doador cadastra o medicamento para doação.
@@ -32,7 +32,7 @@ class MedicineDonationController {
           },
           include: [
             {
-              model: RegisterUserModel,
+              model: UserModel,
               as: 'beneficiaries',
               attributes: ['name', 'phone', 'city', 'email'],
             },

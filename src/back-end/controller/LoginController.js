@@ -1,4 +1,4 @@
-import RegisterModel from '../model/RegisterUser';
+import UserModel from '../model/User';
 import validatesData from '../help/validatesData';
 import encryptData from '../help/encryptData';
 import jwt from '../help/jwt';
@@ -11,7 +11,7 @@ class LoginController {
 
     try {
       if (validateDataLogin === true) {
-        emailExists = await RegisterModel.findOne({
+        emailExists = await UserModel.findOne({
           where: { email },
         });
 

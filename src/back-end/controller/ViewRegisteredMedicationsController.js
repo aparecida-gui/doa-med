@@ -1,4 +1,4 @@
-import Beneficiary from '../model/RegisterUser';
+import Beneficiary from '../model/User';
 import Medicine_Beneficiary from '../model/Medicine_Beneficiary';
 
 class ViewRegisteredMedications {

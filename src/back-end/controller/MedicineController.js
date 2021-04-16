@@ -1,5 +1,5 @@
 import MedicineDonationModel from '../model/Medicine_Donation';
-import RegisterUserModel from '../model/RegisterUser';
+import UserModel from '../model/User';
 
 class Medicine {
   async medicineSearch(req, res) {
@@ -10,7 +10,7 @@ class Medicine {
           where: { name },
           include: [
             {
-              model: RegisterUserModel,
+              model: UserModel,
               as: 'donors',
               attributes: ['id', 'name', 'email', 'city'],
             },
