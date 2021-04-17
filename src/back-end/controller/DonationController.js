@@ -1,6 +1,7 @@
 import ContactDonorModel from '../model/Contact_Donor';
 import MedicineDonationModel from '../model/Medicine_Donation';
 const { Op } = require('sequelize');
+import moment from 'moment';
 
 class DonationController {
   async setDonation(req, res) {
@@ -67,6 +68,18 @@ class DonationController {
     } catch (error) {
       res.status(400).json({ error });
     }
+  }
+
+  async haveDonationScheduledToday(req, res) {
+    const { user_id } = req.params;
+
+    let consultaDoação = await ContactDonorModel.findAll({
+      where: {
+        date: new Date(),
+        [Op.or]: [{ idBeneficiary: user_id }, { idDonor: user_id }],
+      },
+    });
+    res.status(200).json({ consultaDoação });
   }
 }
 
