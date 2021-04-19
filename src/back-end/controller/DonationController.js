@@ -1,7 +1,6 @@
 import ContactDonorModel from '../model/Contact_Donor';
 import MedicineDonationModel from '../model/Medicine_Donation';
 const { Op } = require('sequelize');
-import moment from 'moment';
 
 class DonationController {
   async setDonation(req, res) {
@@ -79,7 +78,11 @@ class DonationController {
         [Op.or]: [{ idBeneficiary: user_id }, { idDonor: user_id }],
       },
     });
-    res.status(200).json({ consultaDoação });
+    if (consultaDoação.length > 0) {
+      res
+        .status(200)
+        .json({ message: 'Você tem doação agendada para o dia de hoje.' });
+    }
   }
 }
 
