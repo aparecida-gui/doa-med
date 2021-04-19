@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import {
   AppBar,
@@ -8,15 +8,20 @@ import {
   Menu,
   MenuItem,
 } from '@material-ui/core';
+import Badge from '@material-ui/core/Badge';
+import NotificationsIcon from '@material-ui/icons/Notifications';
 import { AccountCircle } from '@material-ui/icons';
 import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from '../contexts/UserContex';
 import '../index.css';
+import api from '../services/api';
 
 export default function NavDefault() {
-  const [anchorElement, setAnchorElement] = useState(null);
-  let history = useHistory();
-  let { user } = useAuth();
+  let [anchorElement, setAnchorElement] = useState(null);
+  let [count, setCount] = useState(0);
+  const history = useHistory();
+  const { user } = useAuth();
+  let notifications = [];
 
   function logout() {
     localStorage.removeItem('tokenUser');
@@ -30,6 +35,20 @@ export default function NavDefault() {
   const handleClose = () => {
     setAnchorElement(null);
   };
+
+  useEffect(() => {
+    async function testeNotification() {
+      try {
+        let notification = await api.get(`/have_donation/${user.id}`);
+
+        notifications.push(notification.data);
+        setCount(count + notifications.length);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    testeNotification();
+  }, []);
 
   return (
     <NavBar>
@@ -47,6 +66,11 @@ export default function NavDefault() {
           >
             Seus Medicamentos Cadastrados
           </Link>
+          <IconButton color="inherit">
+            <Badge badgeContent={count} color="secondary">
+              <NotificationsIcon />
+            </Badge>
+          </IconButton>
           <Typography color="inherit">Olá, {user.name}</Typography>
           <IconButton color="inherit" onClick={handleOpenMenu}>
             <AccountCircle />
