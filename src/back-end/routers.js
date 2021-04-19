@@ -51,9 +51,16 @@ router.post(
   DonationController.setDonation
 );
 
-// rota que mostra as notificações
-// que o usuario tem.
+// rota que mostra as doações agendadas
+// do usuario.
 router.get('/notification/:user_id', DonationController.getDonation);
+
+// rota para testar o envio de lembrete
+// para as doações agendadas
+router.get(
+  '/have_donation/:user_id',
+  DonationController.haveDonationScheduledToday
+);
 
 // router.post(
 //   '/medicine/:medicine_beneficiary_id/photo',
