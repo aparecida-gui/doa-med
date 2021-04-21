@@ -79,9 +79,7 @@ class DonationController {
       },
     });
     if (consultaDoação.length > 0) {
-      res
-        .status(200)
-        .json({ message: 'Você tem doação agendada para o dia de hoje.' });
+      res.status(200).json({ message: 'Hoje você tem um doação agendada.' });
     }
   }
 }
