@@ -37,7 +37,6 @@ export default function Login() {
     localStorage.setItem('tokenUser', loginAccess.data.token);
     if (localStorage) {
       history.push(`home`);
-      //history.push(`register_medicine/${userData.id}`);
     }
   };
 
