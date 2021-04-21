@@ -1,6 +1,6 @@
 import { Model, DataTypes } from 'sequelize';
 
-class Contact_Donor extends Model {
+class Donation extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -22,4 +22,4 @@ class Contact_Donor extends Model {
   }
 }
 
-export default Contact_Donor;
+export default Donation;
