@@ -3,7 +3,7 @@ import databaseConfig from '../config/config';
 import Medicine_Donation from '../back-end/model/Medicine_Donation';
 import User from '../back-end/model/User';
 import Medicine_Beneficiary from '../back-end/model/Medicine_Beneficiary';
-import Contact_Donor from '../back-end/model/Contact_Donor';
+import Donation from '../back-end/model/Donation';
 import path from 'path';
 const dotenv = require('dotenv');
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
@@ -71,7 +71,7 @@ Medicine_Beneficiary.init(connection);
 // tabela para cadastrar beneficiarios e doadores.
 User.init(connection);
 
-Contact_Donor.init(connection);
+Donation.init(connection);
 
 Medicine_Donation.belongsToMany(User, {
   foreignKey: 'idDonationMedicine',
@@ -100,7 +100,7 @@ User.belongsToMany(Medicine_Beneficiary, {
 // um usuario pode enviar notificação para
 // varios usuarios.
 // User tem os metodos de busca
-User.hasMany(Contact_Donor, {
+User.hasMany(Donation, {
   foreignKey: 'idBeneficiary',
   constraints: 'true',
   foreignKey: 'idDonor',
@@ -108,7 +108,7 @@ User.hasMany(Contact_Donor, {
 });
 // uma notificação é enviada para
 // apenas um usuario.
-Contact_Donor.belongsTo(User, {
+Donation.belongsTo(User, {
   foreignKey: 'idBeneficiary',
   constraints: 'true',
   foreignKey: 'idDonor',
