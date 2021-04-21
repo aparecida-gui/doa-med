@@ -62,6 +62,10 @@ router.get(
   DonationController.haveDonationScheduledToday
 );
 
+// rota pede a confirmação se a doação
+// aconteceu.
+router.get('/confirm_donation/:user_id', DonationController.confirmDonation);
+
 // router.post(
 //   '/medicine/:medicine_beneficiary_id/photo',
 //   multer(multerConfig).single('name'),
