@@ -1,4 +1,4 @@
-import ContactDonorModel from '../model/Contact_Donor';
+import ContactDonorModel from '../model/Donation';
 import MedicineDonationModel from '../model/Medicine_Donation';
 const { Op } = require('sequelize');
 
@@ -79,7 +79,29 @@ class DonationController {
       },
     });
     if (consultaDoação.length > 0) {
-      res.status(200).json({ message: 'Hoje você tem um doação agendada.' });
+      res.status(200).json({ message: 'Hoje você tem uma doação agendada.' });
+    }
+  }
+
+  async confirmDonation(req, res) {
+    const { user_id } = req.params;
+
+    try {
+      const donantionsDatas = await ContactDonorModel.findAll({
+        where: {
+          date: {
+            [Op.lt]: new Date(),
+          },
+          [Op.or]: [{ idBeneficiary: user_id }, { idDonor: user_id }],
+        },
+      });
+      if (donantionsDatas.length > 0) {
+        res.status(200).json({ donantionsDatas });
+      } else {
+        res.status(200).json({ message: 'Nenhuma confirmação pendente.' });
+      }
+    } catch (error) {
+      res.status(400).json({ error });
     }
   }
 }
