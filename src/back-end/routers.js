@@ -62,8 +62,7 @@ router.get(
   DonationController.haveDonationScheduledToday
 );
 
-// rota pede a confirmação se a doação
-// aconteceu.
+// rota verifica se a doação aconteceu.
 router.get('/confirm_donation/:user_id', DonationController.confirmDonation);
 
 // router.post(

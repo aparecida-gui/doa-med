@@ -83,6 +83,10 @@ class DonationController {
     }
   }
 
+  // metodo que verifica se a doação aconteceu.
+  // pega o id do usuario que está logado.
+  // e verifica na tabela de doação se tem
+  // o id do usuario como doador ou beneficiario.
   async confirmDonation(req, res) {
     const { user_id } = req.params;
 
@@ -96,7 +100,19 @@ class DonationController {
         },
       });
       if (donantionsDatas.length > 0) {
-        res.status(200).json({ donantionsDatas });
+        const dataDonantion = donantionsDatas.map((donantionData) => ({
+          name: donantionData.nameMedicine,
+          quantity: donantionData.quantityDonate,
+          date: donantionData.date,
+          time: donantionData.time,
+        }));
+
+        res.status(200).json({
+          message: 'Este Medicamento foi doado.',
+          dataDonantion,
+        });
+        // id usuario
+        // pedir a confirmação ou negação para o usuario.
       } else {
         res.status(200).json({ message: 'Nenhuma confirmação pendente.' });
       }
