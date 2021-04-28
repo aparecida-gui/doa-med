@@ -4,6 +4,7 @@ import Medicine_Donation from '../back-end/model/Medicine_Donation';
 import User from '../back-end/model/User';
 import Medicine_Beneficiary from '../back-end/model/Medicine_Beneficiary';
 import Donation from '../back-end/model/Donation';
+import ConfirmedDonation from '../back-end/model/ConfirmedDonation';
 import path from 'path';
 const dotenv = require('dotenv');
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
@@ -71,7 +72,12 @@ Medicine_Beneficiary.init(connection);
 // tabela para cadastrar beneficiarios e doadores.
 User.init(connection);
 
+// tabela onde fica os registros da marcação para
+// a doação.
 Donation.init(connection);
+
+// Tabela confirmação ou negação da doação do medicamento.
+ConfirmedDonation.init(connection);
 
 Medicine_Donation.belongsToMany(User, {
   foreignKey: 'idDonationMedicine',
@@ -97,8 +103,7 @@ User.belongsToMany(Medicine_Beneficiary, {
   as: 'medicinesBeneficiary',
 });
 
-// um usuario pode enviar notificação para
-// varios usuarios.
+// um usuario pode fazer diversas doações.
 // User tem os metodos de busca
 User.hasMany(Donation, {
   foreignKey: 'idBeneficiary',
@@ -106,11 +111,26 @@ User.hasMany(Donation, {
   foreignKey: 'idDonor',
   constraints: 'true',
 });
-// uma notificação é enviada para
-// apenas um usuario.
+
+// uma doação pertence apenas um usuario.
 Donation.belongsTo(User, {
   foreignKey: 'idBeneficiary',
   constraints: 'true',
+  foreignKey: 'idDonor',
+  constraints: 'true',
+});
+
+// confirmação ou negação da medicação.
+ConfirmedDonation.hasMany(Donation, {
+  foreignKey: 'idDonation',
+  foreignKey: 'idBeneficiary',
+  foreignKey: 'idDonor',
+  constraints: 'true',
+});
+
+Donation.belongsTo(ConfirmedDonation, {
+  foreignKey: 'idDonation',
+  foreignKey: 'idBeneficiary',
   foreignKey: 'idDonor',
   constraints: 'true',
 });
