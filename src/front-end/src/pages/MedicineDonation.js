@@ -36,7 +36,7 @@ export default function MedicineDonation() {
         setSuccessMessage(registerMedicineDonantion.data.message);
       }
     } catch (error) {
-      setErrorMessage(error.response.data.error);
+      setErrorMessage(error.response.data);
     }
   };
   const initialState = () => {
