@@ -14,7 +14,6 @@ export default function Donation() {
   const getDonations = async () => {
     try {
       let getData = await api.get(`/check_donation/${user.id}`);
-      console.log('getData: ', getData.data.medicinesScheduledDonation);
 
       if (getData.status === 200) {
         setDonationScheduled(getData.data.medicinesScheduledDonation);
@@ -34,13 +33,37 @@ export default function Donation() {
     getDonations();
   }, []);
 
+  const confirmDonantion = async (donation) => {
+    const idBeneficiary = user.id;
+    const idDonation = donation.id;
+    const beneficiaryConfirm = true;
+
+    const dataConfirm = {
+      idBeneficiary,
+      idDonation,
+      beneficiaryConfirm,
+    };
+
+    try {
+      const confirm = await api.post(
+        `confirm_donantion/beneficiary`,
+        dataConfirm
+      );
+      if (confirm.status === 200) {
+        console.log('confirm: ', confirm.data);
+      }
+    } catch (error) {
+      console.log('>>>> error', error);
+    }
+  };
+
   return (
     <LayoutPrivate>
       {donationScheduled &&
         donationScheduled.map((donation) => (
           <Paper
             elevation={8}
-            style={{ marginTop: 30, background: ' #a385cf', color: 'white' }}
+            style={{ marginTop: 30, background: '#a385cf', color: 'white' }}
             key={donation.id}
           >
             <div style={{ margin: 15, padding: 10 }}>
@@ -75,7 +98,11 @@ export default function Donation() {
                     fontWeight: 900,
                   }}
                 >
-                  <Button variant="contained" color="primary">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => confirmDonantion(donation)}
+                  >
                     Sim
                   </Button>
                   <Button variant="contained" color="secondary">
