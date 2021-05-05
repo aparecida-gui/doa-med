@@ -1,5 +1,6 @@
 import ContactDonorModel from '../model/Donation';
 import MedicineDonationModel from '../model/Medicine_Donation';
+import ConfirmedDonationBeneficiary from '../model/ConfirmedDonationBeneficiary';
 const { Op } = require('sequelize');
 
 class DonationController {
@@ -85,36 +86,72 @@ class DonationController {
 
   // metodo que verifica se a doação aconteceu.
   // pega o id do usuario que está logado.
-  // e verifica na tabela de doação se tem
-  // o id do usuario como doador ou beneficiario.
-  async confirmDonation(req, res) {
+  // e verifica na tabela de doação se é
+  // do beneficiario.
+  async checkDonation(req, res) {
     const { user_id } = req.params;
 
     try {
-      const donantionsDatas = await ContactDonorModel.findAll({
+      let beneficiary = await ContactDonorModel.findAll({
         where: {
           date: {
             [Op.lt]: new Date(),
           },
-          [Op.or]: [{ idBeneficiary: user_id }, { idDonor: user_id }],
+          idBeneficiary: user_id,
         },
       });
-      if (donantionsDatas.length > 0) {
-        const dataDonantion = donantionsDatas.map((donantionData) => ({
-          name: donantionData.nameMedicine,
-          quantity: donantionData.quantityDonate,
-          date: donantionData.date,
-          time: donantionData.time,
+      if (beneficiary.length > 0) {
+        const medicinesScheduledDonation = beneficiary.map((donationData) => ({
+          id: donationData.id,
+          name: donationData.nameMedicine,
+          quantity: donationData.quantityDonate,
+          date: donationData.date,
+          time: donationData.time,
         }));
-
         res.status(200).json({
-          message: 'Este Medicamento foi doado.',
-          dataDonantion,
+          medicinesScheduledDonation,
         });
-        // id usuario
-        // pedir a confirmação ou negação para o usuario.
       } else {
-        res.status(200).json({ message: 'Nenhuma confirmação pendente.' });
+        let donantion = await ContactDonorModel.findAll({
+          where: {
+            date: {
+              [Op.lt]: new Date(),
+            },
+            idDonor: user_id,
+          },
+        });
+
+        if (donantion.length > 0) {
+          const medicinesScheduledDonation = donantion.map((donantionData) => ({
+            id: donantionData.id,
+            name: donantionData.nameMedicine,
+            quantity: donantionData.quantityDonate,
+            date: donantionData.date,
+            time: donantionData.time,
+          }));
+          res.status(200).json({
+            medicinesScheduledDonation,
+          });
+        } else {
+          res
+            .status(200)
+            .json({ message: 'Você não tem nenhuma doação pendente.' });
+        }
+      }
+    } catch (error) {
+      res.status(400).json({ error });
+    }
+  }
+
+  async confirmDonation(req, res) {
+    console.log(req.body);
+
+    try {
+      const dataConfirm = await ConfirmedDonationBeneficiary.create(req.body);
+      console.log('>>>>> dataConfirm', dataConfirm);
+
+      if (dataConfirm) {
+        res.status(200).json({ message: 'Obrigado pela sua confirmação.' });
       }
     } catch (error) {
       res.status(400).json({ error });
