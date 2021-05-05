@@ -4,7 +4,7 @@ import Medicine_Donation from '../back-end/model/Medicine_Donation';
 import User from '../back-end/model/User';
 import Medicine_Beneficiary from '../back-end/model/Medicine_Beneficiary';
 import Donation from '../back-end/model/Donation';
-import ConfirmedDonation from '../back-end/model/ConfirmedDonation';
+import ConfirmedDonationBeneficiary from '../back-end/model/ConfirmedDonationBeneficiary';
 import path from 'path';
 const dotenv = require('dotenv');
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
@@ -77,7 +77,7 @@ User.init(connection);
 Donation.init(connection);
 
 // Tabela confirmação ou negação da doação do medicamento.
-ConfirmedDonation.init(connection);
+ConfirmedDonationBeneficiary.init(connection);
 
 Medicine_Donation.belongsToMany(User, {
   foreignKey: 'idDonationMedicine',
@@ -121,17 +121,15 @@ Donation.belongsTo(User, {
 });
 
 // confirmação ou negação da medicação.
-ConfirmedDonation.hasMany(Donation, {
+ConfirmedDonationBeneficiary.hasMany(Donation, {
   foreignKey: 'idDonation',
   foreignKey: 'idBeneficiary',
-  foreignKey: 'idDonor',
   constraints: 'true',
 });
 
-Donation.belongsTo(ConfirmedDonation, {
+Donation.belongsTo(ConfirmedDonationBeneficiary, {
   foreignKey: 'idDonation',
   foreignKey: 'idBeneficiary',
-  foreignKey: 'idDonor',
   constraints: 'true',
 });
 
