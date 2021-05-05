@@ -55,15 +55,22 @@ router.post(
 // do usuario.
 router.get('/notification/:user_id', DonationController.getDonation);
 
-// rota para testar o envio de lembrete
-// para as doações agendadas
+// rota manda notificação para o doador e beneficiario
+// para a doação agendada no dia atual.
 router.get(
   '/have_donation/:user_id',
   DonationController.haveDonationScheduledToday
 );
 
-// rota verifica se a doação aconteceu.
-router.get('/confirm_donation/:user_id', DonationController.confirmDonation);
+// Apos a data agendada para a doação é verificado
+// se a doação aconteceu.
+router.get('/check_donation/:user_id', DonationController.checkDonation);
+
+// rota de confirmação ou negação da doação.
+router.post(
+  '/confirm_donantion/beneficiary',
+  DonationController.confirmDonation
+);
 
 // router.post(
 //   '/medicine/:medicine_beneficiary_id/photo',
