@@ -5,11 +5,14 @@ import { Button, Typography } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import moment from 'moment';
 import LayoutPrivate from '../layouts/LayoutPrivate';
+import DialogBox from './DialogBox';
+import { useHistory } from 'react-router-dom';
 
 export default function Donation() {
   const [donationScheduled, setDonationScheduled] = useState([]);
   const [message, setMessage] = useState('');
   let { user } = useAuth();
+  let history = useHistory();
 
   const getDonations = async () => {
     try {
@@ -49,12 +52,20 @@ export default function Donation() {
         `confirm_donantion/beneficiary`,
         dataConfirm
       );
-      if (confirm.status === 200) {
-        console.log('confirm: ', confirm.data);
+      if (confirm.status === 200 && confirm.data.message) {
+        console.log('confirm: ', confirm.data.message);
+        setMessage('');
+        setMessage(confirm.data.message);
+        console.log('message: ', message);
       }
     } catch (error) {
       console.log('>>>> error', error);
     }
+  };
+
+  const onClickButton1 = () => {
+    history.push('/home');
+    console.log('ok');
   };
 
   return (
@@ -113,7 +124,13 @@ export default function Donation() {
             </div>
           </Paper>
         ))}
-      {message && <Typography variant="h4">{message}</Typography>}
+      {message && (
+        <DialogBox
+          message={message}
+          onClickButton1={onClickButton1}
+          titleButton1={'OK'}
+        />
+      )}
     </LayoutPrivate>
   );
 }
