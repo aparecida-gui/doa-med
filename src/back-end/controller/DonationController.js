@@ -62,7 +62,7 @@ class DonationController {
 
       if (notificationsUser) {
         res.status(200).json(notificationsUser);
-      } else {
+      } else if (notificationsUser.length <= 0) {
         res.status(202).json({ message: 'Nenhuma Doação Cadastrada.' });
       }
     } catch (error) {
@@ -152,6 +152,10 @@ class DonationController {
 
       if (dataConfirm) {
         res.status(200).json({ message: 'Obrigado pela sua confirmação.' });
+      } else {
+        res
+          .status(404)
+          .json({ message: 'Não foi possível confirmar sua doação.' });
       }
     } catch (error) {
       res.status(400).json({ error });
