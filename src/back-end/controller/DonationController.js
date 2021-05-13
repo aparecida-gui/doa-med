@@ -1,6 +1,7 @@
 import ContactDonorModel from '../model/Donation';
 import MedicineDonationModel from '../model/Medicine_Donation';
-import ConfirmedDonationBeneficiary from '../model/ConfirmedDonationBeneficiary';
+import ConfirmedDonationBeneficiaryModel from '../model/ConfirmedDonationBeneficiary';
+import ConfirmsDonorDonationModel from '../model/ConfirmsDonorDonation';
 const { Op } = require('sequelize');
 
 class DonationController {
@@ -84,24 +85,63 @@ class DonationController {
     }
   }
 
+  async verifyUser(req, res) {
+    const { user_id } = req.params;
+
+    const beneficiary = await ContactDonorModel.findAll({
+      where: { idBeneficiary: user_id },
+    });
+    const donor = await ContactDonorModel.findAll({
+      where: { idDonor: user_id },
+    });
+
+    if (beneficiary.length > 0) {
+      const confirmBeneficiary = await ConfirmedDonationBeneficiaryModel.create(
+        req.body
+      );
+      res.status(200).json({
+        message: 'Obrigado pela sua confirmação.',
+        confirmBeneficiary,
+      });
+    }
+    if (donor.length > 0) {
+      const {
+        idBeneficiary: idDonor,
+        idDonation,
+        beneficiaryConfirm: donorConfirm,
+      } = req.body;
+
+      const confirmDonor = await ConfirmsDonorDonationModel.create({
+        idDonor,
+        idDonation,
+        donorConfirm,
+      });
+      res.status(200).json({
+        message: 'Obrigado pela sua confirmação doador.',
+        confirmDonor,
+      });
+    }
+  }
+
   // metodo que verifica se a doação aconteceu.
   // pega o id do usuario que está logado.
   // e verifica na tabela de doação se é
-  // do beneficiario.
+  // do beneficiario ou doador.
   async checkDonation(req, res) {
     const { user_id } = req.params;
 
     try {
-      let beneficiary = await ContactDonorModel.findAll({
+      const seach = await ContactDonorModel.findAll({
         where: {
           date: {
             [Op.lt]: new Date(),
           },
-          idBeneficiary: user_id,
+          [Op.or]: [{ idBeneficiary: user_id }, { idDonor: user_id }],
         },
       });
-      if (beneficiary.length > 0) {
-        const medicinesScheduledDonation = beneficiary.map((donationData) => ({
+
+      if (seach.length > 0) {
+        const medicinesScheduledDonation = seach.map((donationData) => ({
           id: donationData.id,
           name: donationData.nameMedicine,
           quantity: donationData.quantityDonate,
@@ -111,51 +151,6 @@ class DonationController {
         res.status(200).json({
           medicinesScheduledDonation,
         });
-      } else {
-        let donantion = await ContactDonorModel.findAll({
-          where: {
-            date: {
-              [Op.lt]: new Date(),
-            },
-            idDonor: user_id,
-          },
-        });
-
-        if (donantion.length > 0) {
-          const medicinesScheduledDonation = donantion.map((donantionData) => ({
-            id: donantionData.id,
-            name: donantionData.nameMedicine,
-            quantity: donantionData.quantityDonate,
-            date: donantionData.date,
-            time: donantionData.time,
-          }));
-          res.status(200).json({
-            medicinesScheduledDonation,
-          });
-        } else {
-          res
-            .status(200)
-            .json({ message: 'Você não tem nenhuma doação pendente.' });
-        }
-      }
-    } catch (error) {
-      res.status(400).json({ error });
-    }
-  }
-
-  async confirmDonation(req, res) {
-    console.log(req.body);
-
-    try {
-      const dataConfirm = await ConfirmedDonationBeneficiary.create(req.body);
-      console.log('>>>>> dataConfirm', dataConfirm);
-
-      if (dataConfirm) {
-        res.status(200).json({ message: 'Obrigado pela sua confirmação.' });
-      } else {
-        res
-          .status(404)
-          .json({ message: 'Não foi possível confirmar sua doação.' });
       }
     } catch (error) {
       res.status(400).json({ error });
