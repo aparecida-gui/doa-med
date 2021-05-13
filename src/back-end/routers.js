@@ -67,10 +67,7 @@ router.get(
 router.get('/check_donation/:user_id', DonationController.checkDonation);
 
 // rota de confirmação ou negação da doação.
-router.post(
-  '/confirm_donantion/beneficiary',
-  DonationController.confirmDonation
-);
+router.post('/confirm_donantion/:user_id', DonationController.verifyUser);
 
 // router.post(
 //   '/medicine/:medicine_beneficiary_id/photo',

@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import api from '../services/api';
-import { useAuth } from '../contexts/UserContex';
+import React, { useEffect, useState } from 'react';
 import { Button, Typography } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import moment from 'moment';
-import LayoutPrivate from '../layouts/LayoutPrivate';
-import DialogBox from './DialogBox';
 import { useHistory } from 'react-router-dom';
+import { useAuth } from '../contexts/UserContex';
+import LayoutPrivate from '../layouts/LayoutPrivate';
+import api from '../services/api';
+import DialogBox from './DialogBox';
 
 export default function Donation() {
   const [donationScheduled, setDonationScheduled] = useState([]);
@@ -49,24 +49,18 @@ export default function Donation() {
 
     try {
       const confirm = await api.post(
-        `confirm_donantion/beneficiary`,
+        `/confirm_donantion/${user.id}`,
         dataConfirm
       );
-      if (confirm.status === 200 && confirm.data.message) {
-        console.log('confirm: ', confirm.data.message);
-        setMessage('');
+      if (confirm.status === 200) {
         setMessage(confirm.data.message);
-        console.log('message: ', message);
       }
     } catch (error) {
       console.log('>>>> error', error);
     }
   };
 
-  const onClickButton1 = () => {
-    history.push('/home');
-    console.log('ok');
-  };
+  const onClickButton1 = () => history.push('/home');
 
   return (
     <LayoutPrivate>
