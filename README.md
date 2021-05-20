@@ -9,7 +9,7 @@
 </br>
 
 ## Problema
-Não é um problema apenas no Brasil, mas mundial o desperdicio de medicamentos. São toneladas de medicamentos que poderiam estar salvando vidas, mas estão aindo parar nos lixos das nossas casas. Para mais informações acesso post no [medium aqui ](https://medium.com/@suelen.ads.guimaraes/doamed-doa%C3%A7%C3%A3o-de-medicamentos-bc40bfd84e50)
+Não é um problema apenas no Brasil, mas mundial o desperdicio de medicamentos. São toneladas de medicamentos que poderiam estar salvando vidas, mas estão aindo parar nos lixos das nossas casas. Para mais informações acesse post no [medium aqui ](https://medium.com/@suelen.ads.guimaraes/doamed-doa%C3%A7%C3%A3o-de-medicamentos-bc40bfd84e50)
 
 
 ## Solução
