@@ -1,4 +1,3 @@
-
 <p align="center">
   <a>
     <img width="400" src="logo-doaMed.png">
@@ -8,13 +7,16 @@
 </br>
 </br>
 
-## Problema
-Não é um problema apenas no Brasil, mas mundial o desperdicio de medicamentos. São toneladas de medicamentos que poderiam estar salvando vidas, mas estão aindo parar nos lixos das nossas casas.
+---
 
+## Problema
+
+Apos a finalização de um tratamento medico é natural sobrar algum medicamento, que normalmente ficam esquecidos nas nossas gavetas e são lembrados apenas apos o seu vencimento. O medicamento que sobra para alguns pode fazer falta para outros.
 
 ## Solução
-Conectar quem precisa do medicamento com quem tem em casa e quer doa-lo. Mas como?
-A imagem abaixo apresenta fluxo simples da aplicação e tem o intuito de mostrar o problema e a soluçao de forma simplificado.
+
+Conectar quem precisa, com quem tem em casa e quer doar. Mas como?
+A imagem abaixo apresenta fluxo simples da aplicação e tem o intuito de mostrar o problema e a soluçao de forma simplificada.
 
 <a>
   <img width="1000" src="fluxo-simples-doaMed.png">
@@ -26,10 +28,9 @@ Em desenvolvimento
 
 ## Demonstração da aplicação - em ajuste
 
-
 ## Pré-requisitos
-Você precisa ter instalado em seu computador as seguintes ferramentas para poder executar o projeto local: [git](https://git-scm.com/downloads), [node.js](https://nodejs.org/en/download/)
 
+Você precisa ter instalado em seu computador as seguintes ferramentas para poder executar o projeto local: [git](https://git-scm.com/downloads), [node.js](https://nodejs.org/en/download/)
 
 ## Para executar o projeto local siga os passos abaixo.
 
@@ -53,6 +54,6 @@ Você precisa ter instalado em seu computador as seguintes ferramentas para pode
 - Jest
 - Supertest
 
-## Porque estas tecnologias foram escolhidas?
+## Porque a escolhidas por essas tecnologias?
 
-Porque a aplicação é web o que facilita o acesso a todos, já que basta ter apenas um navegador web para acessa-la e pela facilidade em poder utilizar apenas uma linguagem no backend e no frontend.
+Essas tecnologias foram escolhidas em primeiro lugar pelo decisão em desenvolver uma aplicação web, em segundo lugar foram analisado fatores como: curva de aprendizado ser baixa, terem uma ótima documentação, uma comunidade grande e bem difundida e por serem tecnologias com atualizações recorrentes.
