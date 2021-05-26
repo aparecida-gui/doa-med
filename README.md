@@ -11,7 +11,7 @@
 
 ## Problema
 
-Apos a finalização de um tratamento medico é natural sobrar algum medicamento, que normalmente ficam esquecidos nas nossas gavetas e são lembrados apenas apos o seu vencimento. O medicamento que sobra para alguns pode fazer falta para outros.
+Apos a finalização de um tratamento medico é natural sobrar algum medicamento, que normalmente ficam esquecidos nas nossas gavetas e são lembrados apenas apos o seu vencimento. O medicamento que sobra para alguns pode fazer falta para outros. Para mais informações acesse post no [medium aqui ](https://medium.com/@suelen.ads.guimaraes/doamed-doa%C3%A7%C3%A3o-de-medicamentos-bc40bfd84e50)
 
 ## Solução
 
