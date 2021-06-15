@@ -17,17 +17,12 @@ class Medicine {
           ],
         });
 
-        let data = [];
-
-        medicine.forEach((element) => {
-          if (element.dataValues) {
-            data.push(element.dataValues);
-          }
-          return data;
+        const dataDonorMedicine = medicine.map((elements) => {
+          return elements;
         });
 
-        if (medicine.length > 0) {
-          res.status(200).json(data);
+        if (dataDonorMedicine.length > 0) {
+          res.status(200).json(dataDonorMedicine);
         } else {
           res.status(200).json({
             message: `${name} não tem cadastro para doação.`,
@@ -37,7 +32,6 @@ class Medicine {
     } catch (error) {
       res.status(400).json(error);
     }
-    res.end();
   }
 
   async registerMedicine(req, res) {
