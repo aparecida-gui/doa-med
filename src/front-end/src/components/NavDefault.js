@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import styled from 'styled-components';
 import {
   AppBar,
@@ -16,7 +16,7 @@ import { useAuth } from '../contexts/UserContex';
 import '../index.css';
 import api from '../services/api';
 
-export default function NavDefault() {
+function NavDefault() {
   let [anchorElement, setAnchorElement] = useState(null);
   let [count, setCount] = useState(0);
   const history = useHistory();
@@ -87,6 +87,8 @@ export default function NavDefault() {
     </NavBar>
   );
 }
+
+export default memo(NavDefault);
 
 const NavBar = styled.nav`
   padding: 6rem;
