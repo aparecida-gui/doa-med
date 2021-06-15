@@ -12,8 +12,7 @@ import multerConfig from '../config/multerConfig';
 import MedicineDonationController from './controller/MedicineDonationController';
 import DonationController from './controller/DonationController';
 
-// rota para o doador cadastrar o medicamento
-// que quer doar.
+// rota para doar medicamento.
 router.post(
   '/register_medicine/donor/:donor_id',
   MedicineDonationController.registerMedicineDonor
@@ -22,10 +21,10 @@ router.post(
 // rota para registrar usuários.
 router.post('/register_user', UserController.register);
 
-// rota de login
+// rota para fazer login.
 router.post('/', LoginController.login);
 
-// rota mostra os medicamentos dispoíveis para doação ou não.
+// rota para consultas medicamentos dispoíveis para doação ou não.
 router.get('/medicine/:name', MedicineController.medicineSearch);
 
 // rota para o beneficiario adicionar
@@ -44,15 +43,14 @@ router.get(
   ViewRegisteredMedicationsController.showData
 );
 
-// rota onde o beneficiario entre em contado com
-// o doador.
+// rota onde o beneficiario entra em contato com o doador.
 router.post(
   '/contact_donor/notification/:donor_id',
   DonationController.setDonation
 );
 
-// rota que mostra as doações agendadas
-// do usuario.
+// TODO: verificar esta rota.
+// rota que mostra as doações agendadas do usuario.
 router.get('/notification/:user_id', DonationController.getDonation);
 
 // rota manda notificação para o doador e beneficiario
@@ -62,24 +60,16 @@ router.get(
   DonationController.haveDonationScheduledToday
 );
 
-// Apos a data agendada para a doação é verificado
-// se a doação aconteceu.
+// TODO: verificar esta rota.
+// Passada a data do agendamento da doação é verificado se a doação aconteceu
 router.get('/check_donation/:user_id', DonationController.checkDonation);
 
+// TODO: verificar esta rota.
 // rota de confirmação ou negação da doação.
 router.post('/confirm_donantion/:user_id', DonationController.verifyUser);
 
-// router.post(
-//   '/medicine/:medicine_beneficiary_id/photo',
-//   multer(multerConfig).single('name'),
-//   PhotoController.AddPhoto
-// );
-
-// router.get('/photo', PhotoController.showPhoto);
-
-// router.get('/', (req, res, next) => {
-//   res.send('Hello Heroku');
-//   next();
-// });
+// rota em que é passado o id do medicamento doado e o id do doador.
+// é devolvido o id correspondente na tabela Donor_Medicine.
+router.post('/medicine_donor', DonationController.donorMedicine);
 
 export default router;
