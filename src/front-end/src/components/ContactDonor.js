@@ -21,28 +21,33 @@ export default function ContactDonor() {
 
   const sendData = async () => {
     const nameBeneficiary = user.name;
-    const nameDonor = donor1[0].donors[0].name;
     const idBeneficiary = user.id;
+    const nameDonor = donor1[0].donors[0].name;
     const idDonor = donor1[0].donors[0].id;
     const idMedicine = donor1[0].id;
     const nameMedicine = donor1[0].name;
     const quantityDonate = donor1[0].quantity;
 
-    const dataMessage = {
-      nameBeneficiary,
-      idBeneficiary,
-      idMedicine,
-      nameDonor,
+    const donorMedicine = {
       idDonor,
-      message,
-      address,
-      nameMedicine,
-      quantityDonate,
-      date,
-      time,
+      idMedicine,
     };
 
     try {
+      let idDonorMedicine = await api.post('/medicine_donor', donorMedicine);
+      idDonorMedicine = await idDonorMedicine.data.dataDonorMedicine[0].id;
+
+      const dataMessage = {
+        idDonorMedicine,
+        idBeneficiary,
+        message,
+        address,
+        nameMedicine,
+        quantityDonate,
+        date,
+        time,
+      };
+
       const sendNotificationDonor = await api.post(
         `/contact_donor/notification/${donor1[0].id}`,
         dataMessage
@@ -51,7 +56,7 @@ export default function ContactDonor() {
         setMessageNotification(sendNotificationDonor.data.successMessage);
       }
     } catch (error) {
-      console.log('>>>> error:', error);
+      console.log(error);
     }
   };
 
