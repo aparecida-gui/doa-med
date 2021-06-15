@@ -6,7 +6,7 @@ import sendEmail from '../help/sendEmail';
 class MedicineDonationController {
   async registerMedicineDonor(req, res) {
     const { donor_id } = req.params;
-    const { name, expirationDate, quantity, laboratory } = req.body;
+    const { name, expirationDate, quantity, laboratory, status } = req.body;
 
     const donor = await UserModel.findByPk(donor_id);
 
@@ -17,6 +17,7 @@ class MedicineDonationController {
         expirationDate,
         quantity,
         laboratory,
+        status,
       });
 
       // adiciona os dados na tabela pivo Donor_Medicine
