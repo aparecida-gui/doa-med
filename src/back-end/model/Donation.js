@@ -10,8 +10,8 @@ class Donation extends Model {
         quantityDonate: { type: DataTypes.INTEGER },
         date: { type: DataTypes.DATE },
         time: { type: DataTypes.TIME },
-        idBeneficiary: { type: DataTypes.INTEGER },
-        idDonor: { type: DataTypes.INTEGER },
+        idDonorMedicine: { foreignKey: true, type: DataTypes.INTEGER },
+        idBeneficiary: { foreignKey: true, type: DataTypes.INTEGER },
       },
       {
         freezeTableName: true,
