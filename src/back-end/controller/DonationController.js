@@ -2,18 +2,17 @@ import ContactDonorModel from '../model/Donation';
 import MedicineDonationModel from '../model/Medicine_Donation';
 import ConfirmedDonationBeneficiaryModel from '../model/ConfirmedDonationBeneficiary';
 import ConfirmsDonorDonationModel from '../model/ConfirmsDonorDonation';
+import DonorMedicineModel from '../model/Donor_Medicine';
 const { Op } = require('sequelize');
 
 class DonationController {
   async setDonation(req, res) {
+    console.log('req.body: ', req.body);
+
     const {
-      nameBeneficiary,
-      idBeneficiary,
-      nameDonor,
-      idDonor,
+      idDonorMedicine,
       message,
       address,
-      idMedicine,
       nameMedicine,
       quantityDonate,
       date,
@@ -22,10 +21,7 @@ class DonationController {
 
     try {
       if (
-        nameBeneficiary &&
-        idBeneficiary &&
-        nameDonor &&
-        idDonor &&
+        idDonorMedicine &&
         message &&
         address &&
         nameMedicine &&
@@ -34,12 +30,15 @@ class DonationController {
         time
       ) {
         await ContactDonorModel.create(req.body);
+        const idMedicine = await DonorMedicineModel.findByPk(idDonorMedicine);
+
         await MedicineDonationModel.update(
           { status: false },
-          { where: { id: idMedicine } }
+          { where: { id: idMedicine.idDonationMedicine } }
         );
         res.status(201).json({
-          successMessage: 'Notificação foi enviada.',
+          successMessage:
+            'Doação agendada com sucesso, o doador será notificado.',
         });
       } else {
         res.status(406).json({
@@ -48,6 +47,25 @@ class DonationController {
       }
     } catch (error) {
       res.status(400).json({ error });
+    }
+  }
+
+  async donorMedicine(req, res) {
+    const { idDonor, idMedicine } = req.body;
+
+    try {
+      const dataDonorMedicine = await DonorMedicineModel.findAll({
+        where: {
+          [Op.and]: [{ idDonor: idDonor, idDonationMedicine: idMedicine }],
+        },
+      });
+      if (dataDonorMedicine.length > 0) {
+        res.json({ dataDonorMedicine });
+      } else {
+        res.json({ message: 'Nenhuma doação agendada' });
+      }
+    } catch (error) {
+      res.json({ error });
     }
   }
 
@@ -74,15 +92,35 @@ class DonationController {
   async haveDonationScheduledToday(req, res) {
     const { user_id } = req.params;
 
-    let consultaDoação = await ContactDonorModel.findAll({
+    const dataBeneficiary = await ContactDonorModel.findAll({
       where: {
         date: new Date(),
-        [Op.or]: [{ idBeneficiary: user_id }, { idDonor: user_id }],
+        idBeneficiary: user_id,
       },
     });
-    if (consultaDoação.length > 0) {
-      res.status(200).json({ message: 'Hoje você tem uma doação agendada.' });
+
+    if (dataBeneficiary.length > 0) {
+      if (dataBeneficiary) {
+        res.status(200).json({
+          message: 'Beneficiario, hoje você têm uma doação agendada.',
+        });
+      }
+    } else {
+      const dataDonation = await ContactDonorModel.findAll({
+        where: { date: new Date() },
+      });
+      const [{ idDonorMedicine }] = dataDonation;
+      const donor = await DonorMedicineModel.findByPk(idDonorMedicine);
+      const { idDonor } = donor;
+      if (idDonor === (await parseInt(user_id))) {
+        res
+          .status(200)
+          .json({ message: 'Doador, hoje você têm uma doação agendada.' });
+      }
     }
+    res
+      .status(200)
+      .json({ message: 'Você não têm nenhuma doação agendada para hoje.' });
   }
 
   async verifyUser(req, res) {
@@ -123,33 +161,29 @@ class DonationController {
     }
   }
 
-  // metodo que verifica se a doação aconteceu.
-  // pega o id do usuario que está logado.
-  // e verifica na tabela de doação se é
-  // do beneficiario ou doador.
+  // TODO: remover doações que aconteceram
+  // pegar o id do usuario que está logado.
+  // na tabela de doações verificar se o id do usuario que está logado
+  // é o mesmo id do doador.
+
   async checkDonation(req, res) {
     const { user_id } = req.params;
 
     try {
-      const seach = await ContactDonorModel.findAll({
+      const dataDonation = await ContactDonorModel.findAll({
         where: {
           date: {
             [Op.lt]: new Date(),
           },
-          [Op.or]: [{ idBeneficiary: user_id }, { idDonor: user_id }],
+          idDonor: user_id,
         },
       });
 
-      if (seach.length > 0) {
-        const medicinesScheduledDonation = seach.map((donationData) => ({
-          id: donationData.id,
-          name: donationData.nameMedicine,
-          quantity: donationData.quantityDonate,
-          date: donationData.date,
-          time: donationData.time,
-        }));
+      if (dataDonation.length > 0) {
+        res.status(200).json({ dataDonation });
+      } else {
         res.status(200).json({
-          medicinesScheduledDonation,
+          message: 'Você não têm nenhuma confirmação de doação pendente.',
         });
       }
     } catch (error) {
