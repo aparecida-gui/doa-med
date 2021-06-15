@@ -6,6 +6,7 @@ import Medicine_Beneficiary from '../back-end/model/Medicine_Beneficiary';
 import Donation from '../back-end/model/Donation';
 import ConfirmedDonationBeneficiary from '../back-end/model/ConfirmedDonationBeneficiary';
 import ConfirmsDonorDonation from '../back-end/model/ConfirmsDonorDonation';
+import DonorMedicine from '../back-end/model/Donor_Medicine';
 import path from 'path';
 const dotenv = require('dotenv');
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
@@ -77,6 +78,8 @@ User.init(connection);
 // a doação.
 Donation.init(connection);
 
+DonorMedicine.init(connection);
+
 // Tabela confirmação ou negação da doação do medicamento.
 ConfirmedDonationBeneficiary.init(connection);
 
@@ -106,46 +109,14 @@ User.belongsToMany(Medicine_Beneficiary, {
   as: 'medicinesBeneficiary',
 });
 
-// um usuario pode fazer diversas doações.
-// User tem os metodos de busca
-User.hasMany(Donation, {
-  foreignKey: 'idBeneficiary',
-  constraints: 'true',
-  foreignKey: 'idDonor',
-  constraints: 'true',
+Donation.belongsTo(DonorMedicine, {
+  foreignKey: 'idDonorMedicine',
+  constraints: true,
 });
 
-// uma doação pertence apenas um usuario.
-Donation.belongsTo(User, {
-  foreignKey: 'idBeneficiary',
-  constraints: 'true',
-  foreignKey: 'idDonor',
-  constraints: 'true',
-});
-
-// confirmação ou negação da medicação.
-ConfirmedDonationBeneficiary.hasMany(Donation, {
-  foreignKey: 'idDonation',
-  foreignKey: 'idBeneficiary',
-  constraints: 'true',
-});
-
-Donation.belongsTo(ConfirmedDonationBeneficiary, {
-  foreignKey: 'idDonation',
-  foreignKey: 'idBeneficiary',
-  constraints: 'true',
-});
-
-ConfirmsDonorDonation.hasMany(Donation, {
-  foreignKey: 'idDonation',
-  foreignKey: 'idDonor',
-  constraints: 'true',
-});
-
-Donation.belongsTo(ConfirmsDonorDonation, {
-  foreignKey: 'idDonation',
-  foreignKey: 'idDonor',
-  constraints: 'true',
+DonorMedicine.hasMany(Donation, {
+  foreignKey: 'idDonorMedicine',
+  constraints: true,
 });
 
 export default connection;
