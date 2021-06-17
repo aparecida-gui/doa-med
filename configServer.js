@@ -8,8 +8,8 @@ import path from 'path';
 const app = express();
 const port = process.env.PORT || 5000;
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //Quando for fazer deploy comenta está linha das rotas.
 app.use('/', router);
@@ -29,17 +29,15 @@ db.sync()
 
 app.use(express.static(path.resolve(__dirname, './src/front-end/build')));
 
-app.get('*', (req, res) => {
-  res.sendFile(
-    path.resolve(__dirname, './src', '/front-end', '/build', '/index.html')
-  );
-});
-
-app.get('/*', (req, res) => {
-  res.sendFile(
-    path.resolve(__dirname, './src', '/front-end', '/build', '/index.html')
-  );
-});
+// --> Add this
+if (process.env.NODE_ENV === 'production') {
+  // Serve any static files
+  app.use(express.static(path.join(__dirname, 'front-end/build')));
+  // Handle React routing, return all requests to React app
+  app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'front-end/build', 'index.html'));
+  });
+}
 
 app.use((req, res, next) => {
   res
