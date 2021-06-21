@@ -12,4 +12,4 @@ const multerConfig = {
   }),
 };
 
-module.exports = multerConfig;
+export default multerConfig;

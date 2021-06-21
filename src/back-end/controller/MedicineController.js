@@ -1,5 +1,5 @@
-import MedicineDonationModel from '../model/Medicine_Donation';
-import UserModel from '../model/User';
+import MedicineDonationModel from '../model/Medicine_Donation.js';
+import UserModel from '../model/User.js';
 
 class Medicine {
   async medicineSearch(req, res) {

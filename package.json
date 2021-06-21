@@ -1,7 +1,7 @@
 {
   "name": "final-project",
   "version": "1.0.0",
-  "private": true,
+  "type": "module",
   "engines": {
     "npm": "7.x",
     "node": "14.x"
@@ -11,7 +11,7 @@
   "scripts": {
     "test": "jest",
     "dev": "NODE_ENV=development nodemon --exec babel-node configServer.js",
-    "start": "babel-node configServer.js",
+    "start": "node configServer.js",
     "heroku-postbuild": "cd src/front-end && npm install --only=dev && npm install && npm run build"
   },
   "jest": {

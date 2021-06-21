@@ -1,15 +1,15 @@
 import Sequelize from 'sequelize';
-import databaseConfig from '../config/config';
-import Medicine_Donation from '../back-end/model/Medicine_Donation';
-import User from '../back-end/model/User';
-import Medicine_Beneficiary from '../back-end/model/Medicine_Beneficiary';
-import Donation from '../back-end/model/Donation';
-import ConfirmedDonationBeneficiary from '../back-end/model/ConfirmedDonationBeneficiary';
-import ConfirmsDonorDonation from '../back-end/model/ConfirmsDonorDonation';
-import DonorMedicine from '../back-end/model/Donor_Medicine';
+import databaseConfig from '../config/config.js';
+import Medicine_Donation from '../back-end/model/Medicine_Donation.js';
+import User from '../back-end/model/User.js';
+import Medicine_Beneficiary from '../back-end/model/Medicine_Beneficiary.js';
+import Donation from '../back-end/model/Donation.js';
+import ConfirmedDonationBeneficiary from '../back-end/model/ConfirmedDonationBeneficiary.js';
+import ConfirmsDonorDonation from '../back-end/model/ConfirmsDonorDonation.js';
+import DonorMedicine from '../back-end/model/Donor_Medicine.js';
 import path from 'path';
-const dotenv = require('dotenv');
-dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+import dotenv from 'dotenv';
+dotenv.config({ path: path.resolve('../../.env') });
 
 let connection;
 if (process.env.NODE_ENV === 'production') {

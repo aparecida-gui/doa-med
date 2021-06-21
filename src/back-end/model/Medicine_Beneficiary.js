@@ -1,4 +1,5 @@
-import { Model, DataTypes } from 'sequelize';
+import pkg from 'sequelize';
+const { Model, DataTypes } = pkg;
 
 class Medicine_Beneficiary extends Model {
   static init(sequelize) {

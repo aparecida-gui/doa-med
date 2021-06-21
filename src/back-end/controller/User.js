@@ -1,7 +1,7 @@
-import UserModel from '../model/User';
-import encrypData from '../help/encryptData';
-import jwt from '../help/jwt';
-import validatesData from '../help/validatesData';
+import UserModel from '../model/User.js';
+import encrypData from '../help/encryptData.js';
+import jwt from '../help/jwt.js';
+import validatesData from '../help/validatesData.js';
 
 class User {
   static async userVerify(user) {

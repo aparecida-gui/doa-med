@@ -1,5 +1,5 @@
-import Beneficiary from '../model/User';
-import Medicine_Beneficiary from '../model/Medicine_Beneficiary';
+import Beneficiary from '../model/User.js';
+import Medicine_Beneficiary from '../model/Medicine_Beneficiary.js';
 
 class ViewRegisteredMedications {
   async showData(req, res) {

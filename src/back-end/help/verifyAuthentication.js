@@ -1,4 +1,4 @@
-import jwt from './jwt';
+import jwt from './jwt.js';
 
 const verifyAuthentication = async (req, res, next) => {
   const authHeader = req.headers.authorization;

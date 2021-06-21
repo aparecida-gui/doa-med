@@ -1,16 +1,16 @@
-import express from 'express';
-const router = express.Router();
+import { Router } from 'express';
+let router = Router();
 
-import UserController from './controller/User';
-import LoginController from './controller/LoginController';
-import MedicineController from './controller/MedicineController';
-import MedicineBeneficiaryController from './controller/MedicineBeneficiaryController';
-import ViewRegisteredMedicationsController from './controller/ViewRegisteredMedicationsController';
-import verifyAuthentication from '../back-end/help/verifyAuthentication';
+import UserController from './controller/User.js';
+import LoginController from './controller/LoginController.js';
+import MedicineController from './controller/MedicineController.js';
+import MedicineBeneficiaryController from './controller/MedicineBeneficiaryController.js';
+import ViewRegisteredMedicationsController from './controller/ViewRegisteredMedicationsController.js';
+import verifyAuthentication from '../back-end/help/verifyAuthentication.js';
 import multer from 'multer';
-import multerConfig from '../config/multerConfig';
-import MedicineDonationController from './controller/MedicineDonationController';
-import DonationController from './controller/DonationController';
+import multerConfig from '../config/multerConfig.js';
+import MedicineDonationController from './controller/MedicineDonationController.js';
+import DonationController from './controller/DonationController.js';
 
 // rota para doar medicamento.
 router.post(

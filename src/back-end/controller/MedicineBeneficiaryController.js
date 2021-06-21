@@ -1,6 +1,6 @@
-import Beneficiary from '../model/User';
-import MedicineBeneficiaryModel from '../model/Medicine_Beneficiary';
-import MedicineDonationModel from '../model/Medicine_Donation';
+import Beneficiary from '../model/User.js';
+import MedicineBeneficiaryModel from '../model/Medicine_Beneficiary.js';
+import MedicineDonationModel from '../model/Medicine_Donation.js';
 
 class MedicineBeneficiary {
   async registerMedicineBeneficiary(req, res) {

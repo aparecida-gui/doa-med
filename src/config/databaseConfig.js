@@ -10,4 +10,4 @@ const configDatabase = {
   },
 };
 
-module.exports = configDatabase;
+export default configDatabase;

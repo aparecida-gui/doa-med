@@ -1,9 +1,10 @@
-import ContactDonorModel from '../model/Donation';
-import MedicineDonationModel from '../model/Medicine_Donation';
-import ConfirmedDonationBeneficiaryModel from '../model/ConfirmedDonationBeneficiary';
-import ConfirmsDonorDonationModel from '../model/ConfirmsDonorDonation';
-import DonorMedicineModel from '../model/Donor_Medicine';
-const { Op } = require('sequelize');
+import ContactDonorModel from '../model/Donation.js';
+import MedicineDonationModel from '../model/Medicine_Donation.js';
+import ConfirmedDonationBeneficiaryModel from '../model/ConfirmedDonationBeneficiary.js';
+import ConfirmsDonorDonationModel from '../model/ConfirmsDonorDonation.js';
+import DonorMedicineModel from '../model/Donor_Medicine.js';
+import pkg from 'sequelize';
+const { Op } = pkg;
 
 class DonationController {
   async setDonation(req, res) {

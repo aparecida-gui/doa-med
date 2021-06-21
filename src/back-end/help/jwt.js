@@ -1,7 +1,7 @@
 import jsonwebtoken from 'jsonwebtoken';
 import path from 'path';
-const dotenv = require('dotenv');
-dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
+import dotenv from 'dotenv';
+dotenv.config({ path: path.resolve('../../../.env/') });
 
 const generationToken = async (userId) => {
   try {

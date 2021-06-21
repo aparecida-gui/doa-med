@@ -1,8 +1,8 @@
 import nodemailer from 'nodemailer';
 import sgMail from '@sendgrid/mail';
 import path from 'path';
-const dotenv = require('dotenv');
-dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
+import dotenv from 'dotenv';
+dotenv.config({ path: path.resolve('../../../.env') });
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 //COMPLETE: Enviar email para os beneficiarios

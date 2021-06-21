@@ -1,7 +1,7 @@
-import UserModel from '../model/User';
-import validatesData from '../help/validatesData';
-import encryptData from '../help/encryptData';
-import jwt from '../help/jwt';
+import UserModel from '../model/User.js';
+import validatesData from '../help/validatesData.js';
+import encryptData from '../help/encryptData.js';
+import jwt from '../help/jwt.js';
 
 class LoginController {
   async login(req, res) {

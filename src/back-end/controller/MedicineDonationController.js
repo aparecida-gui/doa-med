@@ -1,7 +1,7 @@
-import MedicineDonationModel from '../model/Medicine_Donation';
-import UserModel from '../model/User';
-import MedicineBeneficiaryModel from '../model/Medicine_Beneficiary';
-import sendEmail from '../help/sendEmail';
+import MedicineDonationModel from '../model/Medicine_Donation.js';
+import UserModel from '../model/User.js';
+import MedicineBeneficiaryModel from '../model/Medicine_Beneficiary.js';
+import sendEmail from '../help/sendEmail.js';
 
 class MedicineDonationController {
   async registerMedicineDonor(req, res) {
