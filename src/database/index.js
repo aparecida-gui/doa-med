@@ -9,7 +9,7 @@ import ConfirmsDonorDonation from '../back-end/model/ConfirmsDonorDonation.js';
 import DonorMedicine from '../back-end/model/Donor_Medicine.js';
 import path from 'path';
 import dotenv from 'dotenv';
-dotenv.config({ path: path.resolve('../../.env') });
+dotenv.config(path.resolve('../../.env'));
 
 let connection;
 if (process.env.NODE_ENV === 'production') {
