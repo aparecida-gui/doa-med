@@ -9,7 +9,10 @@ import ConfirmsDonorDonation from '../back-end/model/ConfirmsDonorDonation.js';
 import DonorMedicine from '../back-end/model/Donor_Medicine.js';
 import path from 'path';
 import dotenv from 'dotenv';
-dotenv.config(path.resolve('../../.env'));
+let d = dotenv.config(path.resolve('../../.env'));
+console.log('>>>>>>>>>> d: ', d.parsed);
+console.log('>>>>>>>> ', process.env.NODE_ENV);
+console.log('>>>>>>>> ', process.env.DATABASE_URL);
 
 let connection;
 if (process.env.NODE_ENV === 'production') {
@@ -19,6 +22,7 @@ if (process.env.NODE_ENV === 'production') {
   );
 }
 if (process.env.NODE_ENV === 'development') {
+  console.log('>>>>>>>>>>>>', process.env.NODE_ENV);
   connection = new Sequelize(
     databaseConfig.development.database,
     databaseConfig.development.username,
