@@ -6,7 +6,6 @@ import db from './src/database/index.js';
 import path from 'path';
 
 const app = express();
-const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -18,6 +17,12 @@ app.use('/', router);
 //   '/files/',
 //   express.static(path.resolve(__dirname, '.', 'tmp', 'uploads'))
 // );
+
+const server = () => {
+  console.log('>>>>>> process.env.PORT: ', process.env.PORT);
+  app.listen(process.env.PORT || 5000);
+  console.log('>>>>> server run');
+};
 
 db.sync()
   .then(() => {
@@ -45,10 +50,5 @@ app.use((req, res, next) => {
     .json({ message: 'Não foi possível encontrar a página solicitada...' });
   next();
 });
-
-const server = () => {
-  app.listen(port);
-  console.log(`>>>>> server run port: ${port}`);
-};
 
 export default app;
