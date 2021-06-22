@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   development: {
     dialect: 'postgres',
     host: '127.0.0.1',
