@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   development: {
     dialect: 'postgres',
     host: '127.0.0.1',
@@ -11,7 +11,8 @@ export default {
     },
   },
   production: {
+    use_env_variable: 'DATABASE_URL',
     dialect: 'postgres',
-    use_env_variable: process.env.DATABASE_URL,
+    operatorsAliases: false,
   },
 };
