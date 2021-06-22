@@ -26,7 +26,9 @@ const server = () => {
 
 db.sync()
   .then(() => {
-    server();
+    console.log('>>>>>> process.env.PORT: ', process.env.PORT);
+    app.listen(process.env.PORT || 5000);
+    console.log('>>>>> server run');
   })
   .catch((err) => {
     console.log('>>>> Err database : ', err);

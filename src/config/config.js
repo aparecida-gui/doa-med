@@ -13,12 +13,5 @@ export default {
   production: {
     dialect: 'postgres',
     use_env_variable: process.env.DATABASE_URL,
-    ssl: true,
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false,
-      },
-    },
   },
 };
