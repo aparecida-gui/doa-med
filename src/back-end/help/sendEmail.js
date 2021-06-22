@@ -4,6 +4,15 @@ import path from 'path';
 import dotenv from 'dotenv';
 dotenv.config(path.resolve('../../../.env'));
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+console.log(
+  '>>>>>> process.env.SENDGRID_API_KEY: ',
+  process.env.SENDGRID_API_KEY
+);
+
+console.log(
+  '>>>>>>>>>> process.env.YOUR_TEMPLATE_ID_BENEFICIARY: ',
+  process.env.YOUR_TEMPLATE_ID_BENEFICIARY
+);
 
 //COMPLETE: Enviar email para os beneficiarios
 
