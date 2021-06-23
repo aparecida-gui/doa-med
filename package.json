@@ -10,8 +10,8 @@
   "description": "App that connects people who need medication and who can donate",
   "scripts": {
     "test": "jest",
-    "dev": "NODE_ENV=development nodemon --exec babel-node configServer.js",
-    "start": "node configServer.js",
+    "dev": "export NODE_ENV=development && nodemon --exec babel-node configServer.js",
+    "start": "export NODE_ENV=production && node configServer.js",
     "heroku-postbuild": "cd src/front-end && npm install --only=dev && npm install && npm run build"
   },
   "jest": {

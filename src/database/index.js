@@ -12,20 +12,18 @@ import dotenv from 'dotenv';
 dotenv.config(path.resolve('../../.env'));
 
 let connection;
+
 console.log('>>>>>>>>> process.env.NODE_ENV', process.env.NODE_ENV);
+
 console.log('>>>>>> process.env.DATABASE_URL: ', process.env.DATABASE_URL);
+
 if (process.env.NODE_ENV === 'production') {
-  console.log(
-    '>>>>>> process.env.DATABASE_URL dentro: ',
-    process.env.DATABASE_URL
-  );
   connection = new Sequelize(
     process.env.DATABASE_URL,
     databaseConfig.production
   );
 }
 if (process.env.NODE_ENV === 'development') {
-  console.log('>>>>>>>>> process.env.NODE_ENV', process.env.NODE_ENV);
   connection = new Sequelize(
     databaseConfig.development.database,
     databaseConfig.development.username,
