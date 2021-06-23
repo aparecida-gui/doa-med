@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-db.sync()
+db.sync({ force: true })
   .then(() => {
     console.log('>>>>>> process.env.PORT: ', process.env.PORT);
     console.log('>>>>> server run');
