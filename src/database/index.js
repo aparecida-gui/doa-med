@@ -14,16 +14,15 @@ dotenv.config(path.resolve('../../.env'));
 let connection;
 
 console.log('>>>>>>>>> process.env.NODE_ENV', process.env.NODE_ENV);
-
 console.log('>>>>>> process.env.DATABASE_URL: ', process.env.DATABASE_URL);
 
 if (process.env.NODE_ENV === 'production') {
-  connection = new Sequelize(
-    process.env.DATABASE_URL,
-    databaseConfig.production
-  );
+  console.log('dentro production');
+  connection = new Sequelize(process.env.DATABASE_URL);
+  console.log('connection: ', connection);
 }
 if (process.env.NODE_ENV === 'development') {
+  console.log('dentro development');
   connection = new Sequelize(
     databaseConfig.development.database,
     databaseConfig.development.username,
@@ -39,6 +38,7 @@ if (process.env.NODE_ENV === 'development') {
       timestamps: false,
     }
   );
+  console.log('connection: ', connection);
 }
 
 test: {
@@ -67,6 +67,8 @@ connection
   .catch((err) => {
     console.error('Unable to connect to the database:', err);
   });
+
+console.log('>>>> connection: ', connection);
 
 // tabela para o doador cadastrar
 // o medicamento que deseja doar.
