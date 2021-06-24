@@ -6,12 +6,12 @@ import path from 'path';
 
 const app = express();
 app.use(cors());
+const port = process.env.PORT || 5000;
 app.use('/', router);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.resolve('./src/front-end/build')));
-app.listen(process.env.PORT || 5000);
 
 // --> Add this
 if (process.env.NODE_ENV === 'production') {
