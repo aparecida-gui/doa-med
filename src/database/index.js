@@ -55,13 +55,13 @@ test: {
 connection
   .authenticate()
   .then(() => {
-    console.log('Connection has been established successfully.');
+    console.log(
+      '>>>>>>> Connection has been established successfully database >>>>>>>'
+    );
   })
   .catch((err) => {
-    console.error('Unable to connect to the database:', err);
+    console.error('>>>>> Unable to connect to the database >>>>>>>', err);
   });
-
-console.log('>>>> connection: ', connection);
 
 // tabela para o doador cadastrar
 // o medicamento que deseja doar.
