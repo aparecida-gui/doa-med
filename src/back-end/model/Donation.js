@@ -9,7 +9,7 @@ class Donation extends Model {
         address: { type: DataTypes.STRING },
         nameMedicine: { type: DataTypes.STRING },
         quantityDonate: { type: DataTypes.INTEGER },
-        date: { type: DataTypes.DATE },
+        date: { type: DataTypes.DATEONLY },
         time: { type: DataTypes.TIME },
         idDonorMedicine: { foreignKey: true, type: DataTypes.INTEGER },
         idBeneficiary: { foreignKey: true, type: DataTypes.INTEGER },
