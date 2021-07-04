@@ -10,7 +10,7 @@
   "description": "App that connects people who need medication and who can donate",
   "scripts": {
     "test": "jest",
-    "dev": "export NODE_ENV=development && nodemon --exec babel-node configServer.js",
+    "dev": "nodemon --exec babel-node configServer.js",
     "start": "export NODE_ENV=production && node configServer.js",
     "heroku-postbuild": "cd src/front-end && npm install --only=dev && npm install && npm run build"
   },
@@ -30,12 +30,12 @@
   "homepage": "https://github.com/Suele/final-project#readme",
   "devDependencies": {
     "@babel/cli": "^7.12.8",
-    "@babel/core": "^7.12.9",
-    "@babel/node": "^7.12.6",
+    "@babel/core": "^7.14.6",
+    "@babel/node": "^7.14.7",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/plugin-syntax-class-properties": "^7.12.13",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/preset-env": "^7.12.7",
+    "@babel/preset-env": "^7.14.7",
     "@babel/preset-react": "^7.12.10",
     "@babel/runtime": "^7.12.5",
     "babel-jest": "^24.9.0",
