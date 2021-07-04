@@ -138,8 +138,8 @@ export default function SearchMedicine() {
                   </TableRow>
                 </TableHead>
                 {medicines.map((medicine) => (
-                  <TableBody>
-                    <StyledTableRow key={medicine.id}>
+                  <TableBody key={medicine.id}>
+                    <StyledTableRow>
                       <StyledTableCell align="center">
                         {medicine.name}
                       </StyledTableCell>
