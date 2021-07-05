@@ -18,8 +18,10 @@ export default function Donation() {
     try {
       let getData = await api.get(`/check_donation/${user.id}`);
 
+      console.log('>>>>>>>>> getData: ', getData);
+
       if (getData.status === 200) {
-        setDonationScheduled(getData.data.medicinesScheduledDonation);
+        setDonationScheduled(getData.data.dataDonation);
       }
       if (getData.data.message) {
         setMessage(getData.data.message);
@@ -80,10 +82,10 @@ export default function Donation() {
                   fontSize: 40,
                 }}
               >
-                Medicamento {donation.name}
+                Medicamento {donation.nameMedicine}
               </Typography>
               <Typography variant="body1" style={{ fontWeight: 900 }}>
-                Quantidade doada {donation.quantity}
+                Quantidade doada {donation.quantityDonate}
               </Typography>
               <Typography variant="body1" style={{ fontWeight: 900 }}>
                 Dia da doação {moment(donation.date).format('DD/MM/YYYY')}
@@ -93,7 +95,7 @@ export default function Donation() {
               </Typography>
               <div style={{ marginTop: 7, paddingTop: 14 }}>
                 <Typography variant="subtitle1" style={{ fontWeight: 900 }}>
-                  Este medicamento foi doado?
+                  Este medicamento foi doado para você?
                 </Typography>
                 <div
                   style={{
