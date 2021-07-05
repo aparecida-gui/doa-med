@@ -52,12 +52,12 @@ class DonationController {
   }
 
   async donorMedicine(req, res) {
-    const { idDonor, idMedicine } = req.body;
+    const { user_id } = req.params;
 
     try {
       const dataDonorMedicine = await DonorMedicineModel.findAll({
         where: {
-          [Op.and]: [{ idDonor: idDonor, idDonationMedicine: idMedicine }],
+          [Op.and]: [{ idDonor: user_id }],
         },
       });
       if (dataDonorMedicine.length > 0) {
@@ -162,33 +162,28 @@ class DonationController {
     }
   }
 
-  // TODO: remover doações que aconteceram
-  // pegar o id do usuario que está logado.
-  // na tabela de doações verificar se o id do usuario que está logado
-  // é o mesmo id do doador.
-
   async checkDonation(req, res) {
     const { user_id } = req.params;
 
     try {
-      const dataDonation = await ContactDonorModel.findAll({
+      let dataDonation = await ContactDonorModel.findAll({
         where: {
           date: {
             [Op.lt]: new Date(),
           },
-          idDonor: user_id,
+          idBeneficiary: user_id,
         },
       });
 
       if (dataDonation.length > 0) {
         res.status(200).json({ dataDonation });
       } else {
-        res.status(200).json({
-          message: 'Você não têm nenhuma confirmação de doação pendente.',
-        });
+        res
+          .status(200)
+          .json({ message: 'Voce não têm nenhuma confirmação pedente.' });
       }
     } catch (error) {
-      res.status(400).json({ error });
+      res.status(400).json(error);
     }
   }
 }
